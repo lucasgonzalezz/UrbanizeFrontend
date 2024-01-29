@@ -30,8 +30,8 @@ export class PurchaseDetailAjaxService {
   }
 
   // Get purchase details by purchase ID and product ID
-  getPurchaseDetailByPurchaseIdAndProductId(purchaseId: number, productId: number): Observable<IPurchaseDetail[]> {
-    return this.http.get<IPurchaseDetail[]>(this.url + '/byPurchase/purchase_id' + purchaseId + '/byProduct/product_id' + productId);
+  getPurchaseDetailByPurchaseIdAndProductId(purchase_id: number, product_id: number): Observable<IPurchaseDetail[]> {
+    return this.http.get<IPurchaseDetail[]>(this.url + '/byPurchase/purchase_id' + purchase_id + '/byProduct/product_id' + product_id);
   }
 
   // Get a random purchase detail
@@ -39,8 +39,8 @@ export class PurchaseDetailAjaxService {
     return this.http.get<IPurchaseDetail>(this.url + '/random');
   }
 
-  getPurchaseDetailPage(page: number, size: number, sort: string, direction: string, compraId: number, camisetaId: number): Observable<IPurchaseDetailPage> {
-    return this.http.get<IPurchaseDetailPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction + '&compraId=' + compraId + '&camisetaId=' + camisetaId);
+  getPurchaseDetailPage(page: number, size: number, sort: string, direction: string, purchase_id: number, product_id: number): Observable<IPurchaseDetailPage> {
+    return this.http.get<IPurchaseDetailPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction + '&purchase_id=' + purchase_id + '&product_id=' + product_id);
   }
 
   updatePurchaseDetail(purchaseDetail: IPurchaseDetail): Observable<IPurchaseDetail> {
