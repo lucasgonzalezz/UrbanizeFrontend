@@ -136,3 +136,22 @@ export interface IPurchaseDetail extends IEntity {
 export interface IPurchaseDetailPage extends IPage<IPurchaseDetail> {
 
 }
+
+export interface IPrelogin extends IEntity {
+    token: string,
+    captchaImage: string
+}
+
+export type formOperation = 'EDIT' | 'NEW';
+
+export interface SessionEvent {
+    type: string;
+}
+
+export interface IToken {
+    jti: string,
+    iss: string,
+    iat: number,
+    exp: number,
+    name: string;
+}
