@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
 import { ProductAjaxService } from './service/product.ajax.service';
@@ -13,7 +15,7 @@ import { CartAjaxService } from './service/cart.ajax.service';
 import { RatingAjaxService } from './service/rating.ajax.service';
 import { CategoryAjaxService } from './service/category.ajax.service';
 import { MediaService } from './service/media.service';
-import { SesionAjaxService } from './service/session.ajax.service';
+import { SessionAjaxService } from './service/session.ajax.service';
 import { CryptoService } from './service/crypto.service';
 
 // Interceptor
@@ -39,7 +41,8 @@ import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [
     UserAjaxService,
@@ -50,7 +53,7 @@ import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-
     RatingAjaxService,
     CategoryAjaxService,
     MediaService,
-    SesionAjaxService,
+    SessionAjaxService,
     CryptoService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

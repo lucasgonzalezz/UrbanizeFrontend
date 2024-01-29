@@ -1,19 +1,19 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { SesionAjaxService } from "../service/session.ajax.service";
+import { SessionAjaxService } from "../service/session.ajax.service";
 import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
-        private sesionService: SesionAjaxService,
+        private sessionService: SessionAjaxService,
     ) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.sesionService.isSessionActive()) {
-            const token = this.sesionService.getToken();
+        if (this.sessionService.isSessionActive()) {
+            const token = this.sessionService.getToken();
             if (token) {
                 const cloned = req.clone({
                     headers: req.headers.set("Authorization", "Bearer " + token)

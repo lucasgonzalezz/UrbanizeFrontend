@@ -7,7 +7,7 @@ import { Observable, Subject } from "rxjs";
 
 @Injectable()
 
-export class SesionAjaxService {
+export class SessionAjaxService {
 
   private url = API_URL + '/session';
 
