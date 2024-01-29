@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
 import { ProductAjaxService } from './service/product.ajax.service';
@@ -43,6 +46,8 @@ import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule, 
   ],
   providers: [
     UserAjaxService,

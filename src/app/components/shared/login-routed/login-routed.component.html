@@ -1,3 +1,51 @@
-<p>
-  login-routed works!
-</p>
+<div class="flex items-center justify-center min-h-screen bg-slate-200">
+  <div class="relative flex flex-col m-6 space-y-8 bg-slate-400 shadow-2xl rounded-2xl md:flex-row md:space-y-0">
+    <div class="flex flex-col justify-center p-8 md:p-14">
+      <span class="mb-3 text-4xl font-bold text-cyan-900">Login</span>
+      <span class="text-cyan-900 mb-8 font-medium">
+        ¡Bienvenid@! Introduce tus datos
+      </span>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="py-4">
+        <div class="py-4 mb-4">
+          <span class="py-2 font-semibold">Username</span>
+          <input type="text"
+            class="w-full p-2 border border-cyan-900 shadow-xl rounded-md placeholder-light placeholder-opacity-0"
+            name="username" id="username" formControlName="username" placeholder="Introduce tu nombre de usuario">
+        </div>
+        <div class="py-4">
+          <span class="py-2 font-semibold">Contraseña</span>
+          <input type="password"
+            class="w-full p-2 border border-cyan-900 shadow-xl rounded-md placeholder-light placeholder-opacity-0"
+            name="contrasenya" id="contrasenya" formControlName="contrasenya" placeholder="Introduce tu contraseña">
+        </div>
+        <div class="py-4">
+          <span class="py-2 font-semibold">Captcha</span>
+          <div class="flex items-center justify-center mb-2">
+            <img [src]="'data:image/png;base64,' + prelogin?.captchaImage" alt="captcha" class="mr-2">
+            <input type="text" id="captcha" name="captcha" formControlName="captcha" placeholder="Introduce el Captcha"
+              class="w-1/2 p-2 rounded-md border-cyan-900 shadow-xl">
+          </div>
+        </div>
+        <div class="flex justify-between w-full py-4">
+          <div class="mr-24">
+            <input type="checkbox" name="checkbox" id="checkbox" class="mr-2">
+            <span class="py-2 font-semibold">Recuérdame</span>
+          </div>
+          <span class="font-bold text-md text-black hover:text-gray-200">¿Te has olvidado de la contraseña</span>
+        </div>
+        <button
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300">Login</button>
+        <button type="button"
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300"
+          (click)="loginAdmin()">Soy Admin</button>
+        <button type="button"
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300"
+          (click)="loginUser()">Soy Usuario</button>
+      </form>
+      <div class="text-center font-semibold">
+        ¿No tienes cuenta?
+        <span class="font-bold text-black hover:text-gray-200">Regístrate</span>
+      </div>
+    </div>
+  </div>
+</div>

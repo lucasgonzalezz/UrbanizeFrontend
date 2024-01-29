@@ -1,58 +1,50 @@
-<!-- menu-unrouted.component.html -->
-
-<nav class="navbar bg-primary text-white" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" routerLink="/home">
-      <!-- Contenido de tu enlace si es necesario -->
+<nav class="bg-slate-400 text-cyan-900 shadow-xl" role="navigation" aria-label="main navigation">
+  <div class="flex items-center justify-between p-4">
+    <a class="text-3xl font-extrabold tracking-tight" href="/home">
+      Urbanize <!-- Change this to your desired modern text -->
     </a>
-  </div>
 
-  <div id="navbar" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="#">
-        Usuarios
+    <div class="hidden md:flex">
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold" href="#">
+        Users
       </a>
-      <a class="navbar-item" href="#">
-        Camisetas
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold" href="#">
+        T-Shirts
       </a>
-      <a class="navbar-item" href="#">
-        Valoraciones
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold" href="#">
+        Ratings
       </a>
-      <!-- Puedes agregar más opciones según tus necesidades -->
+      <!-- Add more options as needed -->
     </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <ng-container *ngIf="username">
-            <div class="navbar-item has-dropdown">
-              <a class="navbar-link">
-                Bienvenido, {{ username }}
-              </a>
-              <div class="navbar-dropdown">
-                <a class="navbar-item" href="#">
-                  Perfil
-                </a>
-                <a class="navbar-item" href="#">
-                  Configuración
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item" routerLink="/logout">
-                  Cerrar sesión
-                </a>
-              </div>
-            </div>
-            <a class="button is-light" href="#">
-              <span class="icon">
-                <i class="pi pi-shopping-cart"></i>
-              </span>
-            </a>
-          </ng-container>
-          <a class="button is-light" routerLink="/login" *ngIf="!username">
-            Iniciar sesión
+    <div class="flex items-center">
+      <ng-container *ngIf="username">
+        <div class="group">
+          <a class="cursor-pointer text-black font-semibold">
+            Welcome, {{ username }}
           </a>
+          <div class="hidden group-hover:block absolute right-0 mt-2 bg-white text-gray-700 border rounded">
+            <a class="block px-4 py-2" href="#">
+              Profile
+            </a>
+            <a class="block px-4 py-2" href="#">
+              Settings
+            </a>
+            <hr class="border-t my-2">
+            <a class="block px-4 py-2" href="/logout">
+              Log Out
+            </a>
+          </div>
         </div>
-      </div>
+        <a class="ml-4 text-black">
+          <span class="icon">
+            <i class="pi pi-shopping-cart"></i>
+          </span>
+        </a>
+      </ng-container>
+      <a class="ml-4 hover:text-gray-200 text-cyan-900 font-semibold" href="/login" *ngIf="!username">
+        Log In
+      </a>
     </div>
   </div>
 </nav>

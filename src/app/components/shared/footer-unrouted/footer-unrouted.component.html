@@ -1,3 +1,30 @@
-<p>
-  footer-unrouted works!
-</p>
+<!-- footer-unrouted.component.html -->
+
+<div class="flex flex-col min-h-screen">
+  <!-- Contenido principal -->
+  <main class="flex-grow">
+    <!-- Tu contenido principal aquí -->
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="bg-slate-400 text-cyan-900 py-4 shadow-xl">
+    <div class="container mx-auto flex items-center justify-between">
+      <div class="text-3xl font-extrabold tracking-tight">
+        Urbanize <!-- Cambia esto al texto deseado -->
+      </div>
+
+      <div class="hidden md:flex">
+        <a class="hover:text-gray-200 text-cyan-900 font-semibold px-4 py-2" href="#">
+          Privacy Policy
+        </a>
+        <a class="hover:text-gray-200 text-cyan-900 font-semibold px-4 py-2" href="#">
+          Terms of Service
+        </a>
+        <a class="hover:text-gray-200 text-cyan-900 font-semibold px-4 py-2" href="#">
+          Contact Us
+        </a>
+        <!-- Agrega más opciones según sea necesario -->
+      </div>
+    </div>
+  </footer>
+</div>
