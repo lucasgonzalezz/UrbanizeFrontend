@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { HttpClientModule } from '@angular/common/http';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PaginatorModule } from 'primeng/paginator';
@@ -27,11 +23,9 @@ import { CategoryAjaxService } from './service/category.ajax.service';
 import { MediaService } from './service/media.service';
 import { SessionAjaxService } from './service/session.ajax.service';
 import { CryptoService } from './service/crypto.service';
-
 // Interceptor
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
-
 // Shared components
 import { MenuUnroutedComponent } from './components/shared/menu-unrouted/menu-unrouted.component';
 import { FooterUnroutedComponent } from './components/shared/footer-unrouted/footer-unrouted.component';
@@ -39,7 +33,7 @@ import { HomeRoutedComponent } from './components/shared/home-routed/home-routed
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
 import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-routed.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+// User components
 import { AdminUserFormUnroutedComponent } from './components/user/admin-user-form-unrouted/admin-user-form-unrouted.component';
 import { AdminUserPlistRoutedComponent } from './components/user/admin-user-plist-routed/admin-user-plist-routed.component';
 import { AdminUserPlistUnroutedComponent } from './components/user/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
@@ -54,7 +48,7 @@ import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-d
     HomeRoutedComponent,
     LoginRoutedComponent,
     LogoutRoutedComponent,
-
+    // User components
     AdminUserFormUnroutedComponent,
     AdminUserPlistRoutedComponent,
     AdminUserPlistUnroutedComponent,
@@ -74,6 +68,7 @@ import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-d
     ConfirmPopupModule
   ],
   providers: [
+    // Services
     UserAjaxService,
     ProductAjaxService,
     PurchaseAjaxService,
