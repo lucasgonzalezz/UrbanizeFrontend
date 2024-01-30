@@ -32,11 +32,11 @@ export class SessionAjaxService {
   }
 
   loginCaptcha(username: string, password: string, token: string, answer: string): Observable<any> {
-    return this.http.post(this.url + '/loginCaptcha', { username: username, contrasenya: password, token: token, answer: answer }, { responseType: 'text' });
+    return this.http.post(this.url + '/loginCaptcha', { username: username, password: password, token: token, answer: answer }, { responseType: 'text' });
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.url + '/login', { username: username, contrasenya: password }, { responseType: 'text' });
+    return this.http.post(this.url + '/login', { username: username, password: password }, { responseType: 'text' });
   }
 
   setToken(token: string): void {
