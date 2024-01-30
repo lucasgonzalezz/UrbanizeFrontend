@@ -9,13 +9,13 @@
         <div class="py-4 mb-4">
           <span class="py-2 font-semibold">Username</span>
           <input type="text"
-            class="w-full p-2 border border-cyan-900 shadow-xl rounded-md placeholder-light placeholder-opacity-0"
+            class="w-full p-2 border shadow-xl rounded-md placeholder-light placeholder-opacity-0"
             name="username" id="username" formControlName="username" placeholder="Introduce tu nombre de usuario">
         </div>
         <div class="py-4">
           <span class="py-2 font-semibold">Contraseña</span>
           <input type="password"
-            class="w-full p-2 border border-cyan-900 shadow-xl rounded-md placeholder-light placeholder-opacity-0"
+            class="w-full p-2 border shadow-xl rounded-md placeholder-light placeholder-opacity-0"
             name="contrasenya" id="contrasenya" formControlName="contrasenya" placeholder="Introduce tu contraseña">
         </div>
         <div class="py-4">
@@ -23,7 +23,7 @@
           <div class="flex items-center justify-center mb-2">
             <img [src]="'data:image/png;base64,' + prelogin?.captchaImage" alt="captcha" class="mr-2">
             <input type="text" id="captcha" name="captcha" formControlName="captcha" placeholder="Introduce el Captcha"
-              class="w-1/2 p-2 rounded-md border-cyan-900 shadow-xl">
+              class="w-1/2 p-2 rounded-md shadow-xl">
           </div>
         </div>
         <div class="flex justify-between w-full py-4">
@@ -31,20 +31,20 @@
             <input type="checkbox" name="checkbox" id="checkbox" class="mr-2">
             <span class="py-2 font-semibold">Recuérdame</span>
           </div>
-          <span class="font-bold text-md text-black hover:text-gray-200">¿Te has olvidado de la contraseña</span>
+          <span class="font-bold text-md text-black hover:text-gray-200 cursor-pointer">¿Te has olvidado de la contraseña?</span>
         </div>
         <button
-          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300">Login</button>
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border-gray-300">Login</button>
         <button type="button"
-          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300"
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border-gray-300"
           (click)="loginAdmin()">Soy Admin</button>
         <button type="button"
-          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300"
+          class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-lg mb-6 hover:bg-gray-200 hover:text-black hover:border-gray-300"
           (click)="loginUser()">Soy Usuario</button>
       </form>
       <div class="text-center font-semibold">
         ¿No tienes cuenta?
-        <span class="font-bold text-black hover:text-gray-200">Regístrate</span>
+        <span class="font-bold text-black hover:text-gray-200 cursor-pointer">Regístrate</span>
       </div>
     </div>
   </div>

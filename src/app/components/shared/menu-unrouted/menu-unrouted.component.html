@@ -1,7 +1,7 @@
 <nav class="bg-slate-400 text-cyan-900 shadow-xl" role="navigation" aria-label="main navigation">
   <div class="flex items-center justify-between p-4">
     <a class="text-3xl font-extrabold tracking-tight" href="/home">
-      Urbanize <!-- Change this to your desired modern text -->
+      Urbanize <!-- Cambia esto al texto moderno deseado -->
     </a>
 
     <div class="hidden md:flex">
@@ -14,35 +14,40 @@
       <a class="hover:text-gray-200 px-4 py-2 font-semibold" href="#">
         Ratings
       </a>
-      <!-- Add more options as needed -->
+      <!-- Agrega más opciones según sea necesario -->
     </div>
 
     <div class="flex items-center">
       <ng-container *ngIf="username">
-        <div class="group">
-          <a class="cursor-pointer text-black font-semibold">
-            Welcome, {{ username }}
+        <div class="ml-4 button is-light mr-5">
+          <span class="icon">
+            <i class="pi pi-shopping-cart text-2xl"></i>
+          </span>
+        </div>
+        <div class="group relative" (click)="toggleLogoutMenu()">
+          <a class="cursor-pointer text-black font-semibold hover:text-gray-200">
+            Bienvenido, {{ username }}
           </a>
-          <div class="hidden group-hover:block absolute right-0 mt-2 bg-white text-gray-700 border rounded">
-            <a class="block px-4 py-2" href="#">
-              Profile
+          <div *ngIf="showLogoutMenu" (click)="closeLogoutMenu()"
+            class="absolute right-0 mt-2 bg-white text-gray-700 border rounded">
+            <a class="block px-4 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#">
+              <i class="pi pi-user mr-2"></i>
+              Perfil
             </a>
-            <a class="block px-4 py-2" href="#">
-              Settings
+            <a class="block px-4 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#">
+              <i class="pi pi-cog mr-2"></i>
+              Ajustes
             </a>
             <hr class="border-t my-2">
-            <a class="block px-4 py-2" href="/logout">
-              Log Out
+            <a class="block px-4 py-2 hover:bg-red-500 hover:text-black font-semibold" href="/logout">
+              <i class="pi pi-sign-out mr-2 ml-1"></i>
+              Salir
             </a>
           </div>
         </div>
-        <a class="ml-4 text-black">
-          <span class="icon">
-            <i class="pi pi-shopping-cart"></i>
-          </span>
-        </a>
       </ng-container>
       <a class="ml-4 hover:text-gray-200 text-cyan-900 font-semibold" href="/login" *ngIf="!username">
+        <i class="pi pi-sign-in mr-1"></i>
         Log In
       </a>
     </div>

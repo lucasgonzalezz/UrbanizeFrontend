@@ -1,3 +1,14 @@
-<p>
-  logout-routed works!
-</p>
+<div class="flex items-center justify-center min-h-screen bg-slate-200">
+  <div class="relative flex flex-col m-6 space-y-8 bg-slate-400 shadow-2xl rounded-2xl md:flex-row md:space-y-0">
+    <div class="flex flex-col justify-center p-8 md:p-14">
+      <span class="mb-3 text-4xl font-bold text-cyan-900">Cerrar Sesión</span>
+      <span class="text-cyan-900 mb-8 font-medium">
+        ¿Estás seguro de que quieres cerrar sesión?
+      </span>
+      <div class="flex justify-center space-x-4">
+        <button class="w-24 bg-cyan-900 text-white font-bold p-2 rounded-lg hover:bg-red-500 hover:text-black hover:border-gray-300" (click)="logout()">Sí</button>
+        <button class="w-24 bg-cyan-900 text-white font-bold p-2 rounded-lg hover:bg-gray-200 hover:text-black hover:border-gray-300" (click)="cancel()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
