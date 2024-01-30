@@ -1,0 +1,134 @@
+<div class="container">
+  <h1 class="title is-4">Formulario de Usuario</h1>
+  <form [formGroup]="userForm" (submit)="onSubmit()">
+    <div class="field">
+      <label class="label">Nombre</label>
+      <div class="control">
+        <input type="text" class="input" id="name" formControlName="name" placeholder="Ingrese el nombre">
+        <div class="help is-danger" *ngIf="hasError('name', 'required')">No has introducido el nombre</div>
+        <div class="help is-danger" *ngIf="hasError('name', 'minlength')">El nombre debe tener al menos 3 caracteres
+        </div>
+        <div class="help is-danger" *ngIf="hasError('name', 'maxlength')">El nombre no puede tener más de 255 caracteres
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Apellido 1</label>
+      <div class="control">
+        <input type="text" class="input" id="last_name1" formControlName="last_name1" placeholder="Ingrese el apellido">
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'required')">No has introducido el apellido</div>
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'minlength')">El apellido debe tener al menos 3
+          caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255
+          caracteres</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Apellido 2</label>
+      <div class="control">
+        <input type="text" class="input" id="last_name2" formControlName="last_name2"
+          placeholder="Ingrese el segundo apellido">
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'required')">No has introducido el apellido</div>
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'minlength')">El apellido debe tener al menos 3
+          caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255
+          caracteres</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Fecha de Nacimiento</label>
+      <div class="control">
+        <input type="date" class="input" id="birth_date" formControlName="birth_date">
+        <div class="help is-danger" *ngIf="hasError('birth_date', 'required')">La fecha de nacimiento es obligatoria
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Teléfono</label>
+      <div class="control">
+        <input type="text" class="input" id="phone_number" formControlName="phone_number"
+          placeholder="Ingrese el teléfono">
+        <div class="help is-danger" *ngIf="hasError('phone_number', 'required')">No has introducido el teléfono</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">DNI</label>
+      <div class="control">
+        <input type="text" class="input" id="dni" formControlName="dni" placeholder="Ingrese el DNI">
+        <div class="help is-danger" *ngIf="hasError('dni', 'required')">No has introducido el DNI</div>
+        <div class="help is-danger" *ngIf="hasError('dni', 'minlength')">El DNI debe tener 9 caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('dni', 'maxlength')">El DNI debe tener 9 caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('dni', 'pattern')">El DNI debe tener 8 números seguidos de una letra
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Ciudad</label>
+      <div class="control">
+        <input type="text" class="input" id="city" formControlName="city" placeholder="Ingrese la ciudad">
+        <div class="help is-danger" *ngIf="hasError('city', 'required')">No has introducido la ciudad</div>
+        <div class="help is-danger" *ngIf="hasError('city', 'minlength')">La ciudad debe tener al menos 3 caracteres
+        </div>
+        <div class="help is-danger" *ngIf="hasError('city', 'maxlength')">La ciudad no puede tener más de 255 caracteres
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Código Postal</label>
+      <div class="control">
+        <input type="text" class="input" id="postal_code" formControlName="postal_code"
+          placeholder="Ingrese el código postal">
+        <div class="help is-danger" *ngIf="hasError('postal_code', 'required')">No has introducido el código postal
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Dirección</label>
+      <div class="control">
+        <input type="text" class="input" id="address" formControlName="address" placeholder="Ingrese la dirección">
+        <div class="help is-danger" *ngIf="hasError('address', 'required')">No has introducido la dirección</div>
+        <div class="help is-danger" *ngIf="hasError('address', 'minlength')">La dirección debe tener al menos 3
+          caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('address', 'maxlength')">La dirección no puede tener más de 255
+          caracteres</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input type="email" class="input" id="email" formControlName="email" placeholder="Ingrese el email">
+        <div class="help is-danger" *ngIf="hasError('email', 'required')">No has introducido el email</div>
+        <div class="help is-danger" *ngIf="hasError('email', 'email')">El email no es válido</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control">
+        <input type="text" class="input" id="username" formControlName="username" placeholder="Ingrese el username">
+        <div class="help is-danger" *ngIf="hasError('username', 'required')">No has introducido el username</div>
+        <div class="help is-danger" *ngIf="hasError('username', 'minlength')">El username debe tener al menos 6
+          caracteres</div>
+        <div class="help is-danger" *ngIf="hasError('username', 'maxlength')">El username no puede tener más de 15
+          caracteres</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Tipo</label>
+      <div class="control">
+        <div class="select">
+          <select id="tipo" formControlName="tipo">
+            <option [ngValue]="false">Usuario Normal</option>
+            <option [ngValue]="true">Administrador</option>
+          </select>
+        </div>
+        <div class="help is-danger" *ngIf="hasError('tipo', 'required')">Especifica si eres Administrador o Usuario
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button type="submit" class="button is-primary">Enviar formulario</button>
+      </div>
+    </div>
+  </form>
+</div>

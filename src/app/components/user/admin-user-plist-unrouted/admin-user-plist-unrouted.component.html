@@ -1,0 +1,70 @@
+<div class="container">
+  <!-- Menú desplegable para ordenar -->
+  <div class="field">
+    <label class="label">Ordenar por:</label>
+    <div class="control">
+      <div class="select">
+        <select #selectEvent (change)="doOrder(selectEvent.value)">
+          <option value="id">ID</option>
+          <option value="name">Nombre</option>
+          <option value="last_name1">Primer pellido</option>
+          <option value="last_name2">Segundo Apellido</option>
+          <option value="dni">DNI</option>
+          <option value="birth_date">Fecha de nacimiento</option>
+          <option value="city">Ciudad</option>
+          <option value="address">Dirección</option>
+          <option value="postal_code">Código postal</option>
+          <option value="phone_number">Teléfono</option>
+          <option value="email">Email</option>
+          <option value="username">Usuario</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido de usuarios -->
+  <div class="columns is-multiline">
+    <div class="column is-one-third" *ngFor="let user of page?.content">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title" (click)="doView(user)">Usuario: {{ user.name }} {{ user.last_name1 }}</p>
+          <a class="card-header-icon" aria-label="more options" (click)="doOrder('last_name1')">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </a>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <p>Nombre de Usuario: {{ user.username }}</p>
+            <p>Primer apellido: {{ user.last_name1 }}</p>
+            <p>Segundo apellido: {{ user.last_name2 }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Dirección: {{ user.address }}</p>
+            <p>Teléfono: {{ user.phone_number }}</p>
+            <p>DNI: {{ user.dni }}</p>
+            <p>Fecha de Nacimiento: {{ user.birth_date | date }}</p>
+            <p>Ciudad: {{ user.city }}</p>
+            <p>Código Postal: {{ user.postal_code }}</p>
+            <p>Tipo de Usuario: {{ user.role ? 'Administrador' : 'Usuario' }}</p>
+            <p>Número de Carritos: {{ user.carts }}</p>
+            <p>Número de Valoraciones: {{ user.ratings }}</p>
+            <p>Número de Compras: {{ user.purchases }}</p>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item" [routerLink]="['/admin', 'user', 'edit', user.id]">Actualizar</a>
+          <a class="card-footer-item" (click)="doRemove(user)">Eliminar</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje si no hay usuarios -->
+  <div class="notification is-info" *ngIf="!page?.content || page?.content?.length === 0">
+    No hay usuarios para mostrar.
+  </div>
+
+  <!-- Paginación -->
+  <div class="level is-justify-content-center mb-3">
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+</div>

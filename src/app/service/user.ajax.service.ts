@@ -34,7 +34,7 @@ export class UserAjaxService {
     return this.http.put<IUser>(this.url, user);
   }
 
-  deleteUsuario(id: number | undefined): Observable<number> {
+  deleteUser(id: number | undefined): Observable<number> {
     return this.http.delete<number>(this.url + '/' + id);
   }
 

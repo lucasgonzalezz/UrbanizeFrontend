@@ -53,8 +53,8 @@ export interface IUser extends IEntity {
     email: string,
     username: string,
     role: boolean,
-    carrts: number,
-    rating: number,
+    carts: number,
+    ratings: number,
     purchases: number
 }
 

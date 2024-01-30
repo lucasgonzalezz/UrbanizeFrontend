@@ -76,7 +76,7 @@ export class LoginRoutedComponent implements OnInit {
   }
 
   loginAdmin() {
-    this.loginForm.setValue({ username: 'Lucas', contrasenya: 'urbanize', captcha: '' });
+    this.loginForm.setValue({ username: 'lucasgr', contrasenya: 'urbanize', captcha: '' });
   }
 
   loginUser() {
