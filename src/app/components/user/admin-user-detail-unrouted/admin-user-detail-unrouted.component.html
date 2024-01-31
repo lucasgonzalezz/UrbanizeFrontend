@@ -1,3 +1,27 @@
-<p>
-  admin-user-detail-unrouted works!
-</p>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="card">
+        <div class="card-content">
+          <div class="content">
+            <h5 class="title is-5">Detalle de Usuario</h5>
+            <p>Nombre de Usuario: {{ user.username }}</p>
+            <p>Primer apellido: {{ user.last_name1 }}</p>
+            <p>Segundo apellido: {{ user.last_name2 }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Dirección: {{ user.address }}</p>
+            <p>Teléfono: {{ user.phone_number }}</p>
+            <p>DNI: {{ user.dni }}</p>
+            <p>Fecha de Nacimiento: {{ user.birth_date | date }}</p>
+            <p>Ciudad: {{ user.city }}</p>
+            <p>Código Postal: {{ user.postal_code }}</p>
+            <p>Tipo de Usuario: {{ user.role ? 'Administrador' : 'Usuario' }}</p>
+            <p>Número de Carritos: {{ user.carts }}</p>
+            <p>Número de Valoraciones: {{ user.ratings }}</p>
+            <p>Número de Compras: {{ user.purchases }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,6 @@ import { PaginatorModule } from 'primeng/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
-
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
 import { ProductAjaxService } from './service/product.ajax.service';

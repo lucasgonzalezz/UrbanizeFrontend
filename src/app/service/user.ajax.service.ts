@@ -38,8 +38,8 @@ export class UserAjaxService {
     return this.http.delete<number>(this.url + '/' + id);
   }
 
-  getUserPage(page: number, size: number, sort: string, direction: string): Observable<IUserPage> {
-    return this.http.get<IUserPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
+  getUserPage(size: number, page: number, sort: string, direction: string): Observable<IUserPage> {
+    return this.http.get<IUserPage>(this.url + '?size=' + size + '&page=' + page +  + '&sort=' + sort + ',' + direction);
   }
 
   generateUsers(amount: number): Observable<number> {

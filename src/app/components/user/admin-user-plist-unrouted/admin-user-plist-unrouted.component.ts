@@ -24,7 +24,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   orderDirection: string = "asc";
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
   status: HttpErrorResponse | null = null;
-  userToDelete: IUser | null = null;
+  usuarioABorrar: IUser | null = null;
   
   constructor(
     private userAjaxService: UserAjaxService,
@@ -81,7 +81,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
       }
 
       doRemove(user: IUser) {
-        this.userToDelete = user;
+        this.usuarioABorrar = user;
         this.confirmationService.confirm({
           accept: () => {
             this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });

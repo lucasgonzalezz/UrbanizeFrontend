@@ -3,7 +3,7 @@
   <div class="field">
     <label class="label">Ordenar por:</label>
     <div class="control">
-      <div class="select">
+      <div class="select has-text-centered">
         <select #selectEvent (change)="doOrder(selectEvent.value)">
           <option value="id">ID</option>
           <option value="name">Nombre</option>
@@ -22,41 +22,69 @@
     </div>
   </div>
 
-  <!-- Contenido de usuarios -->
-  <div class="columns is-multiline">
-    <div class="column is-one-third" *ngFor="let user of page?.content">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title" (click)="doView(user)">Usuario: {{ user.name }} {{ user.last_name1 }}</p>
-          <a class="card-header-icon" aria-label="more options" (click)="doOrder('last_name1')">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
+  <!-- Contenido de usuarios como tabla -->
+  <table class="table is-bordered is-fullwidth is-hoverable has-text-centered">
+    <thead>
+      <tr>
+        <tr>
+          <th class="has-text-centered">Usuario</th>
+          <th class="has-text-centered">Email</th>
+          <th class="has-text-centered">DNI</th>
+          <th class="has-text-centered">Ciudad</th>
+          <th class="has-text-centered">Tipo de Usuario</th>
+          <th class="has-text-centered">Carritos</th>
+          <th class="has-text-centered">Valoraciones</th>
+          <th class="has-text-centered">Compras</th>
+          <th class="has-text-centered">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of page?.content" class="user-item">
+        <td (click)="doView(user)">
+          <p>{{ user.name }} {{ user.last_name1 }}</p>
+        </td>
+        <td>
+          <p>{{ user.email }}</p>
+        </td>
+        <td>
+          <p>{{ user.dni }}</p>
+        </td>
+        <td>
+          <p>{{ user.city }}</p>
+        </td>
+        <td>
+          <p>{{ user.role ? 'Administrador' : 'Usuario' }}</p>
+        </td>
+        <td>
+          <p>{{ user.carts }}</p>
+        </td>
+        <td>
+          <p>{{ user.ratings }}</p>
+        </td>
+        <td>
+          <p>{{ user.purchases }}</p>
+        </td>
+        <td class="user-actions">
+          <!-- Botones de CRUD a la derecha -->
+          <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2" title="Actualizar">
+            <i class="fas fa-edit"></i>
           </a>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <p>Nombre de Usuario: {{ user.username }}</p>
-            <p>Primer apellido: {{ user.last_name1 }}</p>
-            <p>Segundo apellido: {{ user.last_name2 }}</p>
-            <p>Email: {{ user.email }}</p>
-            <p>Dirección: {{ user.address }}</p>
-            <p>Teléfono: {{ user.phone_number }}</p>
-            <p>DNI: {{ user.dni }}</p>
-            <p>Fecha de Nacimiento: {{ user.birth_date | date }}</p>
-            <p>Ciudad: {{ user.city }}</p>
-            <p>Código Postal: {{ user.postal_code }}</p>
-            <p>Tipo de Usuario: {{ user.role ? 'Administrador' : 'Usuario' }}</p>
-            <p>Número de Carritos: {{ user.carts }}</p>
-            <p>Número de Valoraciones: {{ user.ratings }}</p>
-            <p>Número de Compras: {{ user.purchases }}</p>
-          </div>
-        </div>
-        <footer class="card-footer">
-          <a class="card-footer-item" [routerLink]="['/admin', 'user', 'edit', user.id]">Actualizar</a>
-          <a class="card-footer-item" (click)="doRemove(user)">Eliminar</a>
-        </footer>
-      </div>
-    </div>
-  </div>
+          <button class="button is-info is-small mr-2" title="Editar">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button class="button is-success is-small mr-2" (click)="doView(user)" title="Ver Detalles">
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="button is-warning is-small mr-2" title="Vista Alternativa">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <button  (click)="doRemove(user)" class="button is-danger is-small " title="Eliminar">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <!-- Mensaje si no hay usuarios -->
   <div class="notification is-info" *ngIf="!page?.content || page?.content?.length === 0">
@@ -68,3 +96,5 @@
     <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
   </div>
 </div>
+
+<p-confirmPopup></p-confirmPopup>

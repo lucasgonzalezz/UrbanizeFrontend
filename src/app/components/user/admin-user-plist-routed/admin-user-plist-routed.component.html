@@ -1,13 +1,13 @@
 <div class="section">
   <div class="container">
-    <div class="columns">
-      <div class="column">
-        <button class="button is-primary" (click)="doGenerateRandom(10)" [disabled]="bLoading">
+    <div class="columns is-centered">
+      <div class="column is-one-third">
+        <button class="button is-primary is-fullwidth" (click)="doGenerateRandom(10)" [disabled]="bLoading">
           Generar usuarios
         </button>
       </div>
-      <div class="column">
-        <button class="button is-danger" (click)="doEmpty($event)" [disabled]="bLoading">
+      <div class="column is-one-third">
+        <button class="button is-danger is-fullwidth" (click)="doEmpty($event)" [disabled]="bLoading">
           Eliminar usuarios
         </button>
       </div>
@@ -22,5 +22,6 @@
     <app-admin-user-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-user-plist-unrouted>
   </div>
 </div>
+
 
 <p-confirmPopup></p-confirmPopup>
