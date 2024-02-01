@@ -59,6 +59,7 @@ import { AdminCategoryDetailUnroutedComponent } from './components/category/admi
 import { AdminCategoryFormUnroutedComponent } from './components/category/admin-category-form-unrouted/admin-category-form-unrouted.component';
 import { AdminCategoryNewRoutedComponent } from './components/category/admin-category-new-routed/admin-category-new-routed.component';
 import { AdminCategoryEditRoutedComponent } from './components/category/admin-category-edit-routed/admin-category-edit-routed.component';
+import { AdminCategoryViewRoutedComponent } from './components/category/admin-category-view-routed/admin-category-view-routed.component'; 
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { AdminCategoryEditRoutedComponent } from './components/category/admin-ca
     AdminCategoryDetailUnroutedComponent,
     AdminCategoryNewRoutedComponent,
     AdminCategoryEditRoutedComponent,
+    AdminCategoryViewRoutedComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,7 @@ import { AdminCategoryEditRoutedComponent } from './components/category/admin-ca
 import { AdminCategoryNewRoutedComponent } from './components/category/admin-category-new-routed/admin-category-new-routed.component';
 import { AdminUserViewRoutedComponent } from './components/user/admin-user-view-routed/admin-user-view-routed.component';
 import { AdminProductViewRoutedComponent } from './components/product/admin-product-view-routed/admin-product-view-routed.component';
+import { AdminCategoryViewRoutedComponent } from './components/category/admin-category-view-routed/admin-category-view-routed.component';
 
 const routes: Routes = [
   { path: '', component: HomeRoutedComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'admin/category/plist', component: AdminCategoryPlistRoutedComponent },
   { path: 'admin/category/edit/:id', component: AdminCategoryEditRoutedComponent },
   { path: 'admin/category/new', component: AdminCategoryNewRoutedComponent },
+  { path: 'admin/category/view/:id', component: AdminCategoryViewRoutedComponent},
 
 ];
 
