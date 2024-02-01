@@ -78,7 +78,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
             this.initializeForm(this.user);
             this.matSnackBar.open("Usuario creado correctamente", 'Aceptar', {duration: 3000});
             console.log(this.user.birth_date);
-            this.router.navigate(['/admin', 'user', 'view', this.user]);
+            this.router.navigate(['/admin', 'user', 'view', this.user.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
@@ -91,7 +91,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
             this.user = data;
             this.initializeForm(this.user);
             this.matSnackBar.open("Usuario actualizado correctamente", 'Aceptar', {duration: 3000});
-            this.router.navigate(['/admin', 'user', 'view', this.user]);
+            this.router.navigate(['/admin', 'user', 'view', this.user.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;

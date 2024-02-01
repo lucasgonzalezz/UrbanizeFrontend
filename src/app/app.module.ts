@@ -41,6 +41,7 @@ import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-d
 import { AdminUserNewRoutedComponent } from './components/user/admin-user-new-routed/admin-user-new-routed.component';
 import { AdminUserEditRoutedComponent } from './components/user/admin-user-edit-routed/admin-user-edit-routed.component';
 import { AdminUserSelectionUnroutedComponent } from './components/user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
+import { AdminUserViewRoutedComponent } from './components/user/admin-user-view-routed/admin-user-view-routed.component'; 
 // Product components
 import { AdminProductPlistRoutedComponent } from './components/product/admin-product-plist-routed/admin-product-plist-routed.component';
 import { AdminProductPlistUnroutedComponent } from './components/product/admin-product-plist-unrouted/admin-product-plist-unrouted.component';
@@ -49,7 +50,7 @@ import { AdminProductEditRoutedComponent } from './components/product/admin-prod
 import { AdminProductNewRoutedComponent } from './components/product/admin-product-new-routed/admin-product-new-routed.component';
 import { AdminProductSelectionUnroutedComponent } from './components/product/admin-product-selection-unrouted/admin-product-selection-unrouted.component';
 import { AdminProductDetailUnroutedComponent } from './components/product/admin-product-detail-unrouted/admin-product-detail-unrouted.component';
-
+import { AdminProductViewRoutedComponent } from './components/product/admin-product-view-routed/admin-product-view-routed.component';
 // Category components
 import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
 import { AdminCategoryPlistUnroutedComponent } from './components/category/admin-category-plist-unrouted/admin-category-plist-unrouted.component';
@@ -76,6 +77,7 @@ import { AdminCategoryEditRoutedComponent } from './components/category/admin-ca
     AdminUserNewRoutedComponent,
     AdminUserEditRoutedComponent,
     AdminUserSelectionUnroutedComponent,
+    AdminUserViewRoutedComponent,
     // Product components
     AdminProductPlistRoutedComponent,
     AdminProductPlistUnroutedComponent,
@@ -85,6 +87,7 @@ import { AdminCategoryEditRoutedComponent } from './components/category/admin-ca
     AdminProductSelectionUnroutedComponent,
     AdminCategoryPlistUnroutedComponent,
     AdminProductDetailUnroutedComponent,
+    AdminProductViewRoutedComponent,
     // Category components
     AdminCategoryPlistUnroutedComponent,
     AdminCategoryPlistRoutedComponent,
