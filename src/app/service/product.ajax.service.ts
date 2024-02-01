@@ -18,8 +18,8 @@ export class ProductAjaxService {
     return this.http.get<IProduct>(this.url + '/' + id);
   }
 
-  getPageProducts(page: number, size: number, sort: string, direction: string): Observable<IProductPage> {
-    return this.http.get<IProductPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
+  getPageProducts(size: number | undefined,  page: number | undefined,  sort: string, direction: string): Observable<IProductPage> {
+    return this.http.get<IProductPage>(this.url + '?size=' + size + '&page=' + page +  + '&sort=' + sort + ',' + direction);
   }
 
   getProductRandom(): Observable<IProduct> {

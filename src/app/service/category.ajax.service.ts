@@ -18,8 +18,8 @@ export class CategoryAjaxService {
     return this.http.get<ICategory>(this.url + '/' + id);
   }
 
-  getCategorydPage(page: number, size: number, sort: string, direction: string): Observable<ICategoryPage> {
-    return this.http.get<ICategoryPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
+  getCategoryPage(size: number | undefined,  page: number | undefined,  sort: string, direction: string): Observable<ICategoryPage> {
+    return this.http.get<ICategoryPage>(this.url + '?size=' + size + '&page=' + page +  + '&sort=' + sort + ',' + direction);
   }
 
   getCategorydRandom(): Observable<ICategory> {

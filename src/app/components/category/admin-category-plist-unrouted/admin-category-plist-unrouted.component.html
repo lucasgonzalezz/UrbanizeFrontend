@@ -26,48 +26,37 @@
   <table class="table is-bordered is-fullwidth is-hoverable has-text-centered">
     <thead>
       <tr>
-        <tr>
-          <th class="has-text-centered">Nombre</th>
-          <th class="has-text-centered">Stock</th>
-          <th class="has-text-centered">Talla</th>
-          <th class="has-text-centered">Precio</th>
-          <th class="has-text-centered">Imagen</th>
-          <th class="has-text-centered">Categoria</th>
-          <th class="has-text-centered">Acciones</th>
-        </tr>
+        <th class="has-text-centered">ID</th>
+        <th class="has-text-centered">Nombre</th>
+        <th class="has-text-centered">Productos</th>
+        <th class="has-text-centered">Acciones</th>
+      </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of page?.content" class="user-item">
-        <td (click)="doView(product)">
-          <p>{{ product.name }}</p>
+      <tr *ngFor="let category of page?.content" class="user-item">
+        <td (click)="doView(category)">
+          <p>{{ category.id }}</p>
         </td>
         <td>
-          <p>{{ product.stock }}</p>
+          <p>{{ category.name }}</p>
         </td>
         <td>
-          <p>{{ product.size }}</p>
-        </td>
-        <td>
-          <p>{{ product.price + "€" }}</p>
-        </td>
-        <td>
-          <p>{{ product.image }}</p>
-        </td>
-        <td>
-          <p>{{ product.category.name }}</p>
+          <a [routerLink]="['/admin','category','plist','byproduct',category.id]"
+                *ngIf="category.product>0">{{category.product}}</a>
+              <span *ngIf="category.product==0">0</span>
         </td>
         <td class="user-actions">
           <!-- Botones de CRUD a la derecha -->
-          <a [routerLink]="['/admin', 'product', 'edit', product.id]" class="button is-primary is-small mr-2" title="Actualizar">
+          <a [routerLink]="['/admin', 'category', 'edit', category.id]" class="button is-primary is-small mr-2" title="Actualizar">
             <i class="fas fa-edit"></i>
           </a>
-          <button class="button is-success is-small mr-2" (click)="doView(product)" title="Ver Detalles">
+          <button class="button is-success is-small mr-2" (click)="doView(category)" title="Ver Detalles">
             <i class="fas fa-eye"></i>
           </button>
           <button class="button is-warning is-small mr-2" title="Vista Alternativa">
             <i class="fas fa-exchange-alt"></i>
           </button>
-          <button  (click)="doRemove(product)" class="button is-danger is-small " title="Eliminar">
+          <button  (click)="doRemove(category)" class="button is-danger is-small " title="Eliminar">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>
@@ -81,8 +70,6 @@
   </div>
 
   <!-- Paginación -->
-
-    
   <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!"
             [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
             class="mx-2"></p-paginator>

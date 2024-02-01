@@ -43,6 +43,15 @@ import { AdminUserSelectionUnroutedComponent } from './components/user/admin-use
 // Product components
 import { AdminProductPlistRoutedComponent } from './components/product/admin-product-plist-routed/admin-product-plist-routed.component';
 import { AdminProductPlistUnroutedComponent } from './components/product/admin-product-plist-unrouted/admin-product-plist-unrouted.component';
+import { AdminProductFormUnroutedComponent } from './components/product/admin-product-form-unrouted/admin-product-form-unrouted.component';
+import { AdminProductEditRoutedComponent } from './components/product/admin-product-edit-routed/admin-product-edit-routed.component';
+import { AdminProductNewRoutedComponent } from './components/product/admin-product-new-routed/admin-product-new-routed.component';
+import { AdminProductSelectionUnroutedComponent } from './components/product/admin-product-selection-unrouted/admin-product-selection-unrouted.component';
+import { AdminProductDetailUnroutedComponent } from './components/product/admin-product-detail-unrouted/admin-product-detail-unrouted.component';
+
+// Category components
+import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
+import { AdminCategoryPlistUnroutedComponent } from './components/category/admin-category-plist-unrouted/admin-category-plist-unrouted.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +73,14 @@ import { AdminProductPlistUnroutedComponent } from './components/product/admin-p
     // Product components
     AdminProductPlistRoutedComponent,
     AdminProductPlistUnroutedComponent,
-
+    AdminProductFormUnroutedComponent,
+    AdminProductEditRoutedComponent,
+    AdminProductNewRoutedComponent,
+    AdminProductSelectionUnroutedComponent,
+    AdminCategoryPlistUnroutedComponent,
+    // Category components
+    AdminCategoryPlistUnroutedComponent,
+    AdminCategoryPlistRoutedComponent
   ],
   imports: [
     BrowserModule,

@@ -90,7 +90,7 @@ export interface ICartPage extends IPage<ICart> {
 
 export interface ICategory extends IEntity {
     name: string,
-    products: number
+    product: number
 }
 
 export interface ICategoryPage extends IPage<ICategory> {

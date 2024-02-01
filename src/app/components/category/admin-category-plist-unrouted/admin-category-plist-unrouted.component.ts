@@ -5,29 +5,29 @@ import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IProduct, IProductPage } from 'src/app/model/model.interfaces';
-import { ProductAjaxService } from 'src/app/service/product.ajax.service';
-import { AdminProductDetailUnroutedComponent } from '../admin-product-detail-unrouted/admin-product-detail-unrouted.component';
+import { ICategory, ICategoryPage } from 'src/app/model/model.interfaces';
+import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
+import { AdminUserPlistUnroutedComponent } from '../../user/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
 
 @Component({
   providers: [DialogService, ConfirmationService],
-  selector: 'app-admin-product-plist-unrouted',
-  templateUrl: './admin-product-plist-unrouted.component.html',
-  styleUrls: ['./admin-product-plist-unrouted.component.css']
+  selector: 'app-admin-category-plist-unrouted',
+  templateUrl: './admin-category-plist-unrouted.component.html',
+  styleUrls: ['./admin-category-plist-unrouted.component.css']
 })
-export class AdminProductPlistUnroutedComponent implements OnInit {
+export class AdminCategoryPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
 
-  page: IProductPage | undefined;
+  page: ICategoryPage | undefined;
   orderField: string = "id";
   orderDirection: string = "asc";
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
   status: HttpErrorResponse | null = null;
-  productToDelete: IProduct | null = null;
+  usuarioABorrar: ICategory | null = null;
   
   constructor(
-    private productAjaxService: ProductAjaxService,
+    private categoryAjaxService: CategoryAjaxService,
     public dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar
@@ -47,10 +47,11 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
   getPage(): void {
     const page: number = this.paginatorState.page || 0;
     const rows: number = this.paginatorState.rows || 0;
-    this.productAjaxService.getPageProducts(rows, page, this.orderField, this.orderDirection).subscribe({
-      next: (page: IProductPage) => {
+    this.categoryAjaxService.getCategoryPage(rows, page, this.orderField, this.orderDirection).subscribe({
+      next: (page: ICategoryPage) => {
         this.page = page;
         this.paginatorState.pageCount = page.totalPages;
+        console.log(this.page)
       },
       error: (response: HttpErrorResponse) => {
         this.status = response;
@@ -70,22 +71,22 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
       this.getPage();
     }
 
-    doView(product: IProduct) {
+    doView(category: ICategory) {
       let ref: DynamicDialogRef | undefined;
-      ref = this.dialogService.open(AdminProductDetailUnroutedComponent, {
+      ref = this.dialogService.open(AdminUserPlistUnroutedComponent , { // TODO: Change this to the correct component
         header: 'Detalle de usuario',
         width: '70%',
         maximizable: false,
-        data: { id: product.id, ref }
+        data: { id: category.id, ref }
         });
       }
 
-      doRemove(product: IProduct) {
-        this.productToDelete = product;
+      doRemove(category: ICategory) {
+        this.usuarioABorrar = category;
         this.confirmationService.confirm({
           accept: () => {
             this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });
-            this.productAjaxService.deleteProduct(product.id).subscribe({
+            this.categoryAjaxService.deleteCategory(category.id).subscribe({
               next: () => {
                 this.getPage();
               },

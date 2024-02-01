@@ -3,17 +3,17 @@
     <div class="columns is-centered">
       <div class="column is-one-third">
         <button class="button is-primary is-fullwidth" (click)="doGenerateRandom(10)" [disabled]="bLoading">
-          Generar productos
+          Generar categorias
         </button>
       </div>
       <div class="column is-one-third">
         <button class="button is-danger is-fullwidth" (click)="doEmpty($event)" [disabled]="bLoading">
-          Eliminar productos
+          Eliminar categorias
         </button>
       </div>
       <div class="column is-one-third">
-        <a class="button is-danger is-fullwidth" [routerLink]="['/admin', 'product', 'new']">
-          Crear producto
+        <a class="button is-danger is-fullwidth" [routerLink]="['/admin', 'category', 'new']">
+          Crear categoria
         </a>
       </div>
     </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <app-admin-product-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-product-plist-unrouted>
+    <app-admin-category-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-category-plist-unrouted>
   </div>
 </div>
 

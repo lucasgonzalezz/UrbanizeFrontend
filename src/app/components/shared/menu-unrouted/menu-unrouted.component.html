@@ -5,14 +5,14 @@
     </a>
 
     <div class="hidden md:flex">
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold"  *ngIf="username" [routerLink]="['/admin', 'user', 'plist']" >
-        Users
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold"  *ngIf="username" [routerLink]="['/admin', 'user', 'plist']">
+        Usuarios
       </a>
       <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'product', 'plist']">
-        Products
+        Productos
       </a>
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold" href="">
-        Ratings
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'category', 'plist']">
+        Categorias
       </a>
       <!-- Agrega más opciones según sea necesario -->
     </div>

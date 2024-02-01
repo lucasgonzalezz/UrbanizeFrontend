@@ -1,0 +1,30 @@
+<div class="table-container">
+  <table class="table is-bordered is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th (click)="doOrder('id')">ID</th>
+        <th (click)="doOrder('name')">Nomber</th>
+        <th (click)="doOrder('stock')">Stock</th>
+        <th (click)="doOrder('price')">Precio</th>
+        <th>Categoria</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of page?.content">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.stock}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.category.name}}</td>
+        <td>
+          <button class="button is-link" (click)="selectCamiseta(product)">Seleccionar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-container">
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!"
+      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+</div>
