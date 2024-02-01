@@ -1,0 +1,31 @@
+<div class="table-container">
+  <table class="table is-bordered is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th (click)="doOrder('id')">Id</th>
+        <th (click)="doOrder('nombre')">Nombre</th>
+        <th (click)="doOrder('apellido')">Apellido</th>
+        <th (click)="doOrder('username')">Username</th>
+        <th (click)="doOrder('tipo')">Tipo</th>
+        <th>Compras</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of page?.content">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.last_name1}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.purchases}}</td>
+        <td>
+         <button class="button is-link" (click)="onSelectUser(user)">Seleccionar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-container">
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+  </div>

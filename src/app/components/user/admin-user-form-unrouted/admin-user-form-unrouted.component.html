@@ -1,6 +1,17 @@
 <div class="container">
   <h1 class="title is-4">Formulario de Usuario</h1>
   <form [formGroup]="userForm" (submit)="onSubmit()">
+    <div class="field" v-if="operation === 'EDIT'">
+      <label class="label">ID:</label>
+      <div class="control has-icons-right">
+        <input class="input" formControlName="id" placeholder="ID" readonly>
+        <span class="icon is-small is-right">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+        </span>
+      </div>
+      <p class="help is-pulled-right">(No se puede cambiar este número)</p>
+    </div>
+    
     <div class="field">
       <label class="label">Nombre</label>
       <div class="control">
@@ -39,9 +50,7 @@
       <label class="label">Fecha de Nacimiento</label>
       <div class="control">
         <input type="date" class="input" id="birth_date" formControlName="birth_date">
-        <div class="help is-danger" *ngIf="hasError('birth_date', 'required')">La fecha de nacimiento es obligatoria
         </div>
-      </div>
     </div>
     <div class="field">
       <label class="label">Teléfono</label>

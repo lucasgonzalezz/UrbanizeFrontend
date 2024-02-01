@@ -27,59 +27,46 @@
     <thead>
       <tr>
         <tr>
-          <th class="has-text-centered">Usuario</th>
-          <th class="has-text-centered">Fecha nac.</th>
-          <th class="has-text-centered">Email</th>
-          <th class="has-text-centered">DNI</th>
-          <th class="has-text-centered">Ciudad</th>
-          <th class="has-text-centered">Tipo Usuario</th>
-          <th class="has-text-centered">Carritos</th>
-          <th class="has-text-centered">Valoraciones</th>
-          <th class="has-text-centered">Compras</th>
-          <th class="has-text-centered">Acciones</th>
+          <th class="has-text-centered">Nombre</th>
+          <th class="has-text-centered">Stock</th>
+          <th class="has-text-centered">Talla</th>
+          <th class="has-text-centered">Precio</th>
+          <th class="has-text-centered">Imagen</th>
+          <th class="has-text-centered">Categoria</th>
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of page?.content" class="user-item">
-        <td (click)="doView(user)">
-          <p>{{ user.name }} {{ user.last_name1 }}</p>
+      <tr *ngFor="let product of page?.content" class="user-item">
+        <td (click)="doView(product)">
+          <p>{{ product.name }}</p>
         </td>
         <td>
-          <p>{{ user.birth_date | date: 'dd-MM-yyyy' }}</p>
+          <p>{{ product.stock| date: 'dd-MM-yyyy' }}</p>
         </td>
         <td>
-          <p>{{ user.email }}</p>
+          <p>{{ product.size }}</p>
         </td>
         <td>
-          <p>{{ user.dni }}</p>
+          <p>{{ product.price }}</p>
         </td>
         <td>
-          <p>{{ user.city }}</p>
+          <p>{{ product.image }}</p>
         </td>
         <td>
-          <p>{{ user.role ? 'Administrador' : 'Usuario' }}</p>
-        </td>
-        <td>
-          <p>{{ user.carts }}</p>
-        </td>
-        <td>
-          <p>{{ user.ratings }}</p>
-        </td>
-        <td>
-          <p>{{ user.purchases }}</p>
+          <p>{{ product.category }}</p>
         </td>
         <td class="user-actions">
           <!-- Botones de CRUD a la derecha -->
-          <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2" title="Actualizar">
+          <a [routerLink]="['/admin', 'product', 'edit', product.id]" class="button is-primary is-small mr-2" title="Actualizar">
             <i class="fas fa-edit"></i>
           </a>
-          <button class="button is-success is-small mr-2" (click)="doView(user)" title="Ver Detalles">
+          <button class="button is-success is-small mr-2" (click)="doView(product)" title="Ver Detalles">
             <i class="fas fa-eye"></i>
           </button>
           <button class="button is-warning is-small mr-2" title="Vista Alternativa">
             <i class="fas fa-exchange-alt"></i>
           </button>
-          <button  (click)="doRemove(user)" class="button is-danger is-small " title="Eliminar">
+          <button  (click)="doRemove(product)" class="button is-danger is-small " title="Eliminar">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>

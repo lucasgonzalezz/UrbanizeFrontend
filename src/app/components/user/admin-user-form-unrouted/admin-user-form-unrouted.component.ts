@@ -31,10 +31,11 @@ export class AdminUserFormUnroutedComponent implements OnInit {
 
   initializeForm(user: IUser) {
     this.userForm = this.formBuilder.group({
+      id: [user.id],
       name: [user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       last_name1: [user.last_name1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       last_name2: [user.last_name2, [Validators.minLength(3), Validators.maxLength(255)]],
-      birth_date: [user.birth_date, [Validators.required]],
+      birth_date: [user.birth_date],
       phone_number: [user.phone_number, [Validators.required]],
       dni: [user.dni, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('\\d{8}[a-zA-Z]')]],
       city: [user.city, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
@@ -52,6 +53,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
         next: (data: IUser) => {
           this.user = data;
           this.initializeForm(this.user);
+          console.log(this.user.birth_date);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
@@ -75,6 +77,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
             this.user = data;
             this.initializeForm(this.user);
             this.matSnackBar.open("Usuario creado correctamente", 'Aceptar', {duration: 3000});
+            console.log(this.user.birth_date);
             this.router.navigate(['/admin', 'user', 'view', this.user]);
           },
           error: (err: HttpErrorResponse) => {

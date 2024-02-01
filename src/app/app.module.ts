@@ -37,6 +37,12 @@ import { AdminUserFormUnroutedComponent } from './components/user/admin-user-for
 import { AdminUserPlistRoutedComponent } from './components/user/admin-user-plist-routed/admin-user-plist-routed.component';
 import { AdminUserPlistUnroutedComponent } from './components/user/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
 import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-detail-unrouted/admin-user-detail-unrouted.component';
+import { AdminUserNewRoutedComponent } from './components/user/admin-user-new-routed/admin-user-new-routed.component';
+import { AdminUserEditRoutedComponent } from './components/user/admin-user-edit-routed/admin-user-edit-routed.component';
+import { AdminUserSelectionUnroutedComponent } from './components/user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
+// Product components
+import { AdminProductPlistRoutedComponent } from './components/product/admin-product-plist-routed/admin-product-plist-routed.component';
+import { AdminProductPlistUnroutedComponent } from './components/product/admin-product-plist-unrouted/admin-product-plist-unrouted.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +58,13 @@ import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-d
     AdminUserPlistRoutedComponent,
     AdminUserPlistUnroutedComponent,
     AdminUserDetailUnroutedComponent,
+    AdminUserNewRoutedComponent,
+    AdminUserEditRoutedComponent,
+    AdminUserSelectionUnroutedComponent,
+    // Product components
+    AdminProductPlistRoutedComponent,
+    AdminProductPlistUnroutedComponent,
+
   ],
   imports: [
     BrowserModule,

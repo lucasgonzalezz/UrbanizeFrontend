@@ -38,7 +38,7 @@ export class UserAjaxService {
     return this.http.delete<number>(this.url + '/' + id);
   }
 
-  getUserPage(size: number, page: number, sort: string, direction: string): Observable<IUserPage> {
+  getUserPage(size: number | undefined,  page: number | undefined,  sort: string, direction: string): Observable<IUserPage> {
     return this.http.get<IUserPage>(this.url + '?size=' + size + '&page=' + page +  + '&sort=' + sort + ',' + direction);
   }
 

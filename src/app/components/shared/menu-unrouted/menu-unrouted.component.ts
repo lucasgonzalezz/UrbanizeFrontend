@@ -13,7 +13,7 @@ import { UserAjaxService } from 'src/app/service/user.ajax.service';
 export class MenuUnroutedComponent implements OnInit {
 
   username: string = '';
-  userSesion: IUser | null = null;
+  userSession: IUser | null = null;
   url: string = '';
 
   showLogoutMenu: boolean = false;
@@ -31,8 +31,9 @@ export class MenuUnroutedComponent implements OnInit {
 
     this.username = sessionAjaxService.getUsername();
     this.userAjaxService.getUserByUsername(this.sessionAjaxService.getUsername()).subscribe({
-      next: (usuario: IUser) => {
-        this.userSesion = usuario;
+      next: (user: IUser) => {
+        this.userSession = user;
+        console.log(this.userSession.role);
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
@@ -47,8 +48,9 @@ export class MenuUnroutedComponent implements OnInit {
         if (data.type === 'login') {
           this.username = this.sessionAjaxService.getUsername();
           this.userAjaxService.getUserByUsername(this.sessionAjaxService.getUsername()).subscribe({
-            next: (usuario: IUser) => {
-              this.userSesion = usuario;
+            next: (user: IUser) => {
+              this.userSession = user;
+              console.log(this.userSession.role);
             },
             error: (err: HttpErrorResponse) => {
               console.log(err);
