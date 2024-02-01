@@ -1,3 +1,25 @@
-<p>
-  admin-category-selection-unrouted works!
-</p>
+<div class="table-container">
+  <table class="table is-bordered is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th (click)="doOrder('id')">ID</th>
+        <th (click)="doOrder('nombre')">Nombre</th>
+        <th>Productos</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of page?.content">
+        <td>{{category.id}}</td>
+        <td>{{category.name}}</td>
+        <td>{{category.product}}</td>
+        <td>
+          <button class="button is-success" (click)="onSelectCategory(category)">Seleccionar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginator-container">
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+</div>

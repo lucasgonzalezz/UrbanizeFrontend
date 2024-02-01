@@ -1,3 +1,19 @@
-<p>
-  admin-category-form-unrouted works!
-</p>
+<div class="container">
+  <h1 class="title is-4">Formulario de Categoría</h1>
+  <form [formGroup]="categoryForm" (submit)="onSubmit()">
+    <div class="field">
+      <label class="label">Nombre</label>
+      <div class="control">
+        <input class="input" type="text" formControlName="name" placeholder="Nombre de la modalidad">
+        <div class="help is-danger" *ngIf="hasError('name', 'required')">No has introducido el nombre</div>
+        <div class="help is-danger" *ngIf="hasError('name', 'minlength')">El nombre es demasiado corto, debe tener al menos 3 carácteres</div>
+        <div class="help is-danger" *ngIf="hasError('name', 'maxlength')">El nombre es demasiado largo</div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary" type="submit">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>

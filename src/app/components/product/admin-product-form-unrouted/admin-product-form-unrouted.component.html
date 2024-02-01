@@ -39,7 +39,7 @@
     <div class="field">
       <label class="label">Precio</label>
       <div class="control">
-        <input class="input" type="number" formControlName="pricenombre" placeholder="Ingrese el precio">
+        <input class="input" type="number" formControlName="price" placeholder="Ingrese el precio">
       </div>
     </div>
 
@@ -52,12 +52,16 @@
     </div>
 
     <!-- Categoría -->
-    <div class="field">
-      <label class="label">Categoría</label>
-      <div class="control">
-        <button class="button is-link" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
-      </div>
-    </div>
+<!-- Categoría -->
+<div class="field">
+  <label class="label">Categoría</label>
+  <div class="control">
+    <button class="button is-link" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
+    <span *ngIf="selectedCategory" class="selected-category">
+      Categoría seleccionada: {{ selectedCategory.name }}
+    </span>
+  </div>
+</div>
 
     <!-- Botones -->
     <div class="field is-grouped">

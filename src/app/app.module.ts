@@ -10,6 +10,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PaginatorModule } from 'primeng/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogService } from 'primeng/dynamicdialog';
 
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
@@ -52,6 +53,11 @@ import { AdminProductDetailUnroutedComponent } from './components/product/admin-
 // Category components
 import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
 import { AdminCategoryPlistUnroutedComponent } from './components/category/admin-category-plist-unrouted/admin-category-plist-unrouted.component';
+import { AdminCategorySelectionUnroutedComponent } from './components/category/admin-category-selection-unrouted/admin-category-selection-unrouted.component';
+import { AdminCategoryDetailUnroutedComponent } from './components/category/admin-category-detail-unrouted/admin-category-detail-unrouted.component';
+import { AdminCategoryFormUnroutedComponent } from './components/category/admin-category-form-unrouted/admin-category-form-unrouted.component';
+import { AdminCategoryNewRoutedComponent } from './components/category/admin-category-new-routed/admin-category-new-routed.component';
+import { AdminCategoryEditRoutedComponent } from './components/category/admin-category-edit-routed/admin-category-edit-routed.component';
 
 @NgModule({
   declarations: [
@@ -78,9 +84,15 @@ import { AdminCategoryPlistUnroutedComponent } from './components/category/admin
     AdminProductNewRoutedComponent,
     AdminProductSelectionUnroutedComponent,
     AdminCategoryPlistUnroutedComponent,
+    AdminProductDetailUnroutedComponent,
     // Category components
     AdminCategoryPlistUnroutedComponent,
-    AdminCategoryPlistRoutedComponent
+    AdminCategoryPlistRoutedComponent,
+    AdminCategorySelectionUnroutedComponent,
+    AdminCategoryFormUnroutedComponent,
+    AdminCategoryDetailUnroutedComponent,
+    AdminCategoryNewRoutedComponent,
+    AdminCategoryEditRoutedComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +105,7 @@ import { AdminCategoryPlistUnroutedComponent } from './components/category/admin
     MatSnackBarModule,
     PaginatorModule,
     MatProgressSpinnerModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
   ],
   providers: [
     // Services
@@ -107,6 +119,7 @@ import { AdminCategoryPlistUnroutedComponent } from './components/category/admin
     MediaService,
     SessionAjaxService,
     CryptoService,
+    DialogService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

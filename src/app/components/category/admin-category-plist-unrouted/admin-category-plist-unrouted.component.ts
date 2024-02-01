@@ -7,7 +7,7 @@ import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { ICategory, ICategoryPage } from 'src/app/model/model.interfaces';
 import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
-import { AdminUserPlistUnroutedComponent } from '../../user/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
+import { AdminCategoryDetailUnroutedComponent } from '../admin-category-detail-unrouted/admin-category-detail-unrouted.component';
 
 @Component({
   providers: [DialogService, ConfirmationService],
@@ -24,7 +24,7 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
   orderDirection: string = "asc";
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
   status: HttpErrorResponse | null = null;
-  usuarioABorrar: ICategory | null = null;
+  categoryToDelete: ICategory | null = null;
   
   constructor(
     private categoryAjaxService: CategoryAjaxService,
@@ -73,7 +73,7 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
 
     doView(category: ICategory) {
       let ref: DynamicDialogRef | undefined;
-      ref = this.dialogService.open(AdminUserPlistUnroutedComponent , { // TODO: Change this to the correct component
+      ref = this.dialogService.open(AdminCategoryDetailUnroutedComponent , { // TODO: Change this to the correct component
         header: 'Detalle de usuario',
         width: '70%',
         maximizable: false,
@@ -82,7 +82,7 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
       }
 
       doRemove(category: ICategory) {
-        this.usuarioABorrar = category;
+        this.categoryToDelete = category;
         this.confirmationService.confirm({
           accept: () => {
             this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });

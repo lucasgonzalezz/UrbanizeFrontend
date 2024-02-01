@@ -14,7 +14,7 @@ export class CategoryAjaxService {
   constructor(private http: HttpClient) {
   }
 
-  getCategorydById(id: number): Observable<ICategory> {
+  getCategoryById(id: number): Observable<ICategory> {
     return this.http.get<ICategory>(this.url + '/' + id);
   }
 

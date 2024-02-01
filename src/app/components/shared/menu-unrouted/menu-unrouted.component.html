@@ -14,16 +14,14 @@
       <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'category', 'plist']">
         Categorias
       </a>
+      <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'rating', 'plist']">
+        Valoraciones
+      </a>
       <!-- Agrega más opciones según sea necesario -->
     </div>
 
     <div class="flex items-center">
       <ng-container *ngIf="username">
-        <div class="ml-4 button is-light mr-5">
-          <span class="icon">
-            <i class="pi pi-shopping-cart text-2xl"></i>
-          </span>
-        </div>
         <div class="group relative" (click)="toggleLogoutMenu()">
           <a class="cursor-pointer text-black font-semibold hover:text-gray-200">
             Bienvenido, {{ username }}

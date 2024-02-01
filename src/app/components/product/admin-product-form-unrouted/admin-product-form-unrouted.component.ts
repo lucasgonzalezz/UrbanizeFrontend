@@ -24,6 +24,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
   temporadas: string[] = [];
+  selectedCategory: ICategory | undefined;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +43,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
       name: [this.product.name, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       stock: [this.product.stock, [Validators.required]],
       size: [this.product.size, [Validators.required]],
-      pricenombre: [this.product.price, [Validators.required]],
+      price: [this.product.price, [Validators.required]],
       image: [this.product.image],
       category: this.formBuilder.group({
         id: [this.product.category.id, [Validators.required]],
@@ -125,7 +126,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
 
     onShowCategorySelection() {
       this.dynamicDialogRef = this.dialogService.open(AdminCategorySelectionUnroutedComponent, {
-        header: 'Selección de Modalidad',
+        header: 'Selección de Categoría',
         width: '70%',
         maximizable: true
       });
@@ -133,8 +134,9 @@ export class AdminProductFormUnroutedComponent implements OnInit {
       if (this.dynamicDialogRef) {
         this.dynamicDialogRef.onClose.subscribe((category: ICategory) => {
           if (category) {
+            this.selectedCategory = category;
             this.product.category = category;
-            this.productForm.controls['modalidad'].patchValue({ id: category.id });
+            this.productForm.controls['category'].patchValue({ id: category.id });
             }
           });
         }

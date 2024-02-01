@@ -12,6 +12,8 @@ import { AdminProductPlistRoutedComponent } from './components/product/admin-pro
 import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
 import { AdminProductEditRoutedComponent } from './components/product/admin-product-edit-routed/admin-product-edit-routed.component';
 import { AdminProductNewRoutedComponent } from './components/product/admin-product-new-routed/admin-product-new-routed.component';
+import { AdminCategoryEditRoutedComponent } from './components/category/admin-category-edit-routed/admin-category-edit-routed.component';
+import { AdminCategoryNewRoutedComponent } from './components/category/admin-category-new-routed/admin-category-new-routed.component';
 
 const routes: Routes = [
   { path: '', component: HomeRoutedComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'admin/product/new', component: AdminProductNewRoutedComponent },
 
   { path: 'admin/category/plist', component: AdminCategoryPlistRoutedComponent },
+  { path: 'admin/category/edit/:id', component: AdminCategoryEditRoutedComponent },
+  { path: 'admin/category/new', component: AdminCategoryNewRoutedComponent },
 
 ];
 
