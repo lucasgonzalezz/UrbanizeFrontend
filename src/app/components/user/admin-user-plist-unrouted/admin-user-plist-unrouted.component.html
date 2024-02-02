@@ -94,9 +94,11 @@
 
   <!-- Paginación -->
 
-    
+  <div class="flex-auto"> 
   <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!"
             [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
-            class="mx-2"></p-paginator>
+            class="mx-2">
+  </p-paginator>
+</div>
 
 <p-confirmPopup></p-confirmPopup>
