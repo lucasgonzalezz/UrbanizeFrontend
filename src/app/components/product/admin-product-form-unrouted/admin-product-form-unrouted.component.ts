@@ -25,6 +25,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
   dynamicDialogRef: DynamicDialogRef | undefined;
   temporadas: string[] = [];
   selectedCategory: ICategory | undefined;
+  selectedImageUrl: string | undefined = '';
   
   constructor(
     private formBuilder: FormBuilder,
@@ -76,9 +77,9 @@ export class AdminProductFormUnroutedComponent implements OnInit {
 
       this.mediaService.uploadFile(formData).subscribe({
         next: (response) => {
+          this.selectedImageUrl = response.url;
           this.product.image = response.url;
           this.productForm.controls['image'].patchValue(response.url);
-
         },
         error: (error) => {
           this.matSnackBar.open('Error al subir el fichero', 'Aceptar', {duration: 3000});

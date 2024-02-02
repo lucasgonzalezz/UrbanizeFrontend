@@ -51,7 +51,7 @@
           <p>{{ product.price + "€" }}</p>
         </td>
         <td>
-          <p>{{ product.image }}</p>
+        <img [src]="product.image" alt="Imagen del producto" class="image is-64x64">
         </td>
         <td>
           <p>{{ product.category.name }}</p>

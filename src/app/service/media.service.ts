@@ -14,7 +14,7 @@ export class MediaService {
   }
 
   uploadFile(formData: FormData): Observable<any> {
-    return this.http.post(this.url + '/upload', formData);
+    return this.http.post(this.url + '/', formData);
   }
 
 }
