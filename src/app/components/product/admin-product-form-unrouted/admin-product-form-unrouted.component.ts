@@ -80,6 +80,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
           this.selectedImageUrl = response.url;
           this.product.image = response.url;
           this.productForm.controls['image'].patchValue(response.url);
+
         },
         error: (error) => {
           this.matSnackBar.open('Error al subir el fichero', 'Aceptar', {duration: 3000});

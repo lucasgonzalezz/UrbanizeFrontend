@@ -59,7 +59,14 @@ import { AdminCategoryDetailUnroutedComponent } from './components/category/admi
 import { AdminCategoryFormUnroutedComponent } from './components/category/admin-category-form-unrouted/admin-category-form-unrouted.component';
 import { AdminCategoryNewRoutedComponent } from './components/category/admin-category-new-routed/admin-category-new-routed.component';
 import { AdminCategoryEditRoutedComponent } from './components/category/admin-category-edit-routed/admin-category-edit-routed.component';
-import { AdminCategoryViewRoutedComponent } from './components/category/admin-category-view-routed/admin-category-view-routed.component'; 
+import { AdminCategoryViewRoutedComponent } from './components/category/admin-category-view-routed/admin-category-view-routed.component';
+// Rating components
+import { AdminRatingPlistRoutedComponent } from './components/rating/admin-rating-plist-routed/admin-rating-plist-routed.component';
+import { AdminRatingPlistUnroutedComponent } from './components/rating/admin-rating-plist-unrouted/admin-rating-plist-unrouted.component';
+import { AdminRatingDetailUnroutedComponent } from './components/rating/admin-rating-detail-unrouted/admin-rating-detail-unrouted.component';
+import { AdminRatingFormUnroutedComponent } from './components/rating/admin-rating-form-unrouted/admin-rating-form-unrouted.component';
+import { AdminRatingEditRoutedComponent } from './components/rating/admin-rating-edit-routed/admin-rating-edit-routed.component';
+import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating-view-routed/admin-rating-view-routed.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +105,13 @@ import { AdminCategoryViewRoutedComponent } from './components/category/admin-ca
     AdminCategoryNewRoutedComponent,
     AdminCategoryEditRoutedComponent,
     AdminCategoryViewRoutedComponent,
+    // Rating components
+    AdminRatingPlistRoutedComponent,
+    AdminRatingPlistUnroutedComponent,
+    AdminRatingDetailUnroutedComponent,
+    AdminRatingFormUnroutedComponent,
+    AdminRatingEditRoutedComponent,
+    AdminRatingViewRoutedComponent,
   ],
   imports: [
     BrowserModule,
