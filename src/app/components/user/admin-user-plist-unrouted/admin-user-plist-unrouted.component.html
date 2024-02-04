@@ -1,46 +1,27 @@
 <div class="container">
-  <!-- Menú desplegable para ordenar -->
-  <div class="field">
-    <label class="label">Ordenar por:</label>
-    <div class="control">
-      <div class="select has-text-centered">
-        <select #selectEvent (change)="doOrder(selectEvent.value)">
-          <option value="id">ID</option>
-          <option value="name">Nombre</option>
-          <option value="last_name1">Primer pellido</option>
-          <option value="last_name2">Segundo Apellido</option>
-          <option value="dni">DNI</option>
-          <option value="birth_date">Fecha de nacimiento</option>
-          <option value="city">Ciudad</option>
-          <option value="address">Dirección</option>
-          <option value="postal_code">Código postal</option>
-          <option value="phone_number">Teléfono</option>
-          <option value="email">Email</option>
-          <option value="username">Usuario</option>
-        </select>
-      </div>
-    </div>
+  <div class="flex-auto">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!" [rows]="paginatorState.rows!"
+      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2">
+    </p-paginator>
   </div>
-
   <!-- Contenido de usuarios como tabla -->
-  <table class="table is-bordered is-fullwidth is-hoverable has-text-centered">
-    <thead>
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
       <tr>
-        <tr>
-          <th class="has-text-centered">Usuario</th>
-          <th class="has-text-centered">Fecha nac.</th>
-          <th class="has-text-centered">Email</th>
-          <th class="has-text-centered">DNI</th>
-          <th class="has-text-centered">Ciudad</th>
-          <th class="has-text-centered">Tipo Usuario</th>
-          <th class="has-text-centered">Carritos</th>
-          <th class="has-text-centered">Valoraciones</th>
-          <th class="has-text-centered">Compras</th>
-          <th class="has-text-centered">Acciones</th>
-        </tr>
+        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Fecha nac.</th>
+        <th class="has-text-centered is-size-5 has-text-white">Email</th>
+        <th class="has-text-centered is-size-5 has-text-white">DNI</th>
+        <th class="has-text-centered is-size-5 has-text-white">Ciudad</th>
+        <th class="has-text-centered is-size-5 has-text-white">Tipo Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Carritos</th>
+        <th class="has-text-centered is-size-5 has-text-white">Valoraciones</th>
+        <th class="has-text-centered is-size-5 has-text-white">Compras</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of page?.content" class="user-item">
+      <tr *ngFor="let user of page?.content" class="user-item has-text-centered">
         <td (click)="doView(user)">
           <p>{{ user.name }} {{ user.last_name1 }}</p>
         </td>
@@ -68,23 +49,38 @@
         <td>
           <p>{{ user.purchases }}</p>
         </td>
-        <td class="user-actions">
+        <td class="user-actions has-text-centered">
           <!-- Botones de CRUD a la derecha -->
-          <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2" title="Actualizar">
+          <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2 is-rounded"
+            title="Actualizar">
             <i class="fas fa-edit"></i>
           </a>
-          <button class="button is-success is-small mr-2" (click)="doView(user)" title="Ver Detalles">
+          <button class="button is-primary is-small mr-2 is-rounded" (click)="doView(user)" title="Ver Detalles">
             <i class="fas fa-eye"></i>
           </button>
-          <button class="button is-warning is-small mr-2" title="Vista Alternativa">
+          <button class="button is-primary is-small mr-2 is-rounded" title="Vista Alternativa">
             <i class="fas fa-exchange-alt"></i>
           </button>
-          <button  (click)="doRemove(user)" class="button is-danger is-small " title="Eliminar">
+          <button (click)="doRemove(user)" class="button is-danger is-small is-rounded" title="Eliminar">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>
       </tr>
     </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Fecha nac.</th>
+        <th class="has-text-centered is-size-5 has-text-white">Email</th>
+        <th class="has-text-centered is-size-5 has-text-white">DNI</th>
+        <th class="has-text-centered is-size-5 has-text-white">Ciudad</th>
+        <th class="has-text-centered is-size-5 has-text-white">Tipo Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Carritos</th>
+        <th class="has-text-centered is-size-5 has-text-white">Valoraciones</th>
+        <th class="has-text-centered is-size-5 has-text-white">Compras</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
+    </thead>
   </table>
 
   <!-- Mensaje si no hay usuarios -->
@@ -92,13 +88,4 @@
     No hay usuarios para mostrar.
   </div>
 
-  <!-- Paginación -->
-
-  <div class="flex-auto"> 
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!"
-            [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
-            class="mx-2">
-  </p-paginator>
-</div>
-
-<p-confirmPopup></p-confirmPopup>
+  <p-confirmPopup></p-confirmPopup>

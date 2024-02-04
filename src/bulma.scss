@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Arvo&family=Grandstander:wght@100&family=Outfit:wght@100;300&family=Playfair+Display&display=swap');
 
 // Set your brand colors
 $purple: #8A4D76;
@@ -10,15 +10,22 @@ $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
 $primary_theme: #164e63;
+$secondary: #94A3B8;
+$hola: rgb(176, 186, 201);
 
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: 'Arvo', serif;
+$table-row-hover-background-color: $hola;
 $grey-dark: $brown;
-$grey-light: $beige-light;
+$grey-light: $secondary;
 $primary: $primary_theme;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
+$button-hover-color: $purple;
+$table-background-color: $secondary;
+$has-text-info: $secondary;
+$button-text-hover-color: $pink;
 
 // Update some of Bulma's component variables
 $body-background-color: $beige-lighter;
