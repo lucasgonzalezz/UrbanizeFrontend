@@ -1,50 +1,73 @@
 <nav class="bg-slate-400 text-cyan-900 shadow-xl" role="navigation" aria-label="main navigation">
-  <div class="flex items-center justify-between p-4">
-    <a class="text-3xl font-extrabold tracking-tight" href="/home">
+  <div class="flex items-center justify-between p-5"> <!-- Ajusté el valor de p para hacerlo un poco más estrecho -->
+    <a class="text-3xl font-extrabold tracking-tight ml-6 hover:text-gray-200" href="/home"> <!-- Mantuve el tamaño del texto original -->
       Urbanize <!-- Cambia esto al texto moderno deseado -->
     </a>
 
     <div class="hidden md:flex">
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold"  *ngIf="username" [routerLink]="['/admin', 'user', 'plist']">
+      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'user', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
         Usuarios
       </a>
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'product', 'plist']">
+      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'product', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
         Productos
       </a>
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'category', 'plist']">
+      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'category', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
         Categorias
       </a>
-      <a class="hover:text-gray-200 px-4 py-2 font-semibold" *ngIf="username" [routerLink]="['/admin', 'rating', 'plist']">
+      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'rating', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
         Valoraciones
       </a>
       <!-- Agrega más opciones según sea necesario -->
+
+<!--       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="url=='/home'||url=='/'" aria-current="page"
+                routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="url.startsWith('/admin/user')"
+                routerLink="/admin/equipo/plist"
+                *ngIf="username && userSession?.role==false">Usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="url.startsWith('/admin/jugador')"
+                routerLink="/admin/jugador/plist"
+                *ngIf="username && userSession?.role==false">Jugadores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="url.startsWith('/admin/miembroCuerpoTecnico')"
+                routerLink="/admin/miembroCuerpoTecnico/plist"
+                *ngIf="username && userSession?.role==false">Cuerpo Técnico</a>
+        </li>
+    </ul> -->
+
     </div>
 
     <div class="flex items-center">
       <ng-container *ngIf="username">
         <div class="group relative" (click)="toggleLogoutMenu()">
-          <a class="cursor-pointer text-black font-semibold hover:text-gray-200">
+          <a class="cursor-pointer font-semibold hover:text-gray-200 text-xl text-cyan-900"> <!-- Mantuve el tamaño del texto original -->
             Bienvenido, {{ username }}
           </a>
           <div *ngIf="showLogoutMenu" (click)="closeLogoutMenu()"
             class="absolute right-0 mt-2 bg-white text-gray-700 border rounded">
-            <a class="block px-4 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#">
+            <a class="block px-3 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
               <i class="pi pi-user mr-2"></i>
               Perfil
             </a>
-            <a class="block px-4 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#">
+            <a class="block px-3 py-2 hover:bg-slate-400 hover:text-cyan-900 font-semibold" href="#"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
               <i class="pi pi-cog mr-2"></i>
               Ajustes
             </a>
             <hr class="border-t my-2">
-            <a class="block px-4 py-2 hover:bg-red-500 hover:text-black font-semibold" href="/logout">
+            <a class="block px-3 py-2 hover:bg-red-500 hover:text-black font-semibold" href="/logout"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
               <i class="pi pi-sign-out mr-2 ml-1"></i>
               Salir
             </a>
           </div>
         </div>
       </ng-container>
-      <a class="ml-4 hover:text-gray-200 text-cyan-900 font-semibold" href="/login" *ngIf="!username">
+      <a class="ml-4 hover:text-gray-200 text-cyan-900 font-semibold" href="/login" *ngIf="!username"> <!-- Mantuve el tamaño del texto original -->
         <i class="pi pi-sign-in mr-1"></i>
         Log In
       </a>

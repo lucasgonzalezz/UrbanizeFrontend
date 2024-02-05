@@ -19,6 +19,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
   userForm!: FormGroup;
   user: IUser = {} as IUser;
   status: HttpErrorResponse | null = null;
+  isFieldFocused: { [key: string]: boolean } = {};
 
   constructor(
     private userAjaxService: UserAjaxService,

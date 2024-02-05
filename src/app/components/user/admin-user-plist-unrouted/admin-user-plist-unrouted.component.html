@@ -53,16 +53,19 @@
           <!-- Botones de CRUD a la derecha -->
           <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2 is-rounded"
             title="Actualizar">
-            <i class="fas fa-edit"></i>
+            <span class="icon">
+              <i class="fas fa-edit"></i>
+            </span>
           </a>
           <button class="button is-primary is-small mr-2 is-rounded" (click)="doView(user)" title="Ver Detalles">
-            <i class="fas fa-eye"></i>
-          </button>
-          <button class="button is-primary is-small mr-2 is-rounded" title="Vista Alternativa">
-            <i class="fas fa-exchange-alt"></i>
+            <span class="icon">
+              <i class="fas fa-eye"></i>
+            </span>
           </button>
           <button (click)="doRemove(user)" class="button is-danger is-small is-rounded" title="Eliminar">
-            <i class="fas fa-trash-alt"></i>
+            <span class="icon">
+              <i class="fas fa-trash-alt"></i>
+            </span>
           </button>
         </td>
       </tr>

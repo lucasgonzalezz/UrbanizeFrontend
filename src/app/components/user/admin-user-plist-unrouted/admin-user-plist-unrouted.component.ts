@@ -73,12 +73,11 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     doView(user: IUser) {
       let ref: DynamicDialogRef | undefined;
       ref = this.dialogService.open(AdminUserDetailUnroutedComponent, {
-        header: 'Detalle de usuario',
         width: '70%',
         maximizable: false,
         data: { id: user.id, ref }
-        });
-      }
+      });
+    }
 
       doRemove(user: IUser) {
         this.usuarioABorrar = user;
