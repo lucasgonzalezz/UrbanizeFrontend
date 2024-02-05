@@ -1,9 +1,14 @@
 <div class="container">
   <div class="flex-auto">
     <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!" [rows]="paginatorState.rows!"
-      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2">
+      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]">
     </p-paginator>
+
   </div>
+  <div class="col-lg-2 col-md-12 d-none d-md-block">
+    <h3 class="text-center mb-0">Mostrando {{page?.numberOfElements}} de {{page?.totalElements}}</h3>
+  </div>
+
   <!-- Contenido de usuarios como tabla -->
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
@@ -91,4 +96,7 @@
     No hay usuarios para mostrar.
   </div>
 
-  <p-confirmPopup></p-confirmPopup>
+
+</div>
+
+<p-confirmPopup></p-confirmPopup>

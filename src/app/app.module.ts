@@ -11,6 +11,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogService } from 'primeng/dynamicdialog';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
@@ -125,6 +126,7 @@ import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating
     PaginatorModule,
     MatProgressSpinnerModule,
     ConfirmPopupModule,
+    NgxPaginationModule,
   ],
   providers: [
     // Services

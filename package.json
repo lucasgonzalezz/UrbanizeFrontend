@@ -28,6 +28,7 @@
     "bulma": "^0.9.4",
     "crypto-js": "^4.2.0",
     "feather-icons": "^4.29.1",
+    "ngx-pagination": "^6.0.3",
     "primeicons": "^6.0.1",
     "primeng": "^17.5.0",
     "rxjs": "~7.8.0",

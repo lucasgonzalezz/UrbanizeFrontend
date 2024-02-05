@@ -33,9 +33,15 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
   initializeForm(rating: IRating) {
     this.ratingForm = this.formBuilder.group({
       id: [rating.id],
-      fecha: [new Date(rating.date)],
+      date: [new Date(rating.date)],
       title: [rating.title, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       description: [rating.description, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      user: this.formBuilder.group({
+        id: [rating.user.id, [Validators.required]],
+      }),
+      product: this.formBuilder.group({
+        id: [rating.product.id, [Validators.required]],
+      })
     });
   }
 
@@ -68,7 +74,7 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
             this.rating = { "user": {}, "product": {} } as IRating;
             this.initializeForm(this.rating);
             this.matSnackBar.open('Valoración creada correctamente', 'Aceptar', { duration: 3000 });
-            this.router.navigate(['/admin', 'valoracion', 'plist']);
+            this.router.navigate(['/admin', 'rating', 'plist']);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
@@ -81,7 +87,7 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
             this.rating = data;
             this.initializeForm(this.rating);
             this.matSnackBar.open('Valoración actualizada correctamente', 'Aceptar', { duration: 3000 });
-            this.router.navigate(['/admin', 'valoracion', 'view', this.rating.id]);
+            this.router.navigate(['/admin', 'rating', 'view', this.rating.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;

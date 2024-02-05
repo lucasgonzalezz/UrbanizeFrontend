@@ -5,7 +5,7 @@
     </a>
 
     <div class="hidden md:flex">
-      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'user', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
+      <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username && userSession?.role==true" [routerLink]="['/admin', 'user', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->
         Usuarios
       </a>
       <a class="hover:text-gray-200 px-3 py-2 font-semibold text-xl" *ngIf="username" [routerLink]="['/admin', 'product', 'plist']"> <!-- Ajusté el valor de px para hacerlo un poco más estrecho -->

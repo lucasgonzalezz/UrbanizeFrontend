@@ -11,6 +11,8 @@
       <tr>
         <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
         <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Titulo</th>
+        <th class="has-text-centered is-size-5 has-text-white">Comentario</th>
         <th class="has-text-centered is-size-5 has-text-white">Producto</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
@@ -18,6 +20,8 @@
     <tbody>
       <tr *ngFor="let rating of page?.content" class="has-text-centered">
         <td>{{ rating.date | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ rating.title }}</td>
+        <td>{{ rating.description }}</td>
         <td (click)="doView(rating)">{{ rating.user.name }}</td>
         <td>{{ rating.product.name }}</td>
         <td>
@@ -39,7 +43,9 @@
       <tr>
         <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
         <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
-        <th class="has-text-centered is-size-5 has-text-white">Camiseta</th>
+        <th class="has-text-centered is-size-5 has-text-white">Titulo</th>
+        <th class="has-text-centered is-size-5 has-text-white">Comentario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
