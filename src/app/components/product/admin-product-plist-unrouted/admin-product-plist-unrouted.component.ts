@@ -25,6 +25,9 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
   status: HttpErrorResponse | null = null;
   productToDelete: IProduct | null = null;
+  products: IProduct[] = [];
+
+  value: string = '';
   
   constructor(
     private productAjaxService: ProductAjaxService,
@@ -99,6 +102,25 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
         })
       }
 
+      onInputChange(query: string): void {
+        if (query.length > 2) {
+          this.productAjaxService
+            .getPageProducts(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, query)
+            .subscribe({
+              next: (data: IProductPage) => {
+                this.page = data;
+                this.products = data.content;
+                this.paginatorState.pageCount = data.totalPages;
+                console.log(this.paginatorState);
+              },
+              error: (error: HttpErrorResponse) => {
+                this.status = error;
+              }
+            });
+        } else {
+          this.getPage();
+        }
+      }
 
     }
   

@@ -22,10 +22,13 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
   page: ICategoryPage | undefined;
   orderField: string = "id";
   orderDirection: string = "asc";
-  paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
+  paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   categoryToDelete: ICategory | null = null;
-  
+  categories: ICategory[] = [];
+
+  value: string = '';
+
   constructor(
     private categoryAjaxService: CategoryAjaxService,
     public dialogService: DialogService,
@@ -44,62 +47,87 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
     })
   }
 
-  getPage(): void {
-    const page: number = this.paginatorState.page || 0;
-    const rows: number = this.paginatorState.rows || 0;
-    this.categoryAjaxService.getCategoryPage(rows, page, this.orderField, this.orderDirection).subscribe({
-      next: (page: ICategoryPage) => {
-        this.page = page;
-        this.paginatorState.pageCount = page.totalPages;
-        console.log(this.page)
-      },
-      error: (response: HttpErrorResponse) => {
-        this.status = response;
-      }
-    });
-    }
-
-    onPageChange(event: PaginatorState) {
-      this.paginatorState.rows = event.rows;
-      this.paginatorState.page = event.page;
-      this.getPage();
-    }
-
-    doOrder(fieldorder: string) {
-      this.orderField = fieldorder;
-      this.orderDirection = this.orderDirection == "asc" ? "desc" : "asc";
-      this.getPage();
-    }
-
-    doView(category: ICategory) {
-      let ref: DynamicDialogRef | undefined;
-      ref = this.dialogService.open(AdminCategoryDetailUnroutedComponent , { // TODO: Change this to the correct component
-        width: '70%',
-        maximizable: false,
-        data: { id: category.id, ref }
-        });
-      }
-
-      doRemove(category: ICategory) {
-        this.categoryToDelete = category;
-        this.confirmationService.confirm({
-          accept: () => {
-            this.matSnackBar.open("Se ha eliminado la categoria", 'Aceptar', { duration: 3000 });
-            this.categoryAjaxService.deleteCategory(category.id).subscribe({
-              next: () => {
-                this.getPage();
-              },
-              error: (err: HttpErrorResponse) => {
-                this.status = err;
-              }
-            });
+  onInputChange(query: string): void {
+    if (query.length > 2) {
+      this.categoryAjaxService
+        .getCategoryPage(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, query)
+        .subscribe({
+          next: (data: ICategoryPage) => {
+            this.page = data;
+            this.categories = data.content;
+            this.paginatorState.pageCount = data.totalPages;
+            console.log(this.paginatorState);
           },
-          reject: (type: ConfirmEventType) => {
-            this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
+          error: (error: HttpErrorResponse) => {
+            this.status = error;
           }
-        })
-      }
-
-
+        });
+    } else {
+      this.getPage();
     }
-  
+  }
+
+  getPage(): void {
+    this.categoryAjaxService
+      .getCategoryPage(
+        this.paginatorState.rows,
+        this.paginatorState.page,
+        this.orderField,
+        this.orderDirection
+      )
+      .subscribe({
+        next: (data: ICategoryPage) => {
+          this.page = data;
+          this.paginatorState.pageCount = data.totalPages;
+          this.categories = data.content;
+          console.log(this.paginatorState);
+          console.log(this.categories);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+        },
+      });
+  }
+
+  onPageChange(event: PaginatorState) {
+    this.paginatorState.rows = event.rows;
+    this.paginatorState.page = event.page;
+    this.getPage();
+  }
+
+  doOrder(fieldorder: string) {
+    this.orderField = fieldorder;
+    this.orderDirection = this.orderDirection == "asc" ? "desc" : "asc";
+    this.getPage();
+  }
+
+  doView(category: ICategory) {
+    let ref: DynamicDialogRef | undefined;
+    ref = this.dialogService.open(AdminCategoryDetailUnroutedComponent, { // TODO: Change this to the correct component
+      width: '70%',
+      maximizable: false,
+      data: { id: category.id, ref }
+    });
+  }
+
+  doRemove(category: ICategory) {
+    this.categoryToDelete = category;
+    this.confirmationService.confirm({
+      accept: () => {
+        this.matSnackBar.open("Se ha eliminado la categoria", 'Aceptar', { duration: 3000 });
+        this.categoryAjaxService.deleteCategory(category.id).subscribe({
+          next: () => {
+            this.getPage();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+          }
+        });
+      },
+      reject: (type: ConfirmEventType) => {
+        this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
+      }
+    })
+  }
+
+}

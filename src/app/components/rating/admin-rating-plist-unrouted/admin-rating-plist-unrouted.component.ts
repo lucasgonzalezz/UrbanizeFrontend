@@ -30,6 +30,9 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   ratingToDelete: IRating | null = null;
+  ratings: IRating[] = [];
+
+  value: string = '';
 
   constructor(
     private userAjaxService: UserAjaxService,
@@ -42,10 +45,12 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
+
     if (this.user_id > 0) {
       this.getUser();
+
     }
-    if (this.product_id > 0) {
+    if (this.user_id > 0) {
       this.getProduct();
     }
     this.forceReload.subscribe({
@@ -53,22 +58,52 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
         if (v) {
           this.getPage();
         }
-      }
+      },
     });
   }
 
+  onInputChange(query: string): void {
+    if (query.length > 2) {
+      this.ratingAjaxService
+        .getRatingPage(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, query)
+        .subscribe({
+          next: (data: IRatingPage) => {
+            this.page = data;
+            this.ratings = data.content;
+            this.paginatorState.pageCount = data.totalPages;
+            console.log(this.paginatorState);
+          },
+          error: (error: HttpErrorResponse) => {
+            this.status = error;
+          }
+        });
+    } else {
+      this.getPage();
+    }
+  }
+
   getPage(): void {
-    const page: number = this.paginatorState.page ?? 0;
-    const rows: number = this.paginatorState.rows ?? 0;
-    this.ratingAjaxService.getRatingPage(rows, page, this.orderField, this.orderDirection, this.user_id, this.product_id).subscribe({
-      next: (page: IRatingPage) => {
-        this.page = page;
-        this.paginatorState.pageCount = page.totalPages;
-      },
-      error: (response: HttpErrorResponse) => {
-        this.status = response;
-      }
-    });
+    this.ratingAjaxService
+      .getRatingPage(
+        this.paginatorState.rows,
+        this.paginatorState.page,
+        this.orderField,
+        this.orderDirection,
+      )
+      .subscribe({
+        next: (data: IRatingPage) => {
+          this.page = data;
+          this.paginatorState.pageCount = data.totalPages;
+          this.ratings = data.content;
+          console.log(this.paginatorState);
+          console.log(this.ratings);
+          console.log(this.user_id)
+          console.log(this.product_id)
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+        },
+      });
   }
 
   onPageChange(event: PaginatorState) {

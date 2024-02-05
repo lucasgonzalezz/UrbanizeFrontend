@@ -8,6 +8,9 @@ import { ICategory, ICategoryPage } from "../model/model.interfaces";
   providedIn: 'root'
 })
 export class CategoryAjaxService {
+  getPageCategories(rows: number | undefined, page: number | undefined, orderField: string, orderDirection: string, query: string) {
+    throw new Error('Method not implemented.');
+  }
 
   private url = API_URL + '/category';
 
@@ -18,8 +21,16 @@ export class CategoryAjaxService {
     return this.http.get<ICategory>(this.url + '/' + id);
   }
 
-  getCategoryPage(size: number | undefined,  page: number | undefined,  sort: string, direction: string): Observable<ICategoryPage> {
-    return this.http.get<ICategoryPage>(this.url + '?size=' + size + '&page=' + page +  + '&sort=' + sort + ',' + direction);
+  getCategoryPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<ICategoryPage> {
+    let sUrl_filter: string;
+    if (!size) size = 10;
+    if (!page) page = 0;
+    if (strFilter && strFilter.trim().length > 0) {
+      sUrl_filter = `&filter=${strFilter}`;
+    } else {
+      sUrl_filter = "";
+    }
+    return this.http.get<ICategoryPage>(this.url + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
   }
 
   getCategorydRandom(): Observable<ICategory> {

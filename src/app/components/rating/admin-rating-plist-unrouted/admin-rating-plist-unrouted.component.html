@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="relative flex items-center">
+    <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+      class="w-52 h-10 pl-10 border rounded-full focus:outline-none focus:border-cyan-900 text-cyan-900" />
+    <i class="fas fa-search absolute left-3 text-cyan-900 cursor-pointer"></i>
+  </div>
   <div class="col-lg-2 col-md-12 d-none d-md-block">
     <h3 class="text-right mb-4 mr-2 text-xl text-cyan-900 font-semibold">Mostrando {{page?.numberOfElements}} de
       {{page?.totalElements}}</h3>
@@ -59,11 +64,13 @@
     No hay valoraciones para mostrar.
   </div>
 
-  <div class="flex-auto">
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!" [rows]="paginatorState.rows!"
-      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2">
+  <!-- Paginación -->
+  <div class="flex-auto mx-auto">
+    <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
+      [first]="paginatorState.first!" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0"
+      [rowsPerPageOptions]="[10, 20, 30]">
     </p-paginator>
   </div>
-
-  <p-confirmPopup></p-confirmPopup>
 </div>
+
+<p-confirmPopup></p-confirmPopup>

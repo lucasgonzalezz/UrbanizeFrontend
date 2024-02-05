@@ -35,17 +35,20 @@ export class RatingAjaxService {
     return this.http.delete<number>(this.url + '/' + id);
   }
 
-  getRatingPage(size: number, page: number, sort: string, direction: string, user_id: number, product_id: number): Observable<IRatingPage> {
-    let user = "";
-    if (user_id > 0) {
-      user = "&user=" + user_id;
+  getRatingPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IRatingPage> {
+    let sUrl_filter: string;
+    if (!size) size = 10;
+    if (!page) page = 0;
+
+
+
+    if (strFilter && strFilter.trim().length > 0) {
+      sUrl_filter = `&filter=${strFilter}`;
+    } else {
+      sUrl_filter = "";
     }
-    let product = "";
-    if (product_id > 0) {
-      product = "&product=" + product_id;
-    }
-    return this.http.get<IRatingPage>(this.url + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction + user + product);
-}
+    return this.http.get<IRatingPage>(this.url + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+  }
 
   generateRatinges(amount: number): Observable<number> {
     return this.http.post<number>(this.url + '/populate/' + amount, {});
