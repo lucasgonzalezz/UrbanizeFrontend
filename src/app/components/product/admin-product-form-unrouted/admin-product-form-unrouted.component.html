@@ -1,73 +1,74 @@
 <div class="container">
-  <h1 class="title">Formulario de Producto</h1>
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <h1 class="title is-4 has-text-primary is-size-3">Formulario de Producto</h1>
+  <div class="box is-shadowed box-background-color">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="has-background-light p-4 is-rounded">
 
-    <!-- Nombre (assuming it corresponds to 'titulo') -->
-    <div class="field">
-      <label class="label">Nombre</label>
-      <div class="control">
-        <input class="input" type="text" formControlName="name" placeholder="Ingrese el nombre">
-      </div>
-    </div>
-
-    <!-- Stock -->
-    <div class="field">
-      <label class="label">Stock</label>
-      <div class="control">
-        <input class="input" type="number" formControlName="stock" placeholder="Ingrese el stock">
-      </div>
-    </div>
-
-    <!-- Talla (assuming it corresponds to 'size') -->
-    <div class="field">
-      <label class="label">Talla</label>
-      <div class="control">
-        <div class="select">
-          <select formControlName="size">
-            <option value="">Seleccione la talla</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
+      <!-- Nombre -->
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" formControlName="name" placeholder="Ingrese el nombre">
         </div>
       </div>
-    </div>
 
-    <!-- Precio (assuming it corresponds to 'pricenombre') -->
-    <div class="field">
-      <label class="label">Precio</label>
-      <div class="control">
-        <input class="input" type="number" formControlName="price" placeholder="Ingrese el precio">
+      <!-- Stock -->
+      <div class="field">
+        <label class="label">Stock</label>
+        <div class="control">
+          <input class="input" type="number" formControlName="stock" placeholder="Ingrese el stock">
+        </div>
       </div>
-    </div>
 
-    <!-- Imagen (assuming it corresponds to 'image') -->
-    <div class="field">
-      <label class="label">Imagen</label>
-      <div class="control">
-        <input class="input" type="file" (change)="onFileSelected($event)" accept="image/*">
+      <!-- Talla -->
+      <div class="field">
+        <label class="label">Talla</label>
+        <div class="control">
+          <div class="select">
+            <select formControlName="size">
+              <option value="">Seleccione la talla</option>
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Categoría -->
-<!-- Categoría -->
-<div class="field">
-  <label class="label">Categoría</label>
-  <div class="control">
-    <button class="button is-link" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
-    <span *ngIf="selectedCategory" class="selected-category">
-      Categoría seleccionada: {{ selectedCategory.name }}
-    </span>
+      <!-- Precio -->
+      <div class="field">
+        <label class="label">Precio</label>
+        <div class="control">
+          <input class="input" type="number" formControlName="price" placeholder="Ingrese el precio">
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="field">
+        <label class="label">Imagen</label>
+        <div class="control">
+          <input class="input" type="file" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+      </div>
+
+      <!-- Categoría -->
+      <div class="field">
+        <label class="label">Categoría</label>
+        <div class="control">
+          <button class="button is-primary" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
+          <span *ngIf="selectedCategory" class="selected-category">
+            Categoría seleccionada: {{ selectedCategory.name }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="field">
+        <div class="control has-text-centered">
+          <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+      </div>
+    </form>
   </div>
-</div>
-
-    <!-- Botones -->
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-primary" type="submit">Guardar</button>
-      </div>
-    </div>
-  </form>
 </div>

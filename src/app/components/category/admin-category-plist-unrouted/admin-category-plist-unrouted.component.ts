@@ -74,7 +74,6 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
     doView(category: ICategory) {
       let ref: DynamicDialogRef | undefined;
       ref = this.dialogService.open(AdminCategoryDetailUnroutedComponent , { // TODO: Change this to the correct component
-        header: 'Detalle de usuario',
         width: '70%',
         maximizable: false,
         data: { id: category.id, ref }
@@ -85,7 +84,7 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
         this.categoryToDelete = category;
         this.confirmationService.confirm({
           accept: () => {
-            this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open("Se ha eliminado la categoria", 'Aceptar', { duration: 3000 });
             this.categoryAjaxService.deleteCategory(category.id).subscribe({
               next: () => {
                 this.getPage();

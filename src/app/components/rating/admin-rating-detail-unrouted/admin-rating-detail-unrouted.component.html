@@ -1,3 +1,18 @@
-<p>
-  admin-rating-detail-unrouted works!
-</p>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="card has-shadow">
+        <div class="card-content">
+          <div class="content">
+            <h5 class="title is-5 has-text-primary">Detalle de Valoración</h5>
+            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Fecha:</b> {{ rating.date | date: 'dd-MM-yyyy' }}</p>
+            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Título:</b> {{ rating.title }}</p>
+            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Descripción:</b> {{ rating.description }}</p>
+            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Usuario:</b> {{ rating.user.username }}</p>
+            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Producto:</b> {{ rating.product.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

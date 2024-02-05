@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { IRating, formOperation } from 'src/app/model/model.interfaces';
 import { RatingAjaxService } from '../../../service/rating.ajax.service';
+import { AdminUserSelectionUnroutedComponent } from '../../user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
+import { AdminProductSelectionUnroutedComponent } from '../../product/admin-product-selection-unrouted/admin-product-selection-unrouted.component';
 
 @Component({
   selector: 'app-admin-rating-form-unrouted',
@@ -21,6 +23,9 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
   rating: IRating = { date: new Date(Date.now()), user: {}, product: {} } as IRating;
   status: HttpErrorResponse | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
+
+  selectedUser: string = ''; // Add this line to define selectedUser variable
+  selectedProducto: string = ''; // Add this line to define selectedProducto variable
 
   constructor(
     private formBuilder: FormBuilder,
@@ -96,6 +101,36 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
         });
       }
     }
+  }
+
+  onShowUsuariosSelection() {
+    this.dynamicDialogRef = this.dialogService.open(AdminUserSelectionUnroutedComponent, {
+      header: 'Selecciona un usuario',
+      width: '70%',
+      contentStyle: { "max-height": "350px", "overflow": "auto" },
+      maximizable: true
+    });
+    this.dynamicDialogRef.onClose.subscribe((data: any) => {
+      if (data) {
+        this.selectedUser = data.name; // Assuming 'name' is the property you want to display
+        this.ratingForm.controls['user'].setValue({ id: data.id });
+      }
+    });
+  }
+
+  onShowCamisetasSelection() {
+    this.dynamicDialogRef = this.dialogService.open(AdminProductSelectionUnroutedComponent, {
+      header: 'Selecciona un producto',
+      width: '70%',
+      contentStyle: { "max-height": "350px", "overflow": "auto" },
+      maximizable: true
+    });
+    this.dynamicDialogRef.onClose.subscribe((data: any) => {
+      if (data) {
+        this.selectedProducto = data.name; // Assuming 'name' is the property you want to display
+        this.ratingForm.controls['product'].setValue({ id: data.id });
+      }
+    });
   }
 
 }

@@ -73,7 +73,6 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
     doView(product: IProduct) {
       let ref: DynamicDialogRef | undefined;
       ref = this.dialogService.open(AdminProductDetailUnroutedComponent, {
-        header: 'Detalle de usuario',
         width: '70%',
         maximizable: false,
         data: { id: product.id, ref }

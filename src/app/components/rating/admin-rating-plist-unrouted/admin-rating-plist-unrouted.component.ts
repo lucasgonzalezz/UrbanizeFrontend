@@ -9,6 +9,7 @@ import { IProduct, IUser, IRating, IRatingPage } from 'src/app/model/model.inter
 import { ProductAjaxService } from '../../../service/product.ajax.service';
 import { UserAjaxService } from '../../../service/user.ajax.service';
 import { RatingAjaxService } from '../../../service/rating.ajax.service';
+import { AdminRatingDetailUnroutedComponent } from '../admin-rating-detail-unrouted/admin-rating-detail-unrouted.component';
 
 @Component({
   selector: 'app-admin-rating-plist-unrouted',
@@ -26,7 +27,7 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
   product: IProduct | null = null;
   orderField: string = "id";
   orderDirection: string = "asc";
-  paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
+  paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   ratingToDelete: IRating | null = null;
 
@@ -50,9 +51,9 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
-        this.getPage();
+          this.getPage();
+        }
       }
-    }
     });
   }
 
@@ -68,75 +69,74 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
         this.status = response;
       }
     });
-    }
-
-    onPageChange(event: PaginatorState) {
-      this.paginatorState.rows = event.rows;
-      this.paginatorState.page = event.page;
-      this.getPage();
-    }
-
-    doOrder(fieldorder: string) {
-      this.orderField = fieldorder;
-      this.orderDirection = this.orderDirection == "asc" ? "desc" : "asc";
-      this.getPage();
-    }
-
-    doView(valoracion: IRating) {
-      let ref: DynamicDialogRef | undefined;
-      ref = this.dialogService.open(AdminRatingPlistUnroutedComponent, { // cambiar por el componente de detalle
-        data: { id: valoracion.id },
-        header: "Detalle de la valoracion",
-        width: "70%",
-        maximizable: false
-      });
-    }
-
-    doRemove(valoracion: IRating) {
-      this.ratingToDelete = valoracion;
-      this.confirmationService.confirm({
-        accept: () => {
-          this.ratingAjaxService.deleteRating(valoracion.id).subscribe({
-            next: () => {
-              this.matSnackBar.open("Valoracion borrada", "Aceptar", { duration: 3000 });
-              this.getPage();
-            },
-            error: (err: HttpErrorResponse) => {
-              this.status = err;
-              this.matSnackBar.open("Error al borrar la valoracion", "Aceptar", { duration: 3000 });
-            }
-          });
-        },
-        reject: () => {
-          this.matSnackBar.open("No se ha borrado la valoracion", "Aceptar", { duration: 3000 });
-        }
-      });
-    }
-
-    getUser(): void {
-      this.userAjaxService.getUserById(this.user_id).subscribe({
-        next: (data: IUser) => {
-          this.user = data;
-          this.getPage();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-        }
-      });
-    }
-
-    getProduct(): void {
-      this.productAjaxService.getProductById(this.product_id).subscribe({
-        next: (data: IProduct) => {
-          this.product = data;
-          this.getPage();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-        }
-      })
-    }
-
   }
 
-  
+  onPageChange(event: PaginatorState) {
+    this.paginatorState.rows = event.rows;
+    this.paginatorState.page = event.page;
+    this.getPage();
+  }
+
+  doOrder(fieldorder: string) {
+    this.orderField = fieldorder;
+    this.orderDirection = this.orderDirection == "asc" ? "desc" : "asc";
+    this.getPage();
+  }
+
+  doView(valoracion: IRating) {
+    let ref: DynamicDialogRef | undefined;
+    ref = this.dialogService.open(AdminRatingDetailUnroutedComponent, {
+      data: { id: valoracion.id },
+      width: "70%",
+      maximizable: false
+    });
+  }
+
+  doRemove(valoracion: IRating) {
+    this.ratingToDelete = valoracion;
+    this.confirmationService.confirm({
+      accept: () => {
+        this.ratingAjaxService.deleteRating(valoracion.id).subscribe({
+          next: () => {
+            this.matSnackBar.open("Valoracion borrada", "Aceptar", { duration: 3000 });
+            this.getPage();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.matSnackBar.open("Error al borrar la valoracion", "Aceptar", { duration: 3000 });
+          }
+        });
+      },
+      reject: () => {
+        this.matSnackBar.open("No se ha borrado la valoracion", "Aceptar", { duration: 3000 });
+      }
+    });
+  }
+
+  getUser(): void {
+    this.userAjaxService.getUserById(this.user_id).subscribe({
+      next: (data: IUser) => {
+        this.user = data;
+        this.getPage();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    });
+  }
+
+  getProduct(): void {
+    this.productAjaxService.getProductById(this.product_id).subscribe({
+      next: (data: IProduct) => {
+        this.product = data;
+        this.getPage();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
+  }
+
+}
+
+

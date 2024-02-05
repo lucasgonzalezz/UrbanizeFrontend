@@ -1,20 +1,29 @@
-<div class="section">
+<div class="section bg-slate-300">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-one-third">
-        <button class="button is-primary is-fullwidth" (click)="doGenerateRandom(10)" [disabled]="bLoading">
-          Generar productos
-        </button>
-      </div>
-      <div class="column is-one-third">
-        <button class="button is-danger is-fullwidth" (click)="doEmpty($event)" [disabled]="bLoading">
-          Eliminar productos
-        </button>
-      </div>
-      <div class="column is-one-third">
-        <a class="button is-danger is-fullwidth" [routerLink]="['/admin', 'product', 'new']">
-          Crear producto
-        </a>
+      <div class="column">
+        <div class="is-small has-text-centered">
+          <div class="title is-3 has-text-primary mb-4">
+            <span class="icon is-large has-text-primary">
+              <i class="fas fa-tshirt"></i>
+            </span>
+            Productos
+          </div>
+          <div class="buttons is-centered">
+            <button class="button is-primary is-rounded is-shadow" (click)="doGenerateRandom(10)"
+              [disabled]="bLoading">+10</button>
+            <button class="button is-primary is-rounded is-shadow" (click)="doGenerateRandom(50)"
+              [disabled]="bLoading">+50</button>
+            <button class="button is-primary is-rounded is-shadow"
+              (click)="doGenerateRandom(100)" [disabled]="bLoading">+100</button>
+          </div>
+          <div class="buttons is-centered mt-3">
+            <button class="button is-danger is-rounded is-shadow" (click)="doEmpty($event)"
+              [disabled]="bLoading">Eliminar productos</button>
+            <a class="button is-primary is-rounded is-shadow"
+              [routerLink]="['/admin', 'product', 'new']">Crear productos</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="columns">
@@ -27,6 +36,5 @@
     <app-admin-product-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-product-plist-unrouted>
   </div>
 </div>
-
 
 <p-confirmPopup></p-confirmPopup>

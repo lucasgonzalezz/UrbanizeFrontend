@@ -1,53 +1,58 @@
 <div class="container">
-  <h1 class="title">Formulario de Valoración</h1>
-  <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+  <h1 class="title is-4 has-text-primary is-size-3">Formulario de Valoración</h1>
+  <div class="box is-shadowed box-background-color">
+    <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()" class="has-background-light p-4 is-rounded">
 
-    <!--Fecha-->
-    <div class="field">
-      <label class="label">Fecha</label>
-      <div class="control">
-        <input class="input" type="date" formControlName="fecha" placeholder="Fecha">
-      </div>
-    </div>
-
-    <!-- Comentario -->
-    <div class="field">
-      <label class="label">Titulo</label>
-      <div class="control">
-        <textarea class="textarea" formControlName="title" placeholder="Ingrese titulo"></textarea>
-      </div>
-    </div>
-
-
-    <!-- Comentario -->
-    <div class="field">
-      <label class="label">Comentario</label>
-      <div class="control">
-        <textarea class="textarea" formControlName="description" placeholder="Ingrese un comentario"></textarea>
-      </div>
-    </div>
-
-        <!-- Selector de Usuario -->
-        <div class="field">
-          <label class="label">Usuario</label>
-          <div class="control">
-         <!--   <button class="button is-link" type="button" (click)="onShowUsuariosSelection()">Seleccionar Usuario</button> -->
-          </div>
+      <!-- Fecha -->
+      <div class="field">
+        <label class="label">Fecha</label>
+        <div class="control">
+          <input class="input" type="date" formControlName="date" placeholder="Fecha">
         </div>
-    
-        <!-- Selector de Camiseta -->
-        <div class="field">
-          <label class="label">Camiseta</label>
-          <div class="control">
-         <!--   <button class="button is-link" type="button" (click)="onShowUsuariosSelection()">Seleccionar Usuario</button> -->
-        </div>
-        </div>
-
-    <!-- Botones -->
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-primary" type="submit">Guardar</button>
       </div>
-    </div>
-  </form>
+
+      <!-- Titulo -->
+      <div class="field">
+        <label class="label">Titulo</label>
+        <div class="control">
+          <textarea class="input" formControlName="title" placeholder="Ingrese titulo"></textarea>
+        </div>
+      </div>
+
+      <!-- Comentario -->
+      <div class="field">
+        <label class="label">Comentario</label>
+        <div class="control">
+          <textarea class="textarea" formControlName="description" placeholder="Ingrese un comentario"></textarea>
+        </div>
+      </div>
+
+      <!-- Selector de Usuario -->
+      <div class="field">
+        <label class="label">Usuario</label>
+        <div class="control">
+          <button class="button is-primary" type="button" (click)="onShowUsuariosSelection()">Seleccionar
+            Usuario</button>
+          <span>{{ selectedUser }}</span>
+        </div>
+      </div>
+
+      <!-- Selector de Camiseta -->
+      <div class="field">
+        <label class="label">Camiseta</label>
+        <div class="control">
+          <button class="button is-primary" type="button" (click)="onShowCamisetasSelection()">Seleccionar
+            Producto</button>
+          <span>{{ selectedProducto }}</span>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="field">
+        <div class="control has-text-centered">
+          <button class="button is-primary mt-4" type="submit">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

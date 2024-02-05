@@ -1,39 +1,19 @@
 <div class="container">
-  <!-- Menú desplegable para ordenar -->
-  <div class="field">
-    <label class="label">Ordenar por:</label>
-    <div class="control">
-      <div class="select has-text-centered">
-        <select #selectEvent (change)="doOrder(selectEvent.value)">
-          <option value="id">ID</option>
-          <option value="name">Nombre</option>
-          <option value="last_name1">Primer pellido</option>
-          <option value="last_name2">Segundo Apellido</option>
-          <option value="dni">DNI</option>
-          <option value="birth_date">Fecha de nacimiento</option>
-          <option value="city">Ciudad</option>
-          <option value="address">Dirección</option>
-          <option value="postal_code">Código postal</option>
-          <option value="phone_number">Teléfono</option>
-          <option value="email">Email</option>
-          <option value="username">Usuario</option>
-        </select>
-      </div>
-    </div>
+  <div class="col-lg-2 col-md-12 d-none d-md-block">
+    <h3 class="text-right mb-4 mr-2 text-xl text-cyan-900 font-semibold">Mostrando {{page?.numberOfElements}} de {{page?.totalElements}}</h3>
   </div>
-
   <!-- Contenido de usuarios como tabla -->
-  <table class="table is-bordered is-fullwidth is-hoverable has-text-centered">
-    <thead>
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered">ID</th>
-        <th class="has-text-centered">Nombre</th>
-        <th class="has-text-centered">Productos</th>
-        <th class="has-text-centered">Acciones</th>
+        <th class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th class="has-text-centered is-size-5 has-text-white">Productos</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let category of page?.content" class="user-item">
+      <tr *ngFor="let category of page?.content" class="category-item has-text-centered">
         <td (click)="doView(category)">
           <p>{{ category.id }}</p>
         </td>
@@ -45,23 +25,35 @@
                 *ngIf="category.product>0">{{category.product}}</a>
               <span *ngIf="category.product==0">0</span>
         </td>
-        <td class="user-actions">
+        <td class="category-actions has-text-centered">
           <!-- Botones de CRUD a la derecha -->
-          <a [routerLink]="['/admin', 'category', 'edit', category.id]" class="button is-primary is-small mr-2" title="Actualizar">
-            <i class="fas fa-edit"></i>
+          <a [routerLink]="['/admin', 'category', 'edit', category.id]" class="button is-primary is-small mr-2 is-rounded"
+            title="Actualizar">
+            <span class="icon">
+              <i class="fas fa-edit"></i>
+            </span>
           </a>
-          <button class="button is-success is-small mr-2" (click)="doView(category)" title="Ver Detalles">
-            <i class="fas fa-eye"></i>
+          <button class="button is-primary is-small mr-2 is-rounded" (click)="doView(category)" title="Ver Detalles">
+            <span class="icon">
+              <i class="fas fa-eye"></i>
+            </span>
           </button>
-          <button class="button is-warning is-small mr-2" title="Vista Alternativa">
-            <i class="fas fa-exchange-alt"></i>
-          </button>
-          <button  (click)="doRemove(category)" class="button is-danger is-small " title="Eliminar">
-            <i class="fas fa-trash-alt"></i>
+          <button (click)="doRemove(category)" class="button is-danger is-small is-rounded" title="Eliminar">
+            <span class="icon">
+              <i class="fas fa-trash-alt"></i>
+            </span>
           </button>
         </td>
       </tr>
     </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th class="has-text-centered is-size-5 has-text-white">Productos</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
+    </thead>
   </table>
 
   <!-- Mensaje si no hay usuarios -->
@@ -75,3 +67,4 @@
             class="mx-2"></p-paginator>
 
 <p-confirmPopup></p-confirmPopup>
+</div>

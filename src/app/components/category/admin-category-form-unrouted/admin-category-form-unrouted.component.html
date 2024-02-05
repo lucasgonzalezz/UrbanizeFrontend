@@ -1,19 +1,21 @@
 <div class="container">
-  <h1 class="title is-4">Formulario de Categoría</h1>
-  <form [formGroup]="categoryForm" (submit)="onSubmit()">
-    <div class="field">
-      <label class="label">Nombre</label>
-      <div class="control">
-        <input class="input" type="text" formControlName="name" placeholder="Nombre de la modalidad">
-        <div class="help is-danger" *ngIf="hasError('name', 'required')">No has introducido el nombre</div>
-        <div class="help is-danger" *ngIf="hasError('name', 'minlength')">El nombre es demasiado corto, debe tener al menos 3 carácteres</div>
-        <div class="help is-danger" *ngIf="hasError('name', 'maxlength')">El nombre es demasiado largo</div>
+  <h1 class="title is-4 has-text-primary is-size-3">Formulario de Categoría</h1>
+  <div class="box is-shadowed box-background-color">
+    <form [formGroup]="categoryForm" (submit)="onSubmit()" class="has-background-light p-4 is-rounded">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" formControlName="name" placeholder="Nombre de la modalidad">
+          <div class="help is-danger" *ngIf="hasError('name', 'required')">No has introducido el nombre</div>
+          <div class="help is-danger" *ngIf="hasError('name', 'minlength')">El nombre es demasiado corto, debe tener al menos 3 caracteres</div>
+          <div class="help is-danger" *ngIf="hasError('name', 'maxlength')">El nombre es demasiado largo</div>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <button class="button is-primary" type="submit">Enviar</button>
+      <div class="field">
+        <div class="control has-text-centered">
+          <button class="button is-primary" type="submit">Enviar</button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
