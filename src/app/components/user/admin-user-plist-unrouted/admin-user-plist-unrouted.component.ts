@@ -27,6 +27,8 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   usuarioABorrar: IUser | null = null;
   usuarios: IUser[] = []; 
 
+  value: string = '';
+
   constructor(
     private userAjaxService: UserAjaxService,
     public dialogService: DialogService,
@@ -103,6 +105,26 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
         this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
       }
     })
+  }
+
+  onInputChange(query: string): void {
+    if (query.length > 2) {
+      this.userAjaxService
+        .getUserPage(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, query)
+        .subscribe({
+          next: (data: IUserPage) => {
+            this.page = data;
+            this.usuarios = data.content;
+            this.paginatorState.pageCount = data.totalPages;
+            console.log(this.paginatorState);
+          },
+          error: (error: HttpErrorResponse) => {
+            this.status = error;
+          }
+        });
+    } else {
+      this.getPage();
+    }
   }
 
 }

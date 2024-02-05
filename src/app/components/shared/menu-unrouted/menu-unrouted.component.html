@@ -6,23 +6,23 @@
     </a>
     <div class="hidden md:flex space-x-4"> <!-- Agregué la clase space-x-4 para establecer un margen horizontal entre los elementos -->
       <a class="nav-link nav-item hover:text-slate-950 px-3 py-2 font-semibold text-xl
-          rounded-full {{ url=='/home' || url=='/' ? 'bg-indigo-300' : '' }}" aria-current="page"
+          rounded-full {{ url=='/home' || url=='/' ? 'bg-slate-300' : '' }}" aria-current="page"
         routerLink="/home">Home</a>
     
       <a class="nav-link nav-item hover:text-slate-950 px-3 py-2 font-semibold text-xl
-          rounded-full {{ url.startsWith('/admin/user') ? 'bg-indigo-300' : '' }}" routerLink="/admin/user/plist"
+          rounded-full {{ url.startsWith('/admin/user') ? 'bg-slate-300' : '' }}" routerLink="/admin/user/plist"
         *ngIf="username && userSession?.role==true">Usuarios</a>
     
       <a class="nav-link nav-item hover:text-slate-950 px-3 py-2 font-semibold text-xl
-          rounded-full {{ url.startsWith('/admin/product') ? 'bg-indigo-300' : '' }}" routerLink="/admin/product/plist"
+          rounded-full {{ url.startsWith('/admin/product') ? 'bg-slate-300' : '' }}" routerLink="/admin/product/plist"
         *ngIf="username && userSession?.role==true">Productos</a>
     
       <a class="nav-link nav-item hover:text-slate-950 px-3 py-2 font-semibold text-xl
-          rounded-full {{ url.startsWith('/admin/category') ? 'bg-indigo-300' : '' }}" routerLink="/admin/category/plist"
+          rounded-full {{ url.startsWith('/admin/category') ? 'bg-slate-300' : '' }}" routerLink="/admin/category/plist"
         *ngIf="username && userSession?.role==true">Categorias</a>
     
       <a class="nav-link nav-item hover:text-slate-950 px-3 py-2 font-semibold text-xl
-          rounded-full {{ url.startsWith('/admin/rating') ? 'bg-indigo-300' : '' }}" routerLink="/admin/rating/plist"
+          rounded-full {{ url.startsWith('/admin/rating') ? 'bg-slate-300' : '' }}" routerLink="/admin/rating/plist"
         *ngIf="username && userSession?.role==true">Valoraciones</a>
     </div>
     
