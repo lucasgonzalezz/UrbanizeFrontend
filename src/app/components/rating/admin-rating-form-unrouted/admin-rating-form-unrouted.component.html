@@ -1,3 +1,37 @@
-<p>
-  admin-rating-form-unrouted works!
-</p>
+<div class="container">
+  <h1 class="title">Formulario de Valoración</h1>
+  <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+
+    <!--Fecha-->
+    <div class="field">
+      <label class="label">Fecha</label>
+      <div class="control">
+        <input class="input" type="date" formControlName="fecha" placeholder="Fecha">
+      </div>
+    </div>
+
+        <!-- Comentario -->
+        <div class="field">
+          <label class="label">Titulo</label>
+          <div class="control">
+            <textarea class="textarea" formControlName="title" placeholder="Ingrese titulo"></textarea>
+          </div>
+        </div>
+    
+  
+    <!-- Comentario -->
+    <div class="field">
+      <label class="label">Comentario</label>
+      <div class="control">
+        <textarea class="textarea" formControlName="description" placeholder="Ingrese un comentario"></textarea>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-primary" type="submit">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

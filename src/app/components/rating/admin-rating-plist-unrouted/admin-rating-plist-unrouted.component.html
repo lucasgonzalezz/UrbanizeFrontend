@@ -1,3 +1,54 @@
-<p>
-  admin-rating-plist-unrouted works!
-</p>
+<div class="container">
+  <div class="flex-auto">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!" [rows]="paginatorState.rows!"
+      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2">
+    </p-paginator>
+  </div>
+
+  <!-- Contenido de valoraciones como tabla -->
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
+      <tr>
+        <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
+        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rating of page?.content" class="has-text-centered">
+        <td>{{ rating.date | date: 'dd-MM-yyyy' }}</td>
+        <td (click)="doView(rating)">{{ rating.user.name }}</td>
+        <td>{{ rating.product.name }}</td>
+        <td>
+          <a [routerLink]="['/admin', 'rating', 'edit', rating.id]" class="button is-primary is-small mr-2 is-rounded"
+            title="Editar">
+            <span class="icon">
+              <i class="fas fa-edit"></i>
+            </span>
+          </a>
+          <button (click)="doRemove(rating)" class="button is-danger is-small is-rounded" title="Eliminar">
+            <span class="icon">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
+        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th class="has-text-centered is-size-5 has-text-white">Camiseta</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
+    </thead>
+  </table>
+
+  <!-- Mensaje si no hay valoraciones -->
+  <div class="notification is-info" *ngIf="!page?.content || page?.content?.length === 0">
+    No hay valoraciones para mostrar.
+  </div>
+
+  <p-confirmPopup></p-confirmPopup>
+</div>
