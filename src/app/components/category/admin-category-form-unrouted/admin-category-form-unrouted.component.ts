@@ -78,10 +78,8 @@ export class AdminCategoryFormUnroutedComponent implements OnInit {
           next: (data: ICategory) => {
             this.category = data;
             this.initializeForm(this.category);
-            if (this.category.id) {
-              this.router.navigate(['/admin', 'category', 'view', this.category.id]);
-            }
             this.matSnackBar.open("Registro actualizado", 'Aceptar', { duration: 3000});
+            this.router.navigate(['/admin', 'category', 'view', this.category.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;

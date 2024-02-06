@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [ConfirmationService],
@@ -15,12 +16,16 @@ export class AdminProductPlistRoutedComponent implements OnInit {
 
   forceReload: Subject<boolean> = new Subject<boolean>();
   bLoading: boolean = false;
+  category_id: number;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private productAjaxService: ProductAjaxService,
     private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar,
-  ) { }
+  ) { 
+    this.category_id = parseInt(this.activatedRoute.snapshot.paramMap.get('categoryid') ?? "0");
+  }
 
   ngOnInit() {
   }

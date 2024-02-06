@@ -102,7 +102,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
             this.product.id = data.id;
             this.initializeForm(this.product);
             this.matSnackBar.open('Registro creado correctamente', 'Aceptar', {duration: 3000});
-            this.router.navigate(['/admin', 'product', 'view', this.product.id]);
+            this.router.navigate(['/admin/product/view', this.product.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;

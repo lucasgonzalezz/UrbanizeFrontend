@@ -75,10 +75,9 @@ export class AdminUserFormUnroutedComponent implements OnInit {
       if (this.operation === 'NEW') {
         this.userAjaxService.createUser(this.userForm.value).subscribe({
           next: (data: IUser) => {
-            this.user = data;
+            this.user.id = data.id;
             this.initializeForm(this.user);
             this.matSnackBar.open("Usuario creado correctamente", 'Aceptar', {duration: 3000});
-            console.log(this.user.birth_date);
             this.router.navigate(['/admin', 'user', 'view', this.user.id]);
           },
           error: (err: HttpErrorResponse) => {

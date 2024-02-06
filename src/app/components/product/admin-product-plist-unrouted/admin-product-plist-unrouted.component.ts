@@ -5,9 +5,10 @@ import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IProduct, IProductPage } from 'src/app/model/model.interfaces';
+import { ICategory, IProduct, IProductPage } from 'src/app/model/model.interfaces';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
 import { AdminProductDetailUnroutedComponent } from '../admin-product-detail-unrouted/admin-product-detail-unrouted.component';
+import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
 
 @Component({
   providers: [DialogService, ConfirmationService],
@@ -18,6 +19,7 @@ import { AdminProductDetailUnroutedComponent } from '../admin-product-detail-unr
 export class AdminProductPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
+  @Input() category_id: number = 0;
 
   page: IProductPage | undefined;
   orderField: string = "id";
@@ -26,11 +28,13 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   productToDelete: IProduct | null = null;
   products: IProduct[] = [];
+  category: ICategory | null = null;
 
   value: string = '';
   
   constructor(
     private productAjaxService: ProductAjaxService,
+    private categoryAjaxService: CategoryAjaxService,
     public dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar
@@ -38,6 +42,9 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
+    if (this.category_id > 0) {
+      this.getCategory();
+    }
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -120,6 +127,32 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
         } else {
           this.getPage();
         }
+      }
+
+      getCategory(): void {
+        this.categoryAjaxService.getCategoryById(this.category_id).subscribe({
+          next: (data: ICategory) => {
+            this.category = data;
+            this.getPage();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+          }
+        });
+      }
+
+      getProductsByCategory(): void{
+        const psPage = this.paginatorState.page || 0;
+        const rows = this.paginatorState.rows || 0;
+        this.productAjaxService.getProductsByCategory(this.category_id, rows, psPage, this.orderField, this.orderDirection).subscribe({
+          next: (data: IProductPage) => {
+            this.page = data;
+            this.paginatorState.pageCount = data.totalPages;
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+          }
+        })
       }
 
     }

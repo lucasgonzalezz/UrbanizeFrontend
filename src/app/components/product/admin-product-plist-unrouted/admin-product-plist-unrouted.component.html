@@ -1,4 +1,10 @@
 <div class="container">
+
+  <div class="notification" *ngIf="category_id>0">
+    Filtrando por categoria: {{ category?.name}}
+    <button class="delete" *ngIf="category_id>0" [routerLink]="['/admin', 'product', 'plist']">Quitar filtro</button>
+  </div>
+
   <div class="relative flex items-center">
     <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
       class="w-52 h-10 pl-10 border rounded-full focus:outline-none focus:border-cyan-900 text-cyan-900" />
@@ -39,7 +45,7 @@
           <img [src]="product.image" alt="Imagen del producto" class="image is-64x64">
         </td>
         <td>
-          <p>{{ product.category.name }}</p>
+          <p><a [routerLink]="['/admin', 'product', 'plist', 'bycategory', product.category.id]"> {{product.category.name}}</a></p>
         </td>
         <td class="product-actions has-text-centered">
           <!-- Botones de CRUD a la derecha -->
