@@ -1,30 +1,41 @@
 <div class="table-container">
-  <table class="table is-bordered is-hoverable is-fullwidth">
-    <thead>
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
       <tr>
-        <th (click)="doOrder('id')">ID</th>
-        <th (click)="doOrder('name')">Nomber</th>
-        <th (click)="doOrder('stock')">Stock</th>
-        <th (click)="doOrder('price')">Precio</th>
-        <th>Categoria</th>
-        <th>Opciones</th>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('stock')" class="has-text-centered is-size-5 has-text-white">Stock</th>
+        <th (click)="doOrder('price')" class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th (click)="doOrder('category.name')" class="has-text-centered is-size-5 has-text-white">Categoria</th>
+        <th class="has-text-centered is-size-5 has-text-white">Opciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of page?.content">
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.stock}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.category.name}}</td>
+      <tr *ngFor="let product of page?.content" class="user-item has-text-centered">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category.name }}</td>
         <td>
-          <button class="button is-link" (click)="selectCamiseta(product)">Seleccionar</button>
+          <button class="button is-primary" (click)="selectCamiseta(product)">Seleccionar</button>
         </td>
       </tr>
     </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('stock')" class="has-text-centered is-size-5 has-text-white">Stock</th>
+        <th (click)="doOrder('price')" class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th class="has-text-centered is-size-5 has-text-white">Categoria</th>
+        <th class="has-text-centered is-size-5 has-text-white">Opciones</th>
+      </tr>
+    </thead>
   </table>
   <div class="pagination-container">
-    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!"
-      [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
+      [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]">
+    </p-paginator>
   </div>
 </div>

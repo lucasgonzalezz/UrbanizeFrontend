@@ -12,9 +12,9 @@
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">ID</th>
-        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th class="has-text-centered is-size-5 has-text-white">Productos</th>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('product')" class="has-text-centered is-size-5 has-text-white">Productos</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
@@ -54,11 +54,11 @@
     </tbody>
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">ID</th>
-        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th class="has-text-centered is-size-5 has-text-white">Productos</th>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('product')" class="has-text-centered is-size-5 has-text-white">Productos</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
-      </tr>
+       </tr>
     </thead>
   </table>
 

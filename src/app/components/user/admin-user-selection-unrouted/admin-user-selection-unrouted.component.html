@@ -1,31 +1,45 @@
 <div class="table-container">
-  <table class="table is-bordered is-hoverable is-fullwidth">
-    <thead>
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
       <tr>
-        <th (click)="doOrder('id')">Id</th>
-        <th (click)="doOrder('nombre')">Nombre</th>
-        <th (click)="doOrder('apellido')">Apellido</th>
-        <th (click)="doOrder('username')">Username</th>
-        <th (click)="doOrder('tipo')">Tipo</th>
-        <th>Compras</th>
-        <th>Opciones</th>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">Id</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('last_name1')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
+        <th (click)="doOrder('username')" class="has-text-centered is-size-5 has-text-white">Username</th>
+        <th (click)="doOrder('role')" class="has-text-centered is-size-5 has-text-white">Tipo</th>
+        <th class="has-text-centered is-size-5 has-text-white">Compras</th>
+        <th class="has-text-centered is-size-5 has-text-white">Opciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of page?.content">
-        <td>{{user.id}}</td>
-        <td>{{user.name}}</td>
-        <td>{{user.last_name1}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.role}}</td>
-        <td>{{user.purchases}}</td>
+      <tr *ngFor="let user of page?.content" class="user-item has-text-centered">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.last_name1 }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.purchases }}</td>
         <td>
-         <button class="button is-link" (click)="onSelectUser(user)">Seleccionar</button>
+          <button class="button is-primary" (click)="onSelectUser(user)">Seleccionar</button>
         </td>
       </tr>
     </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">Id</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('last_name1')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
+        <th (click)="doOrder('username')" class="has-text-centered is-size-5 has-text-white">Username</th>
+        <th (click)="doOrder('role')" class="has-text-centered is-size-5 has-text-white">Tipo</th>
+        <th class="has-text-centered is-size-5 has-text-white">Compras</th>
+        <th class="has-text-centered is-size-5 has-text-white">Opciones</th>
+      </tr>
+    </thead>
   </table>
   <div class="pagination-container">
-    <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
+      [first]="paginatorState.first!" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0"
+      [rowsPerPageOptions]="[10, 20, 30]">
+    </p-paginator>
   </div>
-  </div>
+</div>

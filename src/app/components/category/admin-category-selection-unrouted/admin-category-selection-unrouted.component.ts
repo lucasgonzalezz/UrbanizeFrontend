@@ -29,9 +29,9 @@ export class AdminCategorySelectionUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    const page = this.paginatorState.page || 0;
     const rows = this.paginatorState.rows || 0;
-    this.categoryAjaxService.getCategoryPage(page, rows, this.orderField, this.orderDirection).subscribe({
+    const page = this.paginatorState.page || 0;
+    this.categoryAjaxService.getCategoryPage(rows, page, this.orderField, this.orderDirection).subscribe({
       next: (data: ICategoryPage) => {
         this.page = data;
         this.paginatorState.pageCount = data.totalPages;

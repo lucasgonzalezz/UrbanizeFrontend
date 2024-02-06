@@ -132,15 +132,12 @@ export class AdminProductFormUnroutedComponent implements OnInit {
         width: '70%',
         maximizable: true
       });
-  
-      if (this.dynamicDialogRef) {
-        this.dynamicDialogRef.onClose.subscribe((category: ICategory) => {
+          this.dynamicDialogRef.onClose.subscribe((category: ICategory) => {
           if (category) {
             this.selectedCategory = category;
             this.product.category = category;
             this.productForm.controls['category'].patchValue({ id: category.id });
             }
           });
-        }
       }
     }

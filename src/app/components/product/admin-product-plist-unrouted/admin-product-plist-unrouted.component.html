@@ -12,12 +12,12 @@
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th class="has-text-centered is-size-5 has-text-white">Stock</th>
-        <th class="has-text-centered is-size-5 has-text-white">Talla</th>
-        <th class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('stock')" class="has-text-centered is-size-5 has-text-white">Stock</th>
+        <th (click)="doOrder('size')" class="has-text-centered is-size-5 has-text-white">Talla</th>
+        <th (click)="doOrder('price')" class="has-text-centered is-size-5 has-text-white">Precio</th>
         <th class="has-text-centered is-size-5 has-text-white">Imagen</th>
-        <th class="has-text-centered is-size-5 has-text-white">Categoria</th>
+        <th (click)="doOrder('category')" class="has-text-centered is-size-5 has-text-white">Categoria</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
@@ -64,12 +64,12 @@
     </tbody>
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th class="has-text-centered is-size-5 has-text-white">Stock</th>
-        <th class="has-text-centered is-size-5 has-text-white">Talla</th>
-        <th class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
+        <th (click)="doOrder('stock')" class="has-text-centered is-size-5 has-text-white">Stock</th>
+        <th (click)="doOrder('size')" class="has-text-centered is-size-5 has-text-white">Talla</th>
+        <th (click)="doOrder('price')" class="has-text-centered is-size-5 has-text-white">Precio</th>
         <th class="has-text-centered is-size-5 has-text-white">Imagen</th>
-        <th class="has-text-centered is-size-5 has-text-white">Categoria</th>
+        <th (click)="doOrder('category')" class="has-text-centered is-size-5 has-text-white">Categoria</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>

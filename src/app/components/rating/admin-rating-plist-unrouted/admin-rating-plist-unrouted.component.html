@@ -12,11 +12,11 @@
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
-        <th class="has-text-centered is-size-5 has-text-white">Titulo</th>
-        <th class="has-text-centered is-size-5 has-text-white">Comentario</th>
-        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
-        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
+        <th (click)="doOrder('date')" class="has-text-centered is-size-5 has-text-white">Fecha</th>
+        <th (click)="doOrder('title')" class="has-text-centered is-size-5 has-text-white">Titulo</th>
+        <th (click)="doOrder('description')" class="has-text-centered is-size-5 has-text-white">Comentario</th>
+        <th (click)="doOrder('user')" class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th (click)="doOrder('product')" class="has-text-centered is-size-5 has-text-white">Producto</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
@@ -49,11 +49,11 @@
     </tbody>
     <thead class="has-background-primary">
       <tr>
-        <th class="has-text-centered is-size-5 has-text-white">Fecha</th>
-        <th class="has-text-centered is-size-5 has-text-white">Usuario</th>
-        <th class="has-text-centered is-size-5 has-text-white">Titulo</th>
-        <th class="has-text-centered is-size-5 has-text-white">Comentario</th>
-        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
+        <th (click)="doOrder('date')" class="has-text-centered is-size-5 has-text-white">Fecha</th>
+        <th (click)="doOrder('title')" class="has-text-centered is-size-5 has-text-white">Titulo</th>
+        <th (click)="doOrder('description')" class="has-text-centered is-size-5 has-text-white">Comentario</th>
+        <th (click)="doOrder('user')" class="has-text-centered is-size-5 has-text-white">Usuario</th>
+        <th (click)="doOrder('product')" class="has-text-centered is-size-5 has-text-white">Producto</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>

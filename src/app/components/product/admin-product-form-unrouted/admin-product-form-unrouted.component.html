@@ -56,10 +56,8 @@
       <div class="field">
         <label class="label">Categoría</label>
         <div class="control">
-          <button class="button is-primary" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
-          <span *ngIf="selectedCategory" class="selected-category">
-            Categoría seleccionada: {{ selectedCategory.name }}
-          </span>
+          <button class="button is-primary" type="button" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
+          <span class="ml-3 text-cyan-900 font-semibold">{{ selectedCategory?.name }}</span>
         </div>
       </div>
 
