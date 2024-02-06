@@ -76,11 +76,11 @@ export class LoginRoutedComponent implements OnInit {
   }
 
   loginAdmin() {
-    this.loginForm.setValue({ username: 'lucasgr', contrasenya: 'urbanize', captcha: '' });
+    this.loginForm.setValue({ username: 'pepe33', contrasenya: 'urbanize', captcha: '' });
   }
 
   loginUser() {
-    this.loginForm.setValue({ username: 'sekimmortenn', contrasenya: 'noventaveinticuatro9024', captcha: '' });
+    this.loginForm.setValue({ username: 'pepita', contrasenya: 'urbanize', captcha: '' });
   }
 
   showNotificationWithMessage(message: string) {
