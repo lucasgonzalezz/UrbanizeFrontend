@@ -23,10 +23,9 @@ export class AdminProductFormUnroutedComponent implements OnInit {
   product: IProduct = { image: '', category: {} } as IProduct;
   status: HttpErrorResponse | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
-  temporadas: string[] = [];
   selectedCategory: ICategory | undefined;
   selectedImageUrl: string | undefined = '';
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private productAjaxService: ProductAjaxService,
@@ -36,7 +35,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
     private dialogService: DialogService
   ) {
     this.initializeForm(this.product);
-   }
+  }
 
   initializeForm(product: IProduct) {
     this.productForm = this.formBuilder.group({
@@ -61,7 +60,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
-          this.matSnackBar.open('Error al obtener el registro', 'Aceptar', {duration: 3000});
+          this.matSnackBar.open('Error al obtener el registro', 'Aceptar', { duration: 3000 });
         }
       });
     } else {
@@ -83,7 +82,7 @@ export class AdminProductFormUnroutedComponent implements OnInit {
 
         },
         error: (error) => {
-          this.matSnackBar.open('Error al subir el fichero', 'Aceptar', {duration: 3000});
+          this.matSnackBar.open('Error al subir el fichero', 'Aceptar', { duration: 3000 });
         }
       });
     }
@@ -98,15 +97,16 @@ export class AdminProductFormUnroutedComponent implements OnInit {
       if (this.operation == 'NEW') {
         this.productAjaxService.createProduct(this.productForm.value).subscribe({
           next: (data: IProduct) => {
-            this.product = { "image": '', "category": {} } as IProduct; 
+            console.log(data);
+            this.product = { "image": '', "category": {} } as IProduct;
             this.product.id = data.id;
             this.initializeForm(this.product);
-            this.matSnackBar.open('Registro creado correctamente', 'Aceptar', {duration: 3000});
-            this.router.navigate(['/admin/product/view', this.product.id]);
+            this.matSnackBar.open('Registro creado correctamente', 'Aceptar', { duration: 3000 });
+            this.router.navigate(['/admin', 'product', 'plist']);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open('Error al crear el registro', 'Aceptar', {duration: 3000});
+            this.matSnackBar.open('Error al crear el registro', 'Aceptar', { duration: 3000 });
           }
         });
       } else {
@@ -114,30 +114,30 @@ export class AdminProductFormUnroutedComponent implements OnInit {
           next: (data: IProduct) => {
             this.product = data;
             this.initializeForm(this.product);
-            this.matSnackBar.open('Registro actualizado correctamente', 'Aceptar', {duration: 3000});
+            this.matSnackBar.open('Registro actualizado correctamente', 'Aceptar', { duration: 3000 });
             this.router.navigate(['/admin', 'product', 'view', this.product.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open('Error al actualizar el registro', 'Aceptar', {duration: 3000});
+            this.matSnackBar.open('Error al actualizar el registro', 'Aceptar', { duration: 3000 });
           }
         });
       }
     }
   }
 
-    onShowCategorySelection() {
-      this.dynamicDialogRef = this.dialogService.open(AdminCategorySelectionUnroutedComponent, {
-        header: 'Selección de Categoría',
-        width: '70%',
-        maximizable: true
-      });
-          this.dynamicDialogRef.onClose.subscribe((category: ICategory) => {
-          if (category) {
-            this.selectedCategory = category;
-            this.product.category = category;
-            this.productForm.controls['category'].patchValue({ id: category.id });
-            }
-          });
+  onShowCategorySelection() {
+    this.dynamicDialogRef = this.dialogService.open(AdminCategorySelectionUnroutedComponent, {
+      header: 'Selección de Categoría',
+      width: '70%',
+      maximizable: true
+    });
+    this.dynamicDialogRef.onClose.subscribe((category: ICategory) => {
+      if (category) {
+        this.selectedCategory = category;
+        this.product.category = category;
+        this.productForm.controls['category'].patchValue({ id: category.id });
       }
-    }
+    });
+  }
+}

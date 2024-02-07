@@ -31,7 +31,7 @@ export class AdminCategoryFormUnroutedComponent implements OnInit {
 
   initializeForm(category: ICategory) {
     this.categoryForm = this.formBuilder.group({
-      id: [category.id],
+      id: [this.category.id],
       name: [category.name, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
     });
   }
@@ -63,9 +63,8 @@ export class AdminCategoryFormUnroutedComponent implements OnInit {
           next: (data: ICategory) => {
             this.category = data;
             this.initializeForm(this.category);
-            if (this.category.id) {
-              this.router.navigate(['/admin', 'category', 'view', this.category.id]);
-            }
+              this.router.navigate(['/admin', 'category', 'plist']);
+            
             this.matSnackBar.open("Registro creado", 'Aceptar', { duration: 3000});
           },
           error: (err: HttpErrorResponse) => {

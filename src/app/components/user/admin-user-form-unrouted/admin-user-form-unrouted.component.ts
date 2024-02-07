@@ -26,13 +26,13 @@ export class AdminUserFormUnroutedComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private matSnackBar: MatSnackBar
-  ) { 
+  ) {
     this.initializeForm(this.user);
   }
 
   initializeForm(user: IUser) {
     this.userForm = this.formBuilder.group({
-      id: [user.id],
+      id: [this.user.id],
       name: [user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       last_name1: [user.last_name1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       last_name2: [user.last_name2, [Validators.minLength(3), Validators.maxLength(255)]],
@@ -58,7 +58,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
-          this.matSnackBar.open("Error al obtener los datos del usuario", 'Aceptar', {duration: 3000});
+          this.matSnackBar.open("Error al obtener los datos del usuario", 'Aceptar', { duration: 3000 });
         }
       })
     } else {
@@ -77,12 +77,12 @@ export class AdminUserFormUnroutedComponent implements OnInit {
           next: (data: IUser) => {
             this.user.id = data.id;
             this.initializeForm(this.user);
-            this.matSnackBar.open("Usuario creado correctamente", 'Aceptar', {duration: 3000});
-            this.router.navigate(['/admin', 'user', 'view', this.user.id]);
+            this.matSnackBar.open("Usuario creado correctamente", 'Aceptar', { duration: 3000 });
+            this.router.navigate(['/admin/user/plist']);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open("Error al crear el usuario", 'Aceptar', {duration: 3000});
+            this.matSnackBar.open("Error al crear el usuario", 'Aceptar', { duration: 3000 });
           }
         })
       } else {
@@ -90,12 +90,12 @@ export class AdminUserFormUnroutedComponent implements OnInit {
           next: (data: IUser) => {
             this.user = data;
             this.initializeForm(this.user);
-            this.matSnackBar.open("Usuario actualizado correctamente", 'Aceptar', {duration: 3000});
+            this.matSnackBar.open("Usuario actualizado correctamente", 'Aceptar', { duration: 3000 });
             this.router.navigate(['/admin', 'user', 'view', this.user.id]);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open("Error al actualizar el usuario", 'Aceptar', {duration: 3000});
+            this.matSnackBar.open("Error al actualizar el usuario", 'Aceptar', { duration: 3000 });
           }
         })
       }

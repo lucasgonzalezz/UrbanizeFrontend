@@ -20,10 +20,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let category of page?.content" class="category-item has-text-centered">
-        <td (click)="doView(category)">
+        <td>
           <p>{{ category.id }}</p>
         </td>
-        <td>
+        <td (click)="doView(category)">
           <p>{{ category.name }}</p>
         </td>
         <td>

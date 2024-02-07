@@ -2,7 +2,18 @@
   <h1 class="title is-4 has-text-primary is-size-3">Formulario de Usuario</h1>
   <div class="box is-shadowed box-background-color">
     <form [formGroup]="userForm" (submit)="onSubmit()" class="has-background-light p-4 is-rounded">
-      <div class="field" v-if="operation === 'EDIT'">
+
+            <!-- Nombre -->
+            <div class="field" *ngIf="operation === 'EDIT'">
+              <label class="label">ID : </label>
+              <div class="control has-icons-right">
+                <input class="input" formControlName="id" placeholder="ID" readonly>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+              <p class="help is-pulled-right">(This number cannot be changed )</p>
+            </div>
 
 
       <div class="field">
@@ -137,7 +148,6 @@
           <button type="submit" class="button is-primary mt-4">Guardar</button>
         </div>
       </div>
-      </div>
-    </form>
+¡    </form>
   </div>
 </div>

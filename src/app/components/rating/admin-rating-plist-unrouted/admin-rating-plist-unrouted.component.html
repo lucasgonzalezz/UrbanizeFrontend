@@ -23,9 +23,9 @@
     <tbody>
       <tr *ngFor="let rating of page?.content" class="has-text-centered">
         <td>{{ rating.date | date: 'dd-MM-yyyy' }}</td>
-        <td>{{ rating.title }}</td>
+        <td (click)="doView(rating)">{{ rating.title }}</td>
         <td>{{ rating.description }}</td>
-        <td (click)="doView(rating)">{{ rating.user.name }}</td>
+        <td>{{ rating.user.name }}</td>
         <td>{{ rating.product.name }}</td>
         <td>
           <a [routerLink]="['/admin', 'rating', 'edit', rating.id]" class="button is-primary is-small mr-2 is-rounded"
