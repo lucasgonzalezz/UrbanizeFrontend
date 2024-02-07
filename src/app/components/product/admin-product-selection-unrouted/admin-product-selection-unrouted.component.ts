@@ -1,6 +1,6 @@
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { IProduct, IProductPage } from 'src/app/model/model.interfaces';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
@@ -11,6 +11,8 @@ import { ProductAjaxService } from 'src/app/service/product.ajax.service';
   styleUrls: ['./admin-product-selection-unrouted.component.css']
 })
 export class AdminProductSelectionUnroutedComponent implements OnInit {
+
+  @Input() category_id: number = 0;
 
   page: IProductPage | undefined;
   orderField: string = "id";
@@ -31,7 +33,7 @@ export class AdminProductSelectionUnroutedComponent implements OnInit {
   getPage(): void {
     const page = this.paginatorState.page || 0;
     const rows = this.paginatorState.rows || 0;
-    this.productAjaxService.getPageProducts(rows, page, this.orderField, this.orderDirection).subscribe({
+    this.productAjaxService.getPageProducts(rows, page, this.orderField, this.orderDirection, this.category_id ).subscribe({
       next: (data: IProductPage) => {
         this.page = data;
         this.paginatorState.pageCount = data.totalPages;

@@ -54,7 +54,6 @@ export class AdminUserFormUnroutedComponent implements OnInit {
         next: (data: IUser) => {
           this.user = data;
           this.initializeForm(this.user);
-          console.log(this.user.birth_date);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;

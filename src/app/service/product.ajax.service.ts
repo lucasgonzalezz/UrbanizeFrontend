@@ -18,16 +18,21 @@ export class ProductAjaxService {
     return this.http.get<IProduct>(this.url + '/' + id);
   }
 
-  getPageProducts(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IProductPage> {
+  getPageProducts(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, category_id:number, strFilter?: string): Observable<IProductPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let sUrl_category = "";
+    if (category_id > 0) {
+      sUrl_category = "&category=" + category_id;
+    }
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IProductPage>(this.url + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+    return this.http.get<IProductPage>(this.url + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_category + sUrl_filter);
   }
 
   getProductRandom(): Observable<IProduct> {

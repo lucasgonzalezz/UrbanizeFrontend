@@ -1,0 +1,82 @@
+<div class="card box">
+  <div class="card-content">
+    <div class="columns">
+      <!-- Columna para la imagen -->
+      <div class="column is-4">
+        <figure class="image is-4by3 box">
+          <img [src]="products.image" alt="Imagen del producto" class="img-fluid" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        </figure>
+      </div>
+
+      <!-- Columna para la información del producto y botones -->
+      <div class="column is-8">
+        <!-- Información del producto -->
+        <div class="column is-12">
+          <h1 class="text-4xl font-medium text-cyan-900">{{ products.name }}</h1>
+          <h2 class="text-xl font-normal text-cyan-900 mt-1">Precio: {{ products.price }}€ </h2>
+          <p class="text-xl font-normal text-cyan-900">Stock: {{ products.stock }} uds.</p>
+          <p class="text-xl font-normal text-cyan-900">Talla: {{ products.size }}</p>
+        </div>
+
+        <!-- Detalles de envío -->
+        <div class="column is-12 mt-2">
+          <h2 class="text-3xl font-medium text-cyan-900">Detalles de envío</h2>
+          <p class="text-xl font-normal text-cyan-900 mt-1 ml-1">
+            <span class="icon is-small mr-3">
+              <i class="fas fa-clock"></i>
+            </span>
+            Entrega en 4-8 días laborables.
+          </p>
+          <p class="text-xl font-normal text-cyan-900 ml-1">
+            <span class="icon is-small mr-3">
+              <i class="fas fa-truck"></i>
+            </span>
+            Envío gratuito para pedidos superiores a 50€.
+          </p>
+          <p class="text-xl font-normal text-cyan-900 ml-1">
+            <span class="icon is-small mr-3">
+              <i class="fas fa-undo"></i>
+            </span>
+            Política de devoluciones de 30 días.
+          </p>
+        </div>
+
+        <!-- Botones debajo de la información del producto -->
+        <div class="columns mt-2">
+          <div class="column is-6">
+            <button type="button" class="button is-primary is-fullwidth" (click)="addToCart(products)">
+              <span class="icon">
+                <i class="fas fa-shopping-cart"></i>
+              </span>
+              <span>Añadir al carrito</span>
+            </button>
+          </div>
+          <div class="column is-6">
+            <button type="button" class="button is-primary is-fullwidth">
+              <span class="icon">
+                <i class="fas fa-credit-card"></i>
+              </span>
+              <span>Comprar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sección de opiniones -->
+<div class="card mt-4">
+  <header class="card-header">
+    <p class="card-header-title text-2xl font-normal text-cyan-900">
+      Opiniones ({{ products.ratings }})
+    </p>
+  </header>
+  <div class="card-content text-cyan-900" style="max-height: 200px; overflow-y: auto;">
+    <!-- Contenido de las opiniones aquí -->
+    <p>Opinión 1</p>
+    <p>Opinión 2</p>
+    <p>Opinión 3</p>
+    <!-- Agrega más opiniones según sea necesario -->
+  </div>
+</div>

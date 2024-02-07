@@ -52,6 +52,9 @@ import { AdminProductNewRoutedComponent } from './components/product/admin-produ
 import { AdminProductSelectionUnroutedComponent } from './components/product/admin-product-selection-unrouted/admin-product-selection-unrouted.component';
 import { AdminProductDetailUnroutedComponent } from './components/product/admin-product-detail-unrouted/admin-product-detail-unrouted.component';
 import { AdminProductViewRoutedComponent } from './components/product/admin-product-view-routed/admin-product-view-routed.component';
+import { UserProductPlistUnroutedComponent } from './components/product/user-product-plist-unrouted/user-product-plist-unrouted.component';
+import { UserProductDetailUnroutedComponent } from './components/product/user-product-detail-unrouted/user-product-detail-unrouted.component';
+import { UserProductViewRoutedComponent } from './components/product/user-product-view-routed/user-product-view-routed.component';
 // Category components
 import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
 import { AdminCategoryPlistUnroutedComponent } from './components/category/admin-category-plist-unrouted/admin-category-plist-unrouted.component';
@@ -97,6 +100,9 @@ import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating
     AdminCategoryPlistUnroutedComponent,
     AdminProductDetailUnroutedComponent,
     AdminProductViewRoutedComponent,
+    UserProductPlistUnroutedComponent,
+    UserProductDetailUnroutedComponent,
+    UserProductViewRoutedComponent,
     // Category components
     AdminCategoryPlistUnroutedComponent,
     AdminCategoryPlistRoutedComponent,

@@ -38,8 +38,8 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
   initializeForm(rating: IRating) {
     this.ratingForm = this.formBuilder.group({
       id: [rating.id],
-      date: [new Date(rating.date)],
-      title: [rating.title, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      date: [rating.date],
+      title: [rating.title, [Validators.required]],
       description: [rating.description, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       user: this.formBuilder.group({
         id: [rating.user.id, [Validators.required]],

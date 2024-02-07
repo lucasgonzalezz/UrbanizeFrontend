@@ -23,6 +23,7 @@ import { AdminCategoryViewRoutedComponent } from './components/category/admin-ca
 import { AdminRatingEditRoutedComponent } from './components/rating/admin-rating-edit-routed/admin-rating-edit-routed.component';
 import { AdminRatingPlistRoutedComponent } from './components/rating/admin-rating-plist-routed/admin-rating-plist-routed.component';
 import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating-view-routed/admin-rating-view-routed.component';
+import { UserProductViewRoutedComponent } from './components/product/user-product-view-routed/user-product-view-routed.component';
 
 const routes: Routes = [
   // Shared routes
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'admin/product/new', component: AdminProductNewRoutedComponent },
   { path: 'admin/product/view/:id', component: AdminProductViewRoutedComponent },
   { path: 'admin/product/plist/bycategory/:categoryid', component: AdminProductPlistRoutedComponent},
+  { path: 'user/product/view/:id', component: UserProductViewRoutedComponent },
   // Category routes
   { path: 'admin/category/plist', component: AdminCategoryPlistRoutedComponent },
   { path: 'admin/category/edit/:id', component: AdminCategoryEditRoutedComponent },

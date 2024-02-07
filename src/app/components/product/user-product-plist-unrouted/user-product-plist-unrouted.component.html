@@ -1,0 +1,61 @@
+<div class="container flex justify-end mr-1">
+  <div class="columns">
+    <div class="column">
+      <div class="field has-addons">
+        <div class="relative flex items-center">
+          <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+            class="w-96 h-10 pl-10 border rounded-full mb-5 focus:outline-none focus:border-cyan-900 text-cyan-900" />
+          <i class="fas fa-search absolute left-3 mb-5 text-cyan-900 cursor-pointer"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="columns">
+  <!-- Columna de Categorías -->
+  <div class="column is-2">
+    <h1 class="title">Categorías</h1>
+    <ul class="categoria-list">
+      <li *ngFor="let category of category" class="categoria-item">
+        {{ category.name }} - {{ category.product }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Columna de Productos -->
+  <div class="column is-10">
+    <div class="columns is-multiline align-right"> <!-- Add custom-align-right class -->
+      <ng-container *ngFor="let product of products">
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img [src]="product.image" alt="Imagen del producto" (click)="doView(product)">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="font-semibold text-2xl text-cyan-950">{{ product.name }}</p>
+              <p class="font-semibold text-xl text-cyan-950 mt-2">Precio: {{ product.price }}€</p>
+            </div>
+            <footer class="card-footer" *ngIf="username">
+              <button class="card-footer-item button is-primary" (click)="addToCart(product)">
+                Comprar<i class="fas fa-shopping-basket ml-2"></i>
+              </button>
+              <button class="card-footer-item button is-primary" (click)="addToCart(product)">
+                Añadir al carrito <i class="fas fa-cart-plus ml-1"></i>
+              </button>
+            </footer>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="flex-auto mx-auto">
+      <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
+        [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!" [totalRecords]="page?.totalElements || 0">
+      </p-paginator>
+    </div>
+  </div>
+  </div>
