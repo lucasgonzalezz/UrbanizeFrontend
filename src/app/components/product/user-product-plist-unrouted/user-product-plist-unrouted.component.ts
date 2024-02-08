@@ -51,6 +51,10 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     private categoryService: CategoryAjaxService,
     private oRouter: Router,
     private userAjaxService: UserAjaxService,
+    private purchaseService: PurchaseAjaxService,
+    private confirmService: ConfirmationService,
+    private router: Router,
+    private matSnackBar: MatSnackBar,
   ) { 
     console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
 
@@ -176,11 +180,44 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     return totalAPagar;
   }
 
-
-
   doView(producto: IProduct) {
     this.oRouter.navigate(['/user', 'product', 'view', producto.id]);
   }
+
+  makeProductPurhase(product: IProduct): void {
+    this.sessionService.getSessionUser()?.subscribe({
+      next: (user: IUser) => {
+        if (user) {
+          this.confirmService.confirm({
+            message: '¿Quieres comprar el producto?',
+            accept: () => {
+              const cantidad = 1;
+              this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
+                next: () => {
+                  this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
+                  this.router.navigate(['/user', 'purchase', 'plist', user.id]);
+                  
+                },
+                error: (err: HttpErrorResponse) => {
+                  this.status = err;
+                  this.matSnackBar.open('Error al comprar la producto', 'Aceptar', {duration: 3000});
+                }
+              });
+              },
+            reject: () => {
+              this.matSnackBar.open('Compra cancelada', 'Aceptar', {duration: 3000});
+            }
+            })
+        } else {
+          this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', {duration: 3000});
+        };
+        },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+        this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', {duration: 3000});
+      }
+      });
+    }
 
 }
 

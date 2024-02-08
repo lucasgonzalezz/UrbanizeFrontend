@@ -42,7 +42,7 @@
         </div>
 
         <!-- Botones debajo de la información del producto -->
-        <div class="columns mt-2">
+        <div class="columns mt-2" *ngIf="username">
           <div class="column is-6">
             <button type="button" class="button is-primary is-fullwidth" (click)="addToCart(products)">
               <span class="icon">

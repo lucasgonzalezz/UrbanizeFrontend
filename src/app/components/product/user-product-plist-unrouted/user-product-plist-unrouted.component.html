@@ -40,8 +40,9 @@
               <p class="font-semibold text-2xl text-cyan-950">{{ product.name }}</p>
               <p class="font-semibold text-xl text-cyan-950 mt-2">Precio: {{ product.price }}€</p>
             </div>
+
             <footer class="card-footer" *ngIf="username">
-              <button class="card-footer-item button is-primary" (click)="addToCart(product)">
+              <button class="card-footer-item button is-primary" (click)="makeProductPurhase(product)">
                 Comprar<i class="fas fa-shopping-basket ml-2"></i>
               </button>
               <button class="card-footer-item button is-primary" (click)="addToCart(product)">
@@ -58,4 +59,6 @@
       </p-paginator>
     </div>
   </div>
-  </div>
+</div>
+
+<p-confirmPopup></p-confirmPopup>

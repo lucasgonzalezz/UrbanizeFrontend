@@ -4,6 +4,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
 import { RatingAjaxService } from './../../../service/rating.ajax.service';
+import { UserAjaxService } from 'src/app/service/user.ajax.service';
+import { IUser } from 'src/app/model/model.interfaces';
+import { SessionAjaxService } from 'src/app/service/session.ajax.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-product-detail-unrouted',
@@ -18,10 +22,17 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   products: IProduct = {} as IProduct;
   status: HttpErrorResponse | null = null;
   rating: IRating[] = [];
+  username: string = '';
+  userSession: IUser | null = null;
+
+  url: string = '';
 
   constructor(
     private productService: ProductAjaxService,
     private ratingService: RatingAjaxService,
+    private sessionService: SessionAjaxService,
+    private userAjaxService: UserAjaxService,
+    private oRouter: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -29,6 +40,24 @@ export class UserProductDetailUnroutedComponent implements OnInit {
       this.id = config.data.id;
       console.log(this.config.data);
     }
+    console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
+
+    this.oRouter.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.url = ev.url;
+      }
+    })
+
+    this.username = sessionService.getUsername();
+    this.userAjaxService.getUserByUsername(this.sessionService.getUsername()).subscribe({
+      next: (user: IUser) => {
+        this.userSession = user;
+        console.log('User Session:', this.userSession); // Agrega este log
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    });
   }
 
   ngOnInit() {

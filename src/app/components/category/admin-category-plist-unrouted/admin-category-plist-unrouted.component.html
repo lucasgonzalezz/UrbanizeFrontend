@@ -27,7 +27,7 @@
           <p>{{ category.name }}</p>
         </td>
         <td>
-          <a [routerLink]="['/admin','category','plist','byproduct',category.id]"
+          <a [routerLink]="['/admin','product','plist','bycategory',category.id]"
             *ngIf="category.product>0">{{category.product}}</a>
           <span *ngIf="category.product==0">0</span>
         </td>

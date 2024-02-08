@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogService } from 'primeng/dynamicdialog';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ConfirmationService } from 'primeng/api';
 
 // Services
 import { UserAjaxService } from './service/user.ajax.service';
@@ -71,6 +72,11 @@ import { AdminRatingDetailUnroutedComponent } from './components/rating/admin-ra
 import { AdminRatingFormUnroutedComponent } from './components/rating/admin-rating-form-unrouted/admin-rating-form-unrouted.component';
 import { AdminRatingEditRoutedComponent } from './components/rating/admin-rating-edit-routed/admin-rating-edit-routed.component';
 import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating-view-routed/admin-rating-view-routed.component';
+// Purchase components
+import { UserPurchasePlistUnroutedComponent } from './components/purchase/user-purchase-plist-unrouted/user-purchase-plist-unrouted.component';
+import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
+import { UserPurchaseDetailUnroutedComponent } from './components/purchase/user-purchase-detail-unrouted/user-purchase-detail-unrouted.component';
+import { UserPurchaseViewRoutedComponent } from './components/purchase/user-purchase-view-routed/user-purchase-view-routed.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +125,11 @@ import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating
     AdminRatingFormUnroutedComponent,
     AdminRatingEditRoutedComponent,
     AdminRatingViewRoutedComponent,
+    // Purchase components
+    UserPurchasePlistUnroutedComponent,
+    UserPurchasePlistRoutedComponent,
+    UserPurchaseDetailUnroutedComponent,
+    UserPurchaseViewRoutedComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,6 +158,7 @@ import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating
     SessionAjaxService,
     CryptoService,
     DialogService,
+    ConfirmationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

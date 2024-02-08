@@ -24,6 +24,8 @@ import { AdminRatingEditRoutedComponent } from './components/rating/admin-rating
 import { AdminRatingPlistRoutedComponent } from './components/rating/admin-rating-plist-routed/admin-rating-plist-routed.component';
 import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating-view-routed/admin-rating-view-routed.component';
 import { UserProductViewRoutedComponent } from './components/product/user-product-view-routed/user-product-view-routed.component';
+import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
+import { UserPurchaseViewRoutedComponent } from './components/purchase/user-purchase-view-routed/user-purchase-view-routed.component';
 
 const routes: Routes = [
   // Shared routes
@@ -52,6 +54,9 @@ const routes: Routes = [
   { path: 'admin/rating/plist', component: AdminRatingPlistRoutedComponent },
   { path: 'admin/rating/edit/:id', component: AdminRatingEditRoutedComponent },
   { path: 'admin/rating/view/:id', component: AdminRatingViewRoutedComponent },
+  // Purchase routes
+  { path: 'user/purchase/plist/:id', component: UserPurchasePlistRoutedComponent },
+  { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent }
 
 ];
 

@@ -22,13 +22,21 @@ export class PurchaseAjaxService {
     return this.http.get<IPurchasePage>(this.url + '/user/' + user_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
   }
 
-  getPagePurchases(page: number, size: number, sort: string, direction: string): Observable<IPurchasePage> {
-    return this.http.get<IPurchasePage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
-  }
+  getPagePurchases(size: number, page: number, sort: string, direction: string, user_id: number): Observable<IPurchasePage> {
+    let user = '';
+    if (user_id > 0) {
+      user = '&user=' + user_id;
+    }
+    return this.http.get<IPurchasePage>(this.url + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction + user);
+}
 
   getPurchaseRandom(): Observable<IPurchase> {
     return this.http.get<IPurchase>(this.url + '/random');
   }
+
+  makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<IPurchase> {
+    return this.http.post<IPurchase>(this.url + '/makeProductPurhase/' + product_id + '/' + user_id + '/' + amount, {});
+}
 
   makeSingleCartPurchase(user_id: number, cart_id: number): Observable<IPurchase> {
     return this.http.post<IPurchase>(this.url + '/makeSingleCartPurchase/' + user_id + '/' + cart_id, {});
