@@ -40,6 +40,10 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   strUserName: string = '';
   username: string = '';
   userSession: IUser | null = null;
+  idCategoriaFiltrada: number | null = null;
+filtrandoPorCategoria: boolean = false;
+productosPorPagina: number = 8;
+
 
   url: string = '';
 
@@ -83,6 +87,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     if (this.category_id > 0) {
       this.getCategoria();
     }
+    
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -92,6 +97,36 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     });
   }
 
+
+
+quitarFiltro(): void {
+  this.value = ''; // Limpiar el valor del filtro de búsqueda
+  console.log(this.value);
+  
+  this.productService.getPageProducts(
+      this.oPaginatorState.rows,
+      this.oPaginatorState.page,
+      this.orderField,
+      this.orderDirection,
+      0 // Filtro por categoría establecido a 0 para mostrar todos los productos
+  ).subscribe({
+      next: (data: IProductPage) => {
+          this.page = data;
+          this.oPaginatorState.pageCount = data.totalPages;
+          this.products = data.content;
+          console.log(this.products);
+      },
+      error: (error: HttpErrorResponse) => {
+          this.status = error;
+      }
+  });
+  
+  this.category_id = 0; // Restablecer el valor de id_categoria a 0
+  console.log(this.category_id);
+  
+  this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
+  console.log(this.filtrandoPorCategoria);
+}
 
   onInputChange(query: string): void {
     if (query.length > 2) {
@@ -218,6 +253,15 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       }
       });
     }
+
+      // Método para filtrar por categoría cuando se hace clic en una categoría
+  filtrarPorCategoria(idCategoria: number): void {
+    this.category_id = idCategoria;
+    this.getPage(); 
+    this.idCategoriaFiltrada = idCategoria;
+    this.filtrandoPorCategoria = true;
+  }
+
 
 }
 

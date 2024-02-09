@@ -19,10 +19,14 @@
   <div class="column is-2">
     <h1 class="title">Categorías</h1>
     <ul class="categoria-list">
-      <li *ngFor="let category of category" class="categoria-item">
-        {{ category.name }} - {{ category.product }}
-      </li>
+      <li *ngFor="let cat of category" class="categoria-item" (click)="filtrarPorCategoria(cat.id)"
+      [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
+  
+      {{ cat.name }} ({{ cat.product }})
+    </li>
     </ul>
+    <button *ngIf="filtrandoPorCategoria" pButton type="button" (click)="quitarFiltro()"
+    class="btn btn-primary">Quitar filtro</button>
   </div>
 
   <!-- Columna de Productos -->
