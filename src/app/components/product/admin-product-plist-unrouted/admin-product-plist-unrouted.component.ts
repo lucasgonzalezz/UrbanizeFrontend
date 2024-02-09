@@ -38,7 +38,9 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
     public dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit() {
     this.getPage();

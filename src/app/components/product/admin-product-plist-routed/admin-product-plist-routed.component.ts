@@ -24,7 +24,7 @@ export class AdminProductPlistRoutedComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar,
   ) { 
-    this.category_id = parseInt(this.activatedRoute.snapshot.paramMap.get('categoryid') ?? "0");
+    this.category_id = parseInt(this.activatedRoute.snapshot.paramMap.get('category_id') ?? "0");
   }
 
   ngOnInit() {

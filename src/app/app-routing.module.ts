@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'admin/product/edit/:id', component: AdminProductEditRoutedComponent },
   { path: 'admin/product/new', component: AdminProductNewRoutedComponent },
   { path: 'admin/product/view/:id', component: AdminProductViewRoutedComponent },
-  { path: 'admin/product/plist/bycategory/:categoryid', component: AdminProductPlistRoutedComponent},
+  { path: 'admin/product/plist/bycategory/:category_id', component: AdminProductPlistRoutedComponent},
   { path: 'user/product/view/:id', component: UserProductViewRoutedComponent },
   // Category routes
   { path: 'admin/category/plist', component: AdminCategoryPlistRoutedComponent },
