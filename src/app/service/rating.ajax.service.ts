@@ -55,7 +55,7 @@ export class RatingAjaxService {
   }
 
   deleteAllRatinges(): Observable<number> {
-    return this.http.delete<number>(this.url);
+    return this.http.delete<number>(this.url + '/empty');
   }
 
   getRatingPageByProduct(product_id: number, page: number, size: number, sort: string, direction: string): Observable<IRatingPage> {
