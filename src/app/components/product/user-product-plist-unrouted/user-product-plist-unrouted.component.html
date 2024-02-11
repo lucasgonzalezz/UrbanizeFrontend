@@ -12,22 +12,22 @@
   </div>
 </div>
 
-
-
 <div class="columns">
-  <!-- Columna de Categorías -->
-  <div class="column is-2">
-    <h1 class="title">Categorías</h1>
-    <ul class="categoria-list">
-      <li *ngFor="let cat of category" class="categoria-item" (click)="filtrarPorCategoria(cat.id)"
+<!-- Columna de Categorías -->
+<div class="column is-2">
+  <h1 class="title text-cyan-900">Categorías</h1>
+
+  <!-- Utilizando botones en lugar de una lista -->
+  <div class="buttons">
+    <button *ngFor="let cat of category" class="button categoria-item is-primary" (click)="filtrarPorCategoria(cat.id)"
       [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
-  
       {{ cat.name }} ({{ cat.product }})
-    </li>
-    </ul>
-    <button *ngIf="filtrandoPorCategoria" pButton type="button" (click)="quitarFiltro()"
-    class="btn btn-primary">Quitar filtro</button>
+    </button>
   </div>
+
+  <!-- Botón "Quitar filtro" con estilo de Bulma -->
+  <button *ngIf="filtrandoPorCategoria" type="button" (click)="quitarFiltro()" class="button is-primary">Quitar filtro</button>
+</div>
 
   <!-- Columna de Productos -->
   <div class="column is-10">

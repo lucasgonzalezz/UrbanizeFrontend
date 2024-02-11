@@ -54,6 +54,9 @@ const routes: Routes = [
   { path: 'admin/rating/plist', component: AdminRatingPlistRoutedComponent },
   { path: 'admin/rating/edit/:id', component: AdminRatingEditRoutedComponent },
   { path: 'admin/rating/view/:id', component: AdminRatingViewRoutedComponent },
+  { path: 'admin/rating/plist/byproduct/:product_id', component: AdminRatingPlistRoutedComponent},
+  { path: 'admin/rating/plist/byuser/:user_id', component: AdminRatingPlistRoutedComponent},
+ 
   // Purchase routes
   { path: 'user/purchase/plist/:id', component: UserPurchasePlistRoutedComponent },
   { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent }

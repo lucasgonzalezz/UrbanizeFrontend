@@ -1,4 +1,14 @@
 <div class="container">
+
+  <div class="notification" *ngIf="user_id>0">
+    Filtrando por usuario: {{ user?.name}}
+    <button class="delete" *ngIf="user_id>0" [routerLink]="['/admin', 'rating', 'plist']">Quitar filtro</button>
+  </div>
+  <div class="notification" *ngIf="product_id>0">
+    Filtrando por producto: {{ product?.name}}
+    <button class="delete" *ngIf="product_id>0" [routerLink]="['/admin', 'rating', 'plist']">Quitar filtro</button>
+  </div>
+
   <div class="relative flex items-center">
     <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
       class="w-52 h-10 pl-10 border rounded-full focus:outline-none focus:border-cyan-900 text-cyan-900" />
@@ -25,8 +35,8 @@
         <td>{{ rating.date | date: 'dd-MM-yyyy' }}</td>
         <td (click)="doView(rating)">{{ rating.title }}</td>
         <td>{{ rating.description }}</td>
-        <td>{{ rating.user.name }}</td>
-        <td>{{ rating.product.name }}</td>
+        <td><a [routerLink]="['/admin', 'rating', 'plist', 'byuser', rating.user.id]"> {{ rating.user.name }}</a></td>
+        <td><a [routerLink]="['/admin', 'rating', 'plist', 'byproduct', rating.product.id]"> {{ rating.product.name }}</a></td>
         <td>
           <a [routerLink]="['/admin', 'rating', 'edit', rating.id]" class="button is-primary is-small mr-2 is-rounded"
             title="Editar">

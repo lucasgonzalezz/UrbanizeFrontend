@@ -65,7 +65,7 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.ratingAjaxService
-        .getRatingPage(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, query)
+        .getRatingPage(this.paginatorState.rows, this.paginatorState.page, this.orderField, this.orderDirection, this.user_id, this.product_id, query)
         .subscribe({
           next: (data: IRatingPage) => {
             this.page = data;
@@ -83,28 +83,18 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.ratingAjaxService
-      .getRatingPage(
-        this.paginatorState.rows,
-        this.paginatorState.page,
-        this.orderField,
-        this.orderDirection,
-      )
-      .subscribe({
-        next: (data: IRatingPage) => {
-          this.page = data;
-          this.paginatorState.pageCount = data.totalPages;
-          this.ratings = data.content;
-          console.log(this.paginatorState);
-          console.log(this.ratings);
-          console.log(this.user_id)
-          console.log(this.product_id)
-        },
-        error: (error: HttpErrorResponse) => {
-          this.status = error;
-        },
-      });
-  }
+    const page: number = this.paginatorState.page ?? 0;
+    const rows: number = this.paginatorState.rows ?? 0;
+    this.ratingAjaxService.getRatingPage(rows, page, this.orderField, this.orderDirection, this.user_id, this.product_id).subscribe({
+      next: (page: IRatingPage) => {
+        this.page = page;
+        this.paginatorState.pageCount = page.totalPages;
+      },
+      error: (response: HttpErrorResponse) => {
+        this.status = response;
+      }
+    });
+    }
 
   onPageChange(event: PaginatorState) {
     this.paginatorState.rows = event.rows;

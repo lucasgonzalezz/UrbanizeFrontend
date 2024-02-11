@@ -230,29 +230,31 @@ quitarFiltro(): void {
               this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
                 next: () => {
                   this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
-                  this.router.navigate(['/user', 'purchase', 'plist', user.id]);
                   
+                  // Navegar a la lista de compras del usuario actual
+                  this.router.navigate(['/user', 'purchase', 'plist', user.id]);
                 },
                 error: (err: HttpErrorResponse) => {
                   this.status = err;
-                  this.matSnackBar.open('Error al comprar la producto', 'Aceptar', {duration: 3000});
+                  this.matSnackBar.open('Error al comprar el producto', 'Aceptar', {duration: 3000});
                 }
               });
-              },
+            },
             reject: () => {
               this.matSnackBar.open('Compra cancelada', 'Aceptar', {duration: 3000});
             }
-            })
+          });
         } else {
           this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', {duration: 3000});
         };
-        },
+      },
       error: (err: HttpErrorResponse) => {
         this.status = err;
         this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', {duration: 3000});
       }
-      });
-    }
+    });
+  }
+  
 
       // Método para filtrar por categoría cuando se hace clic en una categoría
   filtrarPorCategoria(idCategoria: number): void {

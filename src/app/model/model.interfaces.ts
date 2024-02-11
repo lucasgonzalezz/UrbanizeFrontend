@@ -115,7 +115,7 @@ export interface IPurchase extends IEntity {
     purchase_date: Date,
     delivery_date: Date,
     status: string,
-    prchase_code: number,
+    purchaseCode: number,
     user: IUser,
     num_bill: number,
     date_bill: Date,

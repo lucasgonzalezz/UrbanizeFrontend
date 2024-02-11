@@ -12,7 +12,7 @@
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Talla:</b> {{ product.size }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Stock:</b> {{ product.stock }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Precio:</b> {{ product.price }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Categoria:</b> {{ product.category.name }}</p>
+            <p class="has-text-primary ml-4" *ngIf="product.category"><i class="fas fa-arrow-right has-text-primary"></i><b> Categoria:</b> {{ product.category.name }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Valoraciones:</b> {{ product.ratings }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Producto en carritos:</b> {{ product.carts }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Número de compras:</b> {{ product.purchaseDetails }}</p>

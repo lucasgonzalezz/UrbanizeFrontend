@@ -3,7 +3,7 @@
     <div class="column is-4" *ngFor="let purchase of page?.content">
       <div class="card">
         <div class="card-content">
-          <p class="title is-4">Compra #{{purchase.prchase_code}}</p>
+          <p class="title is-4">Compra #{{purchase.purchaseCode}}</p>
           <p class="subtitle is-6">Fecha: {{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
           <p *ngIf="purchase.num_bill" class="subtitle is-6">Número de factura: {{purchase.num_bill}}</p>
           <p *ngIf="purchase.num_bill" class="subtitle is-6">Fecha de factura: {{purchase.date_bill| date: 'dd/MM/yyyy'}}</p>
