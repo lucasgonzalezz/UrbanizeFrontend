@@ -18,8 +18,8 @@ export class PurchaseAjaxService {
     return this.http.get<IPurchase>(this.url + '/' + id);
   }
 
-  getPurchaseByUsuarioId(user_id: number, page: number, size: number, direction: string, sort: string): Observable<IPurchasePage> {
-    return this.http.get<IPurchasePage>(this.url + '/user/' + user_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
+  getPurchaseByUsuarioId(user_id: number, size: number, page: number, sort: string, direction: string): Observable<IPurchasePage> {
+    return this.http.get<IPurchasePage>(this.url + '/byUser/' + user_id + "?size=" + size + "&page=" + page + '&sort=' + sort + ',' + direction);
   }
 
   getPagePurchases(size: number, page: number, sort: string, direction: string, user_id: number): Observable<IPurchasePage> {

@@ -49,7 +49,7 @@ export class UserPurchasePlistUnroutedComponent implements OnInit {
         this.user = user;
         const rows: number = this.paginatorState.rows ?? 0;
         const page: number = this.paginatorState.page ?? 0;
-        this.purchaseService.getPagePurchases(rows, page, this.orderField, this.orderDirection, this.user?.id).subscribe({
+        this.purchaseService.getPurchaseByUsuarioId(this.user?.id, rows, page, this.orderField, this.orderDirection, ).subscribe({
           next: (page: IPurchasePage) => {
             this.page = page;
             this.paginatorState.pageCount = this.page.totalPages;

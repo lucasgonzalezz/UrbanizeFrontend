@@ -10,10 +10,8 @@
 
         <!-- Contenido de la tarjeta -->
         <div class="card-content">
-          <p class="subtitle is-6">Fecha: {{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
-          <p *ngIf="purchase.num_bill" class="subtitle is-6">Número de factura: {{purchase.num_bill}}</p>
-          <p *ngIf="purchase.num_bill" class="subtitle is-6">Fecha de factura: {{purchase.date_bill| date: 'dd/MM/yyyy'}}</p>
-          <a [routerLink]="['/user', 'purchase', 'view', purchase.id]">Ver detalles de la compra</a>
+          <p class="text-cyan-900 text-lg mb-2">Fecha: {{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
+          <a class="text-cyan-900" [routerLink]="['/user', 'purchase', 'view', purchase.id]">Ver detalles de la compra</a>
         </div>
       </div>
     </div>
