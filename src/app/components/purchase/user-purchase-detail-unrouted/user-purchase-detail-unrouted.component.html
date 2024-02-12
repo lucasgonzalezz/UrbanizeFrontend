@@ -1,17 +1,22 @@
 <div class="container">
-  <div class="box">
-    <h1 class="title is-4">Compra #{{purchase.purchaseCode}}</h1>
+  <div class="card">
+    <div class="card-header">
+      <p class="font-semibold text-cyan-900 text-xl my-3 ml-3">Mostrando informacion de la compra con código:</p>
+      <p class="text-cyan-900 mt-4 ml-3 ">{{purchase.purchaseCode}}</p>
+    </div>
+    <div class="content">
+      <p class="ml-4 mt-3 text-cyan-900"><strong class="text-cyan-900 text-lg">Cliente: </strong>{{purchase.user.name}} {{purchase.user.last_name1}}</p>
+      <p class="ml-4 mt-3 text-cyan-900"><strong class="text-cyan-900 text-lg">Fecha: </strong>{{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
+      <p class="ml-4 mt-3 text-cyan-900 pb-4"><strong class="text-cyan-900 text-lg">Dirección de entrega: </strong>{{purchase.user.address}}</p>
+      <ng-container *ngIf="purchase.num_bill">
+        <p><strong>Número de factura: </strong>{{purchase.num_bill}}</p>
+        <p><strong>Fecha de factura: </strong>{{purchase.date_bill | date: 'dd/MM/yyyy'}}</p>
+      </ng-container>
+    </div>
   </div>
-  <div class="content">
-    <p><strong>Cliente: </strong>{{purchase.user.name}} {{purchase.user.last_name1}}</p>
-    <p><strong>Fecha: </strong>{{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
-    <p><strong>Dirección de entrega: </strong>{{purchase.user.address}}</p>
-    <ng-container *ngIf="purchase.num_bill">
-      <p><strong>Número de factura: </strong>{{purchase.num_bill}}</p>
-      <p><strong>Fecha de factura: </strong>{{purchase.date_bill | date: 'dd/MM/yyyy'}}</p>
-    </ng-container>
+
+  <div class="card mt-4">
+    <h2 class="font-semibold text-cyan-900 text-xl py-3 ml-3">Detalles de la compra</h2>
+    <app-user-purchaseDetail-plist-unrouted [purchase_id]="id"></app-user-purchaseDetail-plist-unrouted>
   </div>
-  <div class="box">
-    <h2 class="subtitle is-5">Detalles de la compra</h2>
-   <!-- <app-user-detalle-compra-plist-unrouted [id_compra]="id"></app-user-detalle-dompra-plist-unrouted> -->
 </div>

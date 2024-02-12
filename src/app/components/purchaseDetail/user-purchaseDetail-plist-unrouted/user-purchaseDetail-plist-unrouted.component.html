@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr> 
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let purchaseDetail of page?.content">
+        <td>{{ purchaseDetail.id }}</td>
+        <td>{{ purchaseDetail.product.name }}</td>
+        <td>{{ purchaseDetail.price }}</td>
+        <td>{{ purchaseDetail.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

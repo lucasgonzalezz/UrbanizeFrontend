@@ -43,6 +43,10 @@ export class PurchaseDetailAjaxService {
     return this.http.get<IPurchaseDetailPage>(this.url + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction + '&purchase_id=' + purchase_id + '&product_id=' + product_id);
   }
 
+  getPurchaseDetailByCompraId(purchase_id: number, size: number, page: number, sort: string, direction: string): Observable<IPurchaseDetailPage> {
+    return this.http.get<IPurchaseDetailPage>(this.url + '/byPurchase/' + purchase_id + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+  }
+
   updatePurchaseDetail(purchaseDetail: IPurchaseDetail): Observable<IPurchaseDetail> {
     return this.http.put<IPurchaseDetail>(this.url, purchaseDetail);
   }
