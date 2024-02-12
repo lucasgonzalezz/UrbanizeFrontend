@@ -24,6 +24,7 @@
         <th (click)="doOrder('price')" class="has-text-centered is-size-5 has-text-white">Precio</th>
         <th class="has-text-centered is-size-5 has-text-white">Imagen</th>
         <th (click)="doOrder('category')" class="has-text-centered is-size-5 has-text-white">Categoria</th>
+        <th (click)="doOrder('ratings')" class="has-text-centered is-size-5 has-text-white">Valoraciones</th>
         <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
@@ -46,6 +47,9 @@
         </td>
         <td>
           <p><a [routerLink]="['/admin', 'product', 'plist', 'bycategory', product.category.id]"> {{product.category.name}}</a></p>
+        </td>
+        <td>
+          <p><a [routerLink]="['/admin', 'rating', 'plist', 'byproduct', product.id]"> {{product.ratings}}</a></p>
         </td>
         <td class="product-actions has-text-centered">
           <!-- Botones de CRUD a la derecha -->

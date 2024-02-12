@@ -2,8 +2,14 @@
   <div class="columns is-multiline">
     <div class="column is-4" *ngFor="let purchase of page?.content">
       <div class="card">
+        <!-- Encabezado de la tarjeta -->
+        <div class="card-header">
+          <p class="font-semibold text-cyan-900 text-xl my-3 ml-3">Código de compra:</p>
+          <p class="font-semibold text-cyan-900 text-sm mt-4 ml-3 ">{{purchase.purchaseCode}}</p>
+        </div>
+
+        <!-- Contenido de la tarjeta -->
         <div class="card-content">
-          <p class="title is-4">Compra #{{purchase.purchaseCode}}</p>
           <p class="subtitle is-6">Fecha: {{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
           <p *ngIf="purchase.num_bill" class="subtitle is-6">Número de factura: {{purchase.num_bill}}</p>
           <p *ngIf="purchase.num_bill" class="subtitle is-6">Fecha de factura: {{purchase.date_bill| date: 'dd/MM/yyyy'}}</p>
@@ -17,9 +23,7 @@
     No has hecho ninguna compra todavía. <a [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
   </div>
 
-
   <div class="level is-justify-content-center mb-3">
     <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
   </div>
-
 </div>

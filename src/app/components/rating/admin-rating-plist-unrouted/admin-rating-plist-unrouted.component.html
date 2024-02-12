@@ -1,11 +1,11 @@
 <div class="container">
 
   <div class="notification" *ngIf="user_id>0">
-    Filtrando por usuario: {{ user?.name}}
+    Filtrando por usuario: {{ user?.name }}
     <button class="delete" *ngIf="user_id>0" [routerLink]="['/admin', 'rating', 'plist']">Quitar filtro</button>
   </div>
   <div class="notification" *ngIf="product_id>0">
-    Filtrando por producto: {{ product?.name}}
+    Filtrando por producto: {{ product?.name }}
     <button class="delete" *ngIf="product_id>0" [routerLink]="['/admin', 'rating', 'plist']">Quitar filtro</button>
   </div>
 

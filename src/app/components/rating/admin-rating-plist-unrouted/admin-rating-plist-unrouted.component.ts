@@ -50,7 +50,7 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
       this.getUser();
 
     }
-    if (this.user_id > 0) {
+    if (this.product_id > 0) {
       this.getProduct();
     }
     this.forceReload.subscribe({
@@ -155,6 +155,8 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
       next: (data: IProduct) => {
         this.product = data;
         this.getPage();
+        console.log(this.product_id);
+
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;

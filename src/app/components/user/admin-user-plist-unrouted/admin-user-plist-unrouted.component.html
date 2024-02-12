@@ -50,7 +50,7 @@
           <p>{{ user.carts }}</p>
         </td>
         <td>
-          <p>{{ user.ratings }}</p>
+          <p><a [routerLink]="['/admin', 'rating', 'plist', 'byuser', user.id]"> {{user.ratings}}</a></p>
         </td>
         <td>
           <p>{{ user.purchases }}</p>
