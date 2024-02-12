@@ -81,7 +81,7 @@ export interface IProductPage extends IPage<IProduct> {
 export interface ICart extends IEntity {
     user: IUser,
     product: IProduct,
-    quantity: number,
+    amount: number,
 }
 
 export interface ICartPage extends IPage<ICart> {

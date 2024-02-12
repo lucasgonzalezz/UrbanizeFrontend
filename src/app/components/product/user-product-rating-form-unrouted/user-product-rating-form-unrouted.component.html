@@ -1,0 +1,25 @@
+<div class="container">
+  <form [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label class="label">Titulo</label>
+      <div class="control">
+        <textarea class="input" formControlName="title"></textarea>
+      </div>
+      <label class="label">Comentario</label>
+      <div class="control">
+        <textarea class="textarea" formControlName="description"></textarea>
+      </div>
+      <div class="help is-danger" *ngIf="ratingForm.get('description')?.invalid && ratingForm.get('description')?.touched">
+        Debes escribir un comentario
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary" type="submit" [disabled]="ratingForm.invalid">Enviar valoración</button>
+        <button class="button is-link" (click)="onCancel()">Cancelar</button>
+      </div>
+    </div>
+    
+  </form>
+</div>

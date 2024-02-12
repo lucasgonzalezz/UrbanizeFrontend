@@ -4,7 +4,7 @@
       <!-- Columna para la imagen -->
       <div class="column is-4">
         <figure class="image is-4by3 box">
-          <img [src]="products.image" alt="Imagen del producto" class="img-fluid" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <img [src]="product.image" alt="Imagen del producto" class="img-fluid" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         </figure>
       </div>
 
@@ -12,10 +12,10 @@
       <div class="column is-8">
         <!-- Información del producto -->
         <div class="column is-12">
-          <h1 class="text-4xl font-medium text-cyan-900">{{ products.name }}</h1>
-          <h2 class="text-xl font-normal text-cyan-900 mt-1">Precio: {{ products.price }}€ </h2>
-          <p class="text-xl font-normal text-cyan-900">Stock: {{ products.stock }} uds.</p>
-          <p class="text-xl font-normal text-cyan-900">Talla: {{ products.size }}</p>
+          <h1 class="text-4xl font-medium text-cyan-900">{{ product.name }}</h1>
+          <h2 class="text-xl font-normal text-cyan-900 mt-1">Precio: {{ product.price }}€ </h2>
+          <p class="text-xl font-normal text-cyan-900">Stock: {{ product.stock }} uds.</p>
+          <p class="text-xl font-normal text-cyan-900">Talla: {{ product.size }}</p>
         </div>
 
         <!-- Detalles de envío -->
@@ -41,22 +41,37 @@
           </p>
         </div>
 
+        <div class="field column is-4">
+          <label class="label">Cantidad:</label>
+          <div class="control">
+            <input class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada">
+          </div>
+        </div>
+
         <!-- Botones debajo de la información del producto -->
         <div class="columns mt-2" *ngIf="username">
-          <div class="column is-6">
-            <button type="button" class="button is-primary is-fullwidth" (click)="addToCart(products)">
+          <div class="column is-4">
+            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito">
               <span class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </span>
               <span>Añadir al carrito</span>
             </button>
           </div>
-          <div class="column is-6">
-            <button type="button" class="button is-primary is-fullwidth">
+          <div class="column is-4">
+            <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()">
               <span class="icon">
                 <i class="fas fa-credit-card"></i>
               </span>
               <span>Comprar</span>
+            </button>
+          </div>
+          <div class="column is-4">
+            <button type="button" class="button is-primary is-fullwidth" (click)="realizarValoracion(product)">
+              <span class="icon">
+                <i class="fas fa-credit-card"></i>
+              </span>
+              <span>Valorar</span>
             </button>
           </div>
         </div>
@@ -69,7 +84,7 @@
 <div class="card mt-4">
   <header class="card-header">
     <p class="card-header-title text-2xl font-normal text-cyan-900">
-      Opiniones ({{ products.ratings }})
+      Opiniones ({{ product.ratings }})
     </p>
   </header>
   <div class="card-content text-cyan-900" style="max-height: 200px; overflow-y: auto;">
@@ -80,3 +95,5 @@
     <!-- Agrega más opiniones según sea necesario -->
   </div>
 </div>
+
+<p-confirmPopup></p-confirmPopup>

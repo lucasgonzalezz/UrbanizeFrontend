@@ -56,6 +56,7 @@ import { AdminProductViewRoutedComponent } from './components/product/admin-prod
 import { UserProductPlistUnroutedComponent } from './components/product/user-product-plist-unrouted/user-product-plist-unrouted.component';
 import { UserProductDetailUnroutedComponent } from './components/product/user-product-detail-unrouted/user-product-detail-unrouted.component';
 import { UserProductViewRoutedComponent } from './components/product/user-product-view-routed/user-product-view-routed.component';
+import { UserProductRatingFormUnroutedComponent } from './components/product/user-product-rating-form-unrouted/user-product-rating-form-unrouted.component';
 // Category components
 import { AdminCategoryPlistRoutedComponent } from './components/category/admin-category-plist-routed/admin-category-plist-routed.component';
 import { AdminCategoryPlistUnroutedComponent } from './components/category/admin-category-plist-unrouted/admin-category-plist-unrouted.component';
@@ -72,6 +73,7 @@ import { AdminRatingDetailUnroutedComponent } from './components/rating/admin-ra
 import { AdminRatingFormUnroutedComponent } from './components/rating/admin-rating-form-unrouted/admin-rating-form-unrouted.component';
 import { AdminRatingEditRoutedComponent } from './components/rating/admin-rating-edit-routed/admin-rating-edit-routed.component';
 import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating-view-routed/admin-rating-view-routed.component';
+import { UserRatingPlistUnroutedComponent } from './components/rating/user-rating-plist-unrouted/user-rating-plist-unrouted.component';
 // Purchase components
 import { UserPurchasePlistUnroutedComponent } from './components/purchase/user-purchase-plist-unrouted/user-purchase-plist-unrouted.component';
 import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
@@ -111,6 +113,7 @@ import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseD
     UserProductPlistUnroutedComponent,
     UserProductDetailUnroutedComponent,
     UserProductViewRoutedComponent,
+    UserProductRatingFormUnroutedComponent,
     // Category components
     AdminCategoryPlistUnroutedComponent,
     AdminCategoryPlistRoutedComponent,
@@ -127,6 +130,7 @@ import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseD
     AdminRatingFormUnroutedComponent,
     AdminRatingEditRoutedComponent,
     AdminRatingViewRoutedComponent,
+    UserRatingPlistUnroutedComponent,
     // Purchase components
     UserPurchasePlistUnroutedComponent,
     UserPurchasePlistRoutedComponent,

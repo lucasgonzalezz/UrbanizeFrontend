@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-one-third" *ngFor="let rating of page?.content">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-header-title">{{rating.user.username}}</p>
+          <p class="card-header-icon">{{rating.date | date: 'dd-MM-yyyy'}}</p>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            {{rating.description}}
+            <button *ngIf="isUsuarioValoracion(rating)" (click)="borrarValoracion(rating.id)" class="button is-danger">Borrar valoración</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
