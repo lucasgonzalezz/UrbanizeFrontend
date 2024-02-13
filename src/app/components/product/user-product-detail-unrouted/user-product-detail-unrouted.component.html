@@ -4,7 +4,8 @@
       <!-- Columna para la imagen -->
       <div class="column is-4">
         <figure class="image is-4by3 box">
-          <img [src]="product.image" alt="Imagen del producto" class="img-fluid" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <img [src]="product.image" alt="Imagen del producto" class="img-fluid"
+            style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         </figure>
       </div>
 
@@ -80,19 +81,34 @@
   </div>
 </div>
 
-<!-- Sección de opiniones -->
-<div class="card mt-4">
-  <header class="card-header">
-    <p class="card-header-title text-2xl font-normal text-cyan-900">
-      Opiniones ({{ product.ratings }})
-    </p>
-  </header>
-  <div class="card-content text-cyan-900" style="max-height: 200px; overflow-y: auto;">
-    <!-- Contenido de las opiniones aquí -->
-    <p>Opinión 1</p>
-    <p>Opinión 2</p>
-    <p>Opinión 3</p>
-    <!-- Agrega más opiniones según sea necesario -->
+<h1 class="text-cyan-900 text-3xl font-semibold mb-5 mt-8">Valoraciones</h1>
+
+<div class="card box">
+  <div class="card-content">
+    <div class="columns is-multiline">
+      <div class="column is-one-third" *ngFor="let rating of page?.content">
+        <div class="card">
+          <div class="card-header">
+            <p class="card-header-title text-cyan-900 text-lg">{{rating.user.username}}</p>
+            <p class="card-header-icon text-cyan-900">{{rating.date| date: 'dd-MM-yyyy'}}</p>
+            <button *ngIf="isUsuarioValoracion(rating)" class="button is-danger is-rounded is-small mt-3 mr-2"
+              (click)="borrarValoracion(rating.id)">
+              <span class="icon is-small">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </button>
+          </div>
+          <div class="card-content">
+            <div class="content text-cyan-900">
+              {{rating.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notification is-primary" *ngIf="!page?.content || page?.content?.length === 0">
+    No hay valoraciones para mostrar.
   </div>
 </div>
 

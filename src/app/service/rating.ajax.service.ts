@@ -65,9 +65,9 @@ export class RatingAjaxService {
     return this.http.delete<number>(this.url + '/empty');
   }
 
-  getRatingPageByProduct(product_id: number, page: number, size: number, sort: string, direction: string): Observable<IRatingPage> {
-    return this.http.get<IRatingPage>(this.url + '/product/' + product_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
-  }
+  getRatingPageByProduct(product_id: number, size: number, page: number, sort: string, direction: string): Observable<IRatingPage> {
+    return this.http.get<IRatingPage>(this.url + '/byProduct/' + product_id + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+}
 
   getRatingPageByUser(user_id: number, page: number, size: number, sort: string, direction: string): Observable<IRatingPage> {
     return this.http.get<IRatingPage>(this.url + '/user/' + user_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);

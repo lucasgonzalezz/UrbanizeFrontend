@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="notification is-info" *ngIf="!page?.content || page?.content?.length === 0">
+  <div class="notification is-primary" *ngIf="!page?.content || page?.content?.length === 0">
     No has hecho ninguna compra todavía. <a [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
   </div>
 

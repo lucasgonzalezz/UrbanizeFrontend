@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-product-view-routed',
@@ -8,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProductViewRoutedComponent implements OnInit {
 
+  forceReload: Subject<boolean> = new Subject<boolean>();
   id: number = 1;
 
   constructor(

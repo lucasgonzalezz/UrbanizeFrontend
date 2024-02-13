@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { ICart, IProduct, IRating } from 'src/app/model/model.interfaces';
+import { ICart, IProduct, IRating, IRatingPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserProductRatingFormUnroutedComponent } from '../user-product-rating-form-unrouted/user-product-rating-form-unrouted.component';
+import { Subject } from 'rxjs';
+import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-user-product-detail-unrouted',
@@ -22,12 +24,17 @@ import { UserProductRatingFormUnroutedComponent } from '../user-product-rating-f
 })
 export class UserProductDetailUnroutedComponent implements OnInit {
 
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   @Input() id: number = 1;
   cart: ICart = { user: {}, product: {}, amount: 0 } as ICart;
   cantidadSeleccionada: number = 1;
   status: HttpErrorResponse | null = null;
   product: IProduct = {} as IProduct;
   user: IUser | null = null;
+  paginatorState: PaginatorState = { first: 0, rows: 30, page: 0, pageCount: 0 };
+  page: IRatingPage | null = null;
+  orderField: string = 'id';
+  orderDirection: string = 'asc';
 
   username: string = '';
   userSession: IUser | null = null;
@@ -72,6 +79,14 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   ngOnInit() {
     this.getProduct();
     this.getUser();
+    this.getRatings();
+    this.forceReload.subscribe({
+      next: (v) => {
+        if (v) {
+          this.getRatings();
+        }
+      }
+    });
   }
 
   getOne(): void {
@@ -102,6 +117,20 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.sessionService.getSessionUser()?.subscribe({
       next: (data: IUser) => {
         this.user = data;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
+  }
+
+  getRatings() {
+    const rows: number = this.paginatorState.rows ?? 0;
+    const page: number = this.paginatorState.page ?? 0;
+    this.ratingService.getRatingPageByProduct(this.id, rows, page, this.orderField, this.orderDirection).subscribe({
+      next: (data: IRatingPage) => {
+        this.page = data;
+        this.paginatorState.pageCount = data.totalPages;
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;
@@ -163,7 +192,36 @@ export class UserProductDetailUnroutedComponent implements OnInit {
           contentStyle: {"max-height": "500px", "overflow": "auto"},
           maximizable: false
           });
+          this.ref.onClose.subscribe({
+            next: (v) => {
+              if (v) {
+                this.getRatings();
+              }
+            }
+          })
         };
       } 
+
+      isUsuarioValoracion(rating: IRating): boolean {
+        return this.user !== null && rating.user.id === this.user.id;
+      }
+  
+      borrarValoracion(rating_id: number) {
+        this.confirmService.confirm({
+          message: '¿Quieres borrar la valoración?',
+          accept: () => {
+            this.ratingService.deleteRating(rating_id).subscribe({
+              next: () => {
+                this.matSnackBar.open('Valoración borrada', 'Aceptar', {duration: 3000});
+                this.getRatings();
+              },
+              error: (err: HttpErrorResponse) => {
+                this.status = err;
+                this.matSnackBar.open('Error al borrar la valoración', 'Aceptar', {duration: 3000});
+              }
+            });
+          }
+        });
+      }
 
 }

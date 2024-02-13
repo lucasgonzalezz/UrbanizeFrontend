@@ -10,9 +10,8 @@
     "build:styles": "postcss src/styles.css -o src/styles.css",
     "css-build": "node-sass --omit-source-map-url src/bulma.scss src/css/bulma_styles.css",
     "css-watch": "npm run css-build -- --watch",
-    "start_bulma": "npm run css-watch",
-    "postinstall": "ngcc"
-  },
+    "start_bulma": "npm run css-watch"
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.1.2",
