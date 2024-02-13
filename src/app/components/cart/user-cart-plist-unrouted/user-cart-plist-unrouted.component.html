@@ -1,0 +1,58 @@
+<div class="container" *ngIf="page && page.content.length > 0">
+  <table class="table is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Producto</th>
+        <th>Talla</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Coste Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cart of page?.content">
+        <td><img [src]="cart.product.image" alt="Imagen del producto" class="image is-64x64"></td>
+        <td>{{cart.product.name}}</td>
+        <td>{{cart.product.size}}</td>
+        <td>{{cart.product.price | currency }}</td>
+        <td>
+          <button class="button is-danger" (click)="updateAmount(cart, cart.amount - 1)">-</button>
+          {{cart.amount}}
+          <button class="button is-success" (click)="updateAmount(cart, cart.amount + 1)">+</button>
+        </td>
+        <td>{{ individualPricel.get(cart.id) | currency }} </td>
+        <td>
+          <button class="button is-danger" (click)="deleteCart(cart.id)">Eliminar</button>
+          <button class="button is-primary" (click)="makeSingleCartPurchase(cart.id)">Comprar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="box">
+        <h3 class="title is-4">Total</h3>
+        <p>Coste total (incluyendo IVA): {{ totalCost | currency }}</p>
+        <button class="button is-primary" (click)="user && deleteAllCarts(user.id)">Vacíar el carrito</button>
+        <button class="button is-success" (click)="makeAllCartPurchase()">Comprar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <a class="button is-info" [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="container" *ngIf="page && page.content.length === 0">
+  <p>Todavía no has añadido nada a tu carrito.</p>
+  <a class="button is-info" [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
+</div>
+
+<p-confirmPopup></p-confirmPopup>

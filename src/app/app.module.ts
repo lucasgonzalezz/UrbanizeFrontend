@@ -79,8 +79,11 @@ import { UserPurchasePlistUnroutedComponent } from './components/purchase/user-p
 import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
 import { UserPurchaseDetailUnroutedComponent } from './components/purchase/user-purchase-detail-unrouted/user-purchase-detail-unrouted.component';
 import { UserPurchaseViewRoutedComponent } from './components/purchase/user-purchase-view-routed/user-purchase-view-routed.component';
-
+// PurchaseDetail components
 import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseDetail/user-purchaseDetail-plist-unrouted/user-purchaseDetail-plist-unrouted.component';
+// Cart components
+import { UserCartPlistUnroutedComponent } from './components/cart/user-cart-plist-unrouted/user-cart-plist-unrouted.component';
+import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-routed/user-cart-plist-routed.component';
 
 @NgModule({
   declarations: [
@@ -136,8 +139,11 @@ import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseD
     UserPurchasePlistRoutedComponent,
     UserPurchaseDetailUnroutedComponent,
     UserPurchaseViewRoutedComponent,
-
+    // PurchaseDetail components
     UserPurchaseDetailPlistUnroutedComponent,
+    // Cart components
+    UserCartPlistUnroutedComponent,
+    UserCartPlistRoutedComponent
   ],
   imports: [
     BrowserModule,

@@ -18,9 +18,9 @@ export class CartAjaxService {
     return this.http.get<ICart>(this.url + '/' + id);
   }
 
-  getCartByUserId(user_id: number): Observable<ICart> {
-    return this.http.get<ICart>(this.url + '/user/' + user_id);
-  }
+  getCartsByUser(user_id: number, size: number, page: number, sort: string, direction: string): Observable<ICartPage> {
+    return this.http.get<ICartPage>(this.url + '/byUser/' + user_id + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+}
 
   getCartByUserAndProduct(user_id: number, product_id: number): Observable<ICart> {
     return this.http.get<ICart>(this.url + '/user/' + user_id + '/product/' + product_id);

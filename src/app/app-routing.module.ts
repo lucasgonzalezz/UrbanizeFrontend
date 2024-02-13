@@ -26,6 +26,7 @@ import { AdminRatingViewRoutedComponent } from './components/rating/admin-rating
 import { UserProductViewRoutedComponent } from './components/product/user-product-view-routed/user-product-view-routed.component';
 import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
 import { UserPurchaseViewRoutedComponent } from './components/purchase/user-purchase-view-routed/user-purchase-view-routed.component';
+import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-routed/user-cart-plist-routed.component';
 
 const routes: Routes = [
   // Shared routes
@@ -43,7 +44,7 @@ const routes: Routes = [
   { path: 'admin/product/edit/:id', component: AdminProductEditRoutedComponent },
   { path: 'admin/product/new', component: AdminProductNewRoutedComponent },
   { path: 'admin/product/view/:id', component: AdminProductViewRoutedComponent },
-  { path: 'admin/product/plist/bycategory/:category_id', component: AdminProductPlistRoutedComponent},
+  { path: 'admin/product/plist/bycategory/:category_id', component: AdminProductPlistRoutedComponent },
   { path: 'user/product/view/:id', component: UserProductViewRoutedComponent },
   // Category routes
   { path: 'admin/category/plist', component: AdminCategoryPlistRoutedComponent },
@@ -54,13 +55,13 @@ const routes: Routes = [
   { path: 'admin/rating/plist', component: AdminRatingPlistRoutedComponent },
   { path: 'admin/rating/edit/:id', component: AdminRatingEditRoutedComponent },
   { path: 'admin/rating/view/:id', component: AdminRatingViewRoutedComponent },
-  { path: 'admin/rating/plist/byproduct/:product_id', component: AdminRatingPlistRoutedComponent},
-  { path: 'admin/rating/plist/byuser/:user_id', component: AdminRatingPlistRoutedComponent},
- 
+  { path: 'admin/rating/plist/byproduct/:product_id', component: AdminRatingPlistRoutedComponent },
+  { path: 'admin/rating/plist/byuser/:user_id', component: AdminRatingPlistRoutedComponent },
   // Purchase routes
   { path: 'user/purchase/plist/:id', component: UserPurchasePlistRoutedComponent },
-  { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent }
-
+  { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent },
+  // Cart routes
+  { path: 'user/carto/plist', component: UserCartPlistRoutedComponent },
 ];
 
 @NgModule({

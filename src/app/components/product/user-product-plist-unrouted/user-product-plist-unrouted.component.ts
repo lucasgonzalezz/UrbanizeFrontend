@@ -14,7 +14,6 @@ import { CategoryAjaxService } from './../../../service/category.ajax.service';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { IUser } from 'src/app/model/model.interfaces';
 
-
 @Component({
   selector: 'app-user-product-plist-unrouted',
   templateUrl: './user-product-plist-unrouted.component.html',
@@ -41,12 +40,10 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   username: string = '';
   userSession: IUser | null = null;
   idCategoriaFiltrada: number | null = null;
-filtrandoPorCategoria: boolean = false;
-productosPorPagina: number = 8;
-
+  filtrandoPorCategoria: boolean = false;
+  productosPorPagina: number = 8;
 
   url: string = '';
-
 
   constructor(
     private productService: ProductAjaxService,
@@ -59,7 +56,7 @@ productosPorPagina: number = 8;
     private confirmService: ConfirmationService,
     private router: Router,
     private matSnackBar: MatSnackBar,
-  ) { 
+  ) {
     console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
 
     this.oRouter.events.subscribe((ev) => {
@@ -87,7 +84,7 @@ productosPorPagina: number = 8;
     if (this.category_id > 0) {
       this.getCategoria();
     }
-    
+
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -99,34 +96,34 @@ productosPorPagina: number = 8;
 
 
 
-quitarFiltro(): void {
-  this.value = ''; // Limpiar el valor del filtro de búsqueda
-  console.log(this.value);
-  
-  this.productService.getPageProducts(
+  quitarFiltro(): void {
+    this.value = ''; // Limpiar el valor del filtro de búsqueda
+    console.log(this.value);
+
+    this.productService.getPageProducts(
       this.oPaginatorState.rows,
       this.oPaginatorState.page,
       this.orderField,
       this.orderDirection,
       0 // Filtro por categoría establecido a 0 para mostrar todos los productos
-  ).subscribe({
+    ).subscribe({
       next: (data: IProductPage) => {
-          this.page = data;
-          this.oPaginatorState.pageCount = data.totalPages;
-          this.products = data.content;
-          console.log(this.products);
+        this.page = data;
+        this.oPaginatorState.pageCount = data.totalPages;
+        this.products = data.content;
+        console.log(this.products);
       },
       error: (error: HttpErrorResponse) => {
-          this.status = error;
+        this.status = error;
       }
-  });
-  
-  this.category_id = 0; // Restablecer el valor de id_categoria a 0
-  console.log(this.category_id);
-  
-  this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
-  console.log(this.filtrandoPorCategoria);
-}
+    });
+
+    this.category_id = 0; // Restablecer el valor de id_categoria a 0
+    console.log(this.category_id);
+
+    this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
+    console.log(this.filtrandoPorCategoria);
+  }
 
   onInputChange(query: string): void {
     if (query.length > 2) {
@@ -161,8 +158,8 @@ quitarFiltro(): void {
         next: (data: IProductPage) => {
           this.page = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.products = data.content; 
-          
+          this.products = data.content;
+
           console.log(this.products);
         },
         error: (error: HttpErrorResponse) => {
@@ -229,37 +226,37 @@ quitarFiltro(): void {
               const cantidad = 1;
               this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
                 next: () => {
-                  this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
-                  
+                  this.matSnackBar.open('Producto comprado', 'Aceptar', { duration: 3000 });
+
                   // Navegar a la lista de compras del usuario actual
                   this.router.navigate(['/user', 'purchase', 'plist', user.id]);
                 },
                 error: (err: HttpErrorResponse) => {
                   this.status = err;
-                  this.matSnackBar.open('Error al comprar el producto', 'Aceptar', {duration: 3000});
+                  this.matSnackBar.open('Error al comprar el producto', 'Aceptar', { duration: 3000 });
                 }
               });
             },
             reject: () => {
-              this.matSnackBar.open('Compra cancelada', 'Aceptar', {duration: 3000});
+              this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
             }
           });
         } else {
-          this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', {duration: 3000});
+          this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', { duration: 3000 });
         };
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;
-        this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', {duration: 3000});
+        this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', { duration: 3000 });
       }
     });
   }
-  
 
-      // Método para filtrar por categoría cuando se hace clic en una categoría
+
+  // Método para filtrar por categoría cuando se hace clic en una categoría
   filtrarPorCategoria(idCategoria: number): void {
     this.category_id = idCategoria;
-    this.getPage(); 
+    this.getPage();
     this.idCategoriaFiltrada = idCategoria;
     this.filtrandoPorCategoria = true;
   }
