@@ -10,7 +10,7 @@
 
         <!-- Contenido de la tarjeta -->
         <div class="card-content">
-          <p class="text-cyan-900 text-lg mb-2">Fecha: {{purchase.purchase_date | date: 'dd/MM/yyyy'}}</p>
+          <p class="text-cyan-900 text-lg mb-2">Fecha: {{purchase.purchaseDate | date: 'dd/MM/yyyy'}}</p>
           <a class="text-cyan-900" [routerLink]="['/user', 'purchase', 'view', purchase.id]">Ver detalles de la compra</a>
         </div>
       </div>

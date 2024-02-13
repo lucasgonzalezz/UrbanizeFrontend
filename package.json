@@ -10,7 +10,8 @@
     "build:styles": "postcss src/styles.css -o src/styles.css",
     "css-build": "node-sass --omit-source-map-url src/bulma.scss src/css/bulma_styles.css",
     "css-watch": "npm run css-build -- --watch",
-    "start_bulma": "npm run css-watch"
+    "start_bulma": "npm run css-watch",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +54,6 @@
     "node-sass": "^9.0.0",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "typescript": "~5.3.3"
+    "typescript": "^5.3.3"
   }
 }

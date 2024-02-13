@@ -112,7 +112,7 @@ export interface IRatingPage extends IPage<IRating> {
 }
 
 export interface IPurchase extends IEntity {
-    purchase_date: Date,
+    purchaseDate: Date,
     delivery_date: Date,
     status: string,
     purchaseCode: number,
