@@ -207,11 +207,11 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     });
   }
 
-  agregarAlCarrito(): void {
+  agregarAlCarrito(product: IProduct): void {
     if (this.sessionService.isSessionActive()) {
       this.cart.user = { username: this.sessionService.getUsername() } as IUser;
-      this.cart.product = { id: this.product.id } as IProduct;
-      this.cart.amount = this.cantidadSeleccionada;
+      this.cart.product = { id: product.id } as IProduct;
+      this.cart.amount = 1;
       this.cartAjaxService.createCart(this.cart).subscribe({
         next: (data: ICart) => {
           this.cart = data;

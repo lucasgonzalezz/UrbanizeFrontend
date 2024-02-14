@@ -18,6 +18,10 @@ export class MenuUnroutedComponent implements OnInit {
   url: string = '';
 
   showLogoutMenu: boolean = false;
+
+  isMobileMenuOpen: boolean = false;
+
+
     
   constructor(
     private sessionAjaxService: SessionAjaxService,
@@ -80,6 +84,10 @@ export class MenuUnroutedComponent implements OnInit {
 
   isActive(route: string): boolean {
     return this.router.isActive(route, true);
+  }  
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }  
 
   @HostListener('document:click', ['$event'])
