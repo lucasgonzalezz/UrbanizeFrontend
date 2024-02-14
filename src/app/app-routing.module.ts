@@ -61,7 +61,7 @@ const routes: Routes = [
   { path: 'user/purchase/plist/:id', component: UserPurchasePlistRoutedComponent },
   { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent },
   // Cart routes
-  { path: 'user/carto/plist', component: UserCartPlistRoutedComponent },
+  { path: 'user/cart/plist', component: UserCartPlistRoutedComponent },
 ];
 
 @NgModule({

@@ -52,7 +52,7 @@
         <!-- Botones debajo de la información del producto -->
         <div class="columns mt-2" *ngIf="username">
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito">
+            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()">
               <span class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </span>
@@ -84,10 +84,10 @@
 <h1 class="text-cyan-900 text-3xl font-semibold mb-5 mt-8">Valoraciones</h1>
 
 <div class="card box">
-  <div class="card-content">
+  <div class="card-content ">
     <div class="columns is-multiline">
       <div class="column is-one-third" *ngFor="let rating of page?.content">
-        <div class="card">
+        <div class="card bg-slate-300">
           <div class="card-header">
             <p class="card-header-title text-cyan-900 text-lg">{{rating.user.username}}</p>
             <p class="card-header-icon text-cyan-900">{{rating.date| date: 'dd-MM-yyyy'}}</p>
