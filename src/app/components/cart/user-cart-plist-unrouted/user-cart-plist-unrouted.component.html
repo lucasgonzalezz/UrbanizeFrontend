@@ -1,58 +1,100 @@
-<div class="container" *ngIf="page && page.content.length > 0">
-  <table class="table is-fullwidth is-bordered">
-    <thead>
+<div class="container has-text-centered" *ngIf="page && page.content.length > 0">
+  <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+    <thead class="has-background-primary">
       <tr>
-        <th>Imagen</th>
-        <th>Producto</th>
-        <th>Talla</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        <th>Coste Total</th>
-        <th>Acciones</th>
+        <th class="has-text-centered is-size-5 has-text-white">Imagen</th>
+        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
+        <th class="has-text-centered is-size-5 has-text-white">Talla</th>
+        <th class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th class="has-text-centered is-size-5 has-text-white">Cantidad</th>
+        <th class="has-text-centered is-size-5 has-text-white">Coste Total</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let cart of page?.content">
-        <td><img [src]="cart.product.image" alt="Imagen del producto" class="image is-64x64"></td>
-        <td>{{cart.product.name}}</td>
-        <td>{{cart.product.size}}</td>
-        <td>{{cart.product.price | currency }}</td>
-        <td>
-          <button class="button is-danger" (click)="updateAmount(cart, cart.amount - 1)">-</button>
-          {{cart.amount}}
-          <button class="button is-success" (click)="updateAmount(cart, cart.amount + 1)">+</button>
+        <td class="has-text-centered">
+          <figure class="image is-128x128 is-inline-block">
+            <img [src]="cart.product.image" alt="Imagen del producto">
+          </figure>
         </td>
-        <td>{{ individualPricel.get(cart.id) | currency }} </td>
+        <td class="pt-6 font-semibold text-lg">{{cart.product.name}}</td>
+        <td class="pt-6 font-semibold text-lg">{{cart.product.size}}</td>
+        <td class="pt-6 font-semibold text-lg">{{cart.product.price | currency }}</td>
         <td>
-          <button class="button is-danger" (click)="deleteCart(cart.id)">Eliminar</button>
-          <button class="button is-primary" (click)="makeSingleCartPurchase(cart.id)">Comprar</button>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <button class="button is-primary is-rounded is-small mt-4" (click)="updateAmount(cart, cart.amount + 1)">
+              <span class="icon">
+                <i class="fas fa-plus"></i>
+              </span>
+            </button>
+            {{cart.amount}}
+            <button class="button is-danger is-rounded is-small" (click)="updateAmount(cart, cart.amount - 1)">
+              <span class="icon">
+                <i class="fas fa-minus"></i>
+              </span>
+            </button>
+          </div>
         </td>
+        <td class="pt-6 font-semibold text-lg">{{ individualPricel.get(cart.id) | currency }} </td>
+        <td>
+          <button class="button is-primary is-rounded mr-3 mt-5" (click)="makeSingleCartPurchase(cart.id)">
+            <span>Comprar</span>
+          </button>
+          <button class="button is-danger is-rounded mt-5" (click)="deleteCart(cart.id)">
+            <span class="icon">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          </button>
+        </td>        
       </tr>
     </tbody>
+    <thead class="has-background-primary">
+      <tr>
+        <th class="has-text-centered is-size-5 has-text-white">Imagen</th>
+        <th class="has-text-centered is-size-5 has-text-white">Producto</th>
+        <th class="has-text-centered is-size-5 has-text-white">Talla</th>
+        <th class="has-text-centered is-size-5 has-text-white">Precio</th>
+        <th class="has-text-centered is-size-5 has-text-white">Cantidad</th>
+        <th class="has-text-centered is-size-5 has-text-white">Coste Total</th>
+        <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+      </tr>
+    </thead>
   </table>
 
   <div class="columns is-centered">
     <div class="column is-half">
       <div class="box">
-        <h3 class="title is-4">Total</h3>
-        <p>Coste total (incluyendo IVA): {{ totalCost | currency }}</p>
-        <button class="button is-primary" (click)="user && deleteAllCarts(user.id)">Vacíar el carrito</button>
-        <button class="button is-success" (click)="makeAllCartPurchase()">Comprar</button>
+        <h3 class="title is-4">Total: {{ totalCost | currency }}</h3>
+        <button class="button is-primary" (click)="makeAllCartPurchase()">Comprar</button>
+        <button class="button is-danger ml-4" (click)="user && deleteAllCarts(user.id)">Vacíar el carrito</button>
       </div>
     </div>
   </div>
 
   <div class="columns is-centered">
     <div class="column is-half">
-      <a class="button is-info" [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
+      <a class="button is-primary is-large" [routerLink]="['/home']">
+        <span>Seguir comprando</span>
+        <span class="icon is-large">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </a>
     </div>
   </div>
+  
+  
 
 </div>
 
-<div class="container" *ngIf="page && page.content.length === 0">
-  <p>Todavía no has añadido nada a tu carrito.</p>
-  <a class="button is-info" [routerLink]="['/user', 'product', 'plist']">Seguir comprando</a>
+<div class="notification is-primary" *ngIf="page && page.content.length === 0">
+  <p class="ml-5">Todavía no has añadido nada a tu carrito.</p>
+  <a class="text-xl ml-5" [routerLink]="['/home']">
+    <span>Seguir comprando</span>
+    <span class="icon is-large">
+      <i class="fas fa-arrow-right"></i>
+    </span>
+  </a>
 </div>
 
 <p-confirmPopup></p-confirmPopup>

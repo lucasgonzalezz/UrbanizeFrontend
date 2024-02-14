@@ -6,13 +6,14 @@ import { NavigationEnd, Router } from '@angular/router';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IProduct, IProductPage, IPurchase, ICategory, ICategoryPage } from 'src/app/model/model.interfaces';
+import { IProduct, IProductPage, IPurchase, ICategory, ICategoryPage, ICart } from 'src/app/model/model.interfaces';
 import { PurchaseAjaxService } from './../../../service/purchase.ajax.service';
 import { ProductAjaxService } from './../../../service/product.ajax.service';
 import { SessionAjaxService } from './../../../service/session.ajax.service';
 import { CategoryAjaxService } from './../../../service/category.ajax.service';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { IUser } from 'src/app/model/model.interfaces';
+import { CartAjaxService } from './../../../service/cart.ajax.service';
 
 @Component({
   selector: 'app-user-product-plist-unrouted',
@@ -30,6 +31,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   orderDirection: string = "asc";
   products: IProduct[] = [];
   category: ICategory[] = [];
+  product: IProduct = {} as IProduct;
   oPaginatorState: PaginatorState = { first: 0, rows: 16, page: 0, pageCount: 0 };
   value: string = '';
   status: HttpErrorResponse | null = null;
@@ -42,11 +44,14 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   idCategoriaFiltrada: number | null = null;
   filtrandoPorCategoria: boolean = false;
   productosPorPagina: number = 8;
+  cart: ICart = { user: {}, product: {}, amount: 0 } as ICart;
+  cantidadSeleccionada: number = 1;
 
   url: string = '';
 
   constructor(
     private productService: ProductAjaxService,
+    private cartAjaxService: CartAjaxService,
     public dialogService: DialogService,
     private sessionService: SessionAjaxService,
     private categoryService: CategoryAjaxService,
@@ -202,9 +207,23 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     });
   }
 
-  addToCart(producto: IProduct) {
-    this.productosSeleccionados.push(producto);
-    console.log(`Producto '${producto.name}' añadido al carrito.`);
+  agregarAlCarrito(): void {
+    if (this.sessionService.isSessionActive()) {
+      this.cart.user = { username: this.sessionService.getUsername() } as IUser;
+      this.cart.product = { id: this.product.id } as IProduct;
+      this.cart.amount = this.cantidadSeleccionada;
+      this.cartAjaxService.createCart(this.cart).subscribe({
+        next: (data: ICart) => {
+          this.cart = data;
+          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', { duration: 3000 });
+          this.oRouter.navigate(['/user', 'cart', 'plist']);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al añadir la producto al carrito', 'Aceptar', { duration: 3000 });
+        }
+      });
+    }
   }
 
   getTotalAPagar(): number {
