@@ -15,7 +15,8 @@
         <div class="column is-12">
           <h1 class="text-4xl font-medium text-cyan-900">{{ product.name }}</h1>
           <h2 class="text-xl font-normal text-cyan-900 mt-1">Precio: {{ product.price }}€ </h2>
-          <p class="text-xl font-normal text-cyan-900">Stock: {{ product.stock }} uds.</p>
+          <p class="text-xl font-normal text-cyan-900" *ngIf="product.stock === 0">Sin existencias</p>
+          <p class="text-xl font-normal text-cyan-900" *ngIf="product.stock > 0">En Existencias</p>
           <p class="text-xl font-normal text-cyan-900">Talla: {{ product.size }}</p>
         </div>
 
@@ -45,22 +46,22 @@
         <div class="field column is-4">
           <label class="label">Cantidad:</label>
           <div class="control">
-            <input class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada">
+            <input class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada" (keydown)="handleKeyDown($event)">
           </div>
         </div>
 
         <!-- Botones debajo de la información del producto -->
         <div class="columns mt-2" *ngIf="username">
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()">
+            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()" [disabled]="product.stock === 0">
               <span class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </span>
-              <span>Añadir al carrito</span>
+              Añadir al carrito
             </button>
           </div>
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()">
+            <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()" [disabled]="product.stock === 0">
               <span class="icon">
                 <i class="fas fa-credit-card"></i>
               </span>

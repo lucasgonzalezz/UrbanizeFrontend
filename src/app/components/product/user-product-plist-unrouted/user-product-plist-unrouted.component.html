@@ -43,13 +43,14 @@
             <div class="card-content">
               <p class="font-semibold text-2xl text-cyan-950">{{ product.name }}</p>
               <p class="font-semibold text-xl text-cyan-950 mt-2">Precio: {{ product.price }}€</p>
+              <p class="text-xl font-normal text-cyan-900" *ngIf="product.stock === 0">Sin existencias</p>
             </div>
 
-            <footer class="card-footer" *ngIf="username">
-              <button class="card-footer-item button is-primary" (click)="makeProductPurhase(product)">
+            <footer class="card-footer" *ngIf="username && product.stock != 0">
+              <button class="card-footer-item button is-primary" (click)="makeProductPurhase(product)" [disabled]="product.stock === 0">
                 Comprar<i class="fas fa-shopping-basket ml-2"></i>
               </button>
-              <button class="card-footer-item button is-primary" (click)="agregarAlCarrito(product)">
+              <button class="card-footer-item button is-primary" (click)="agregarAlCarrito(product)" [disabled]="product.stock === 0">
                 Añadir al carrito <i class="fas fa-cart-plus ml-1"></i>
               </button>
             </footer>

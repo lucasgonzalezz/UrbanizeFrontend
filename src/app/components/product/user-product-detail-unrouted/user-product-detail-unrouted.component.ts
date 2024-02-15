@@ -138,6 +138,13 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     })
   }
 
+  handleKeyDown(event: KeyboardEvent): void {
+    // Verificar si la tecla presionada no es una flecha hacia arriba o abajo
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+      event.preventDefault(); // Prevenir la acción predeterminada (escribir el valor)
+    }
+  }
+
   agregarAlCarrito(): void {
     if (this.sessionService.isSessionActive()) {
       this.cart.user = { username: this.sessionService.getUsername() } as IUser;
