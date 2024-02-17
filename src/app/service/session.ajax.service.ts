@@ -9,7 +9,7 @@ import { Observable, Subject } from "rxjs";
 
 export class SessionAjaxService {
 
-  private url = API_URL + '/api/session';
+  private url = API_URL + '/session';
 
   subjectSession = new Subject<SessionEvent>();
 

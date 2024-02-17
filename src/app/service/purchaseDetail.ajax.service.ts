@@ -9,7 +9,7 @@ import { IPurchaseDetail, IPurchaseDetailPage } from "../model/model.interfaces"
 })
 export class PurchaseDetailAjaxService {
 
-  private url = API_URL + '/api/purchaseDetail';
+  private url = API_URL + '/purchaseDetail';
 
   constructor(private http: HttpClient) {
 

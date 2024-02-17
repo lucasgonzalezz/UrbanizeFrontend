@@ -9,7 +9,7 @@ import { IUser, IUserPage } from "../model/model.interfaces";
 })
 export class UserAjaxService {
 
-  url: string = API_URL + '/api/user';
+  url: string = API_URL + '/user';
 
   constructor(private http: HttpClient) {
   }

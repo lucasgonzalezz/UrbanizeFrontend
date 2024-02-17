@@ -8,7 +8,7 @@ import { API_URL } from "src/environment/environment";
 })
 export class MediaService {
 
-  private url = API_URL + '/api/media';
+  private url = API_URL + '/media';
 
   constructor(private http: HttpClient) {
   }

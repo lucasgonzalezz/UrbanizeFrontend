@@ -9,7 +9,7 @@ import { ICart, ICartPage } from "../model/model.interfaces";
 })
 export class CartAjaxService {
 
-  private url = API_URL + '/api/cart';
+  private url = API_URL + '/cart';
 
   constructor(private http: HttpClient) {
   }

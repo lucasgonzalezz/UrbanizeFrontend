@@ -12,7 +12,7 @@ export class CategoryAjaxService {
     throw new Error('Method not implemented.');
   }
 
-  private url = API_URL + '/api/category';
+  private url = API_URL + '/category';
 
   constructor(private http: HttpClient) {
   }
