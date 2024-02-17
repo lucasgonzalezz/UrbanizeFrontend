@@ -9,7 +9,7 @@ import { API_URL } from "src/environment/environment";
 })
 export class PurchaseAjaxService {
 
-  private url = API_URL + '/purchase';
+  private url = API_URL + '/api/purchase';
 
   constructor(private http: HttpClient) {
   }

@@ -9,7 +9,7 @@ import { IProduct, IProductPage } from "../model/model.interfaces";
 })
 export class ProductAjaxService {
 
-  private url = API_URL + '/product';
+  private url = API_URL + '/api/product';
 
   constructor(private http: HttpClient) {
   }

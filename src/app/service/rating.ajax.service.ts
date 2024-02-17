@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 })
 export class RatingAjaxService {
 
-  private url = API_URL + '/rating';
+  private url = API_URL + '/api/rating';
 
   constructor(private http: HttpClient) {
 

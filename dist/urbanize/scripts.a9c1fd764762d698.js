@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const n=document.querySelector('[data-collapse-toggle="navbar-default"]'),e=document.getElementById("navbar-default");n.addEventListener("click",function(){e.hidden=!e.hidden})});
