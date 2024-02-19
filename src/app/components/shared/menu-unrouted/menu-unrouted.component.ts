@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { IUser, SessionEvent } from 'src/app/model/model.interfaces';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
@@ -17,19 +17,16 @@ export class MenuUnroutedComponent implements OnInit {
   userSession: IUser | null = null;
   url: string = '';
 
-  showLogoutMenu: boolean = false;
-
-  isMobileMenuOpen: boolean = false;
-
+  public mostrarDropdown = false;
 
     
   constructor(
+    private elRef: ElementRef,
     private sessionAjaxService: SessionAjaxService,
     private userAjaxService: UserAjaxService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
 
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -74,28 +71,15 @@ export class MenuUnroutedComponent implements OnInit {
     });
   }
 
-  toggleLogoutMenu() {
-    this.showLogoutMenu = !this.showLogoutMenu;
+  toggleDropdown() {
+    this.mostrarDropdown = !this.mostrarDropdown;
   }
-
-  closeLogoutMenu() {
-    this.showLogoutMenu = false;
-  }
-
-  isActive(route: string): boolean {
-    return this.router.isActive(route, true);
-  }  
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  }  
 
   @HostListener('document:click', ['$event'])
-  handleDocumentClick(event: Event) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.group')) {
-      this.showLogoutMenu = false;
+  clickOutside(event: Event) {
+    if (!this.elRef.nativeElement.contains(event.target)) {
+      this.mostrarDropdown = false;
     }
-  }
 
+}
 }

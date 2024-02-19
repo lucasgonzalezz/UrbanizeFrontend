@@ -44,36 +44,47 @@
         </ng-container>
         <ng-container *ngIf="username && userSession?.role==false">
           <li>
-            <a href="#"
-              class="block py-2 px-3 text-governor-bay-600 hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-cyan-900 font-bold text-lg"
-              [routerLink]="['/user', 'purchase', 'plist', userSession?.id]">Mis compras</a>
+            <a class="block py-2 px-3 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url.startsWith('/user/purchase') ? 'bg-slate-300' : '' }}"
+              aria-current="page" [routerLink]="['/user', 'purchase', 'plist', userSession?.id]">Mis compras</a>
           </li>
         </ng-container>
 
         <!-- Contenido para usuarios logueados -->
         <ng-container *ngIf="username">
           <li>
-            <a class="block py-2 px-3 text-governor-bay-600 hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-cyan-900 font-bold text-lg"
-              [routerLink]="['/usuario', 'usuario', 'view', userSession?.id]">¡Bienvenido, {{ username }}!</a>
+            <a class="block py-2 px-3 md:border-0 text-cyan-900 font-bold text-lg"
+              >¡Bienvenido, {{ username }}!</a>
           </li>
           <li *ngIf="userSession?.role==false">
-            <a class="button is-light text-black" [routerLink]="['/user', 'cart', 'plist']">
+            <a class="block py-2 px-3 nav-link nav-item rounded {{ url.startsWith('/user/cart') ? 'bg-slate-300' : '' }}"
+              [routerLink]="['/user', 'cart', 'plist']">
               <span class="icon">
                 <i class="pi pi-shopping-cart text-2xl text-cyan-900"></i>
               </span>
             </a>
           </li>
-          <li>
-            <a class="block py-2 px-3 text-governor-bay-600 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              routerLink="/logout">
+          <div class="relative inline-block text-left" #dropdown>
+            <input type="checkbox" id="dropdown-toggle" class="hidden">
+            <label for="dropdown-toggle"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md bg-slate-40 focus:outline-none  transition cursor-pointer"
+              (click)="toggleDropdown()">
               <i class="pi pi-user text-2xl text-cyan-900"></i>
-            </a>
-          </li>
+            </label>
+            <div *ngIf="mostrarDropdown"
+              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-slate-400 ring-1 ring-black ring-opacity-5">
+              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" [routerLink]="['/user', 'user', 'view', userSession?.id]">
+                  <i class="fas fa-user mr-2"></i> Perfil
+                </a>
+                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" routerLink="/logout">
+                  <i class="fas fa-sign-out-alt mr-2"></i> Salir
+                </a>
+              </div>
+            </div>
+          </div>
         </ng-container>
-
-        <!-- Contenido para usuarios no logueados -->
-        <li *ngIf="!username">
-          <a class="text-cyan-900 font-bold text-lg" routerLink="/login">Iniciar sesión</a>
+        <li class="block py-2 px-3 md:p-0 text-cyan-900 md:border-0 font-bold text-xl" *ngIf="!username">
+          <a class="text-cyan-900 font-bold text-xl" routerLink="/login">Iniciar sesión</a>
         </li>
       </ul>
     </div>
