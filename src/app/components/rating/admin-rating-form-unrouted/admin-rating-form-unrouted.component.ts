@@ -24,8 +24,8 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
 
-  selectedUser: string = ''; // Add this line to define selectedUser variable
-  selectedProducto: string = ''; // Add this line to define selectedProducto variable
+  selectedUser: string = '';
+  selectedProducto: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -112,7 +112,7 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
     });
     this.dynamicDialogRef.onClose.subscribe((data: any) => {
       if (data) {
-        this.selectedUser = data.name; // Assuming 'name' is the property you want to display
+        this.selectedUser = data.name;
         this.ratingForm.controls['user'].setValue({ id: data.id });
       }
     });
@@ -127,7 +127,7 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
     });
     this.dynamicDialogRef.onClose.subscribe((data: any) => {
       if (data) {
-        this.selectedProducto = data.name; // Assuming 'name' is the property you want to display
+        this.selectedProducto = data.name;
         this.ratingForm.controls['product'].setValue({ id: data.id });
       }
     });

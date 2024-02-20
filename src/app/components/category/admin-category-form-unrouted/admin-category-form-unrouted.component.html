@@ -16,20 +16,24 @@
                   </div>
 
 
-      <div class="field">
-        <label class="label">Nombre</label>
-        <div class="control">
-          <input class="input" type="text" formControlName="name" placeholder="Nombre de la modalidad">
-          <div class="help is-danger" *ngIf="hasError('name', 'required')">No has introducido el nombre</div>
-          <div class="help is-danger" *ngIf="hasError('name', 'minlength')">El nombre es demasiado corto, debe tener al menos 3 caracteres</div>
-          <div class="help is-danger" *ngIf="hasError('name', 'maxlength')">El nombre es demasiado largo</div>
-        </div>
-      </div>
-      <div class="field">
-        <div class="control has-text-centered">
-          <button class="button is-primary" type="submit">Enviar</button>
-        </div>
-      </div>
+<!-- Nombre -->
+<div class="field">
+  <label class="label">Nombre</label>
+  <div class="control">
+    <input class="input" type="text" formControlName="name" placeholder="Nombre de la modalidad">
+    <div class="help is-danger" *ngIf="categoryForm.get('name')?.touched && hasError('name', 'required')">No has introducido el nombre</div>
+    <div class="help is-danger" *ngIf="categoryForm.get('name')?.touched && hasError('name', 'minlength')">El nombre es demasiado corto, debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="categoryForm.get('name')?.touched && hasError('name', 'maxlength')">El nombre es demasiado largo</div>
+  </div>
+</div>
+
+<!-- Botones -->
+<div class="field">
+  <div class="control has-text-centered">
+    <button class="button is-primary" type="submit">Enviar</button>
+  </div>
+</div>
+
     </form>
   </div>
 </div>

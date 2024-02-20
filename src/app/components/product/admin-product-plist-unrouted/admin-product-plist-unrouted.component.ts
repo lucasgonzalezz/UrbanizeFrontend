@@ -95,7 +95,7 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
     this.productToDelete = product;
     this.confirmationService.confirm({
       accept: () => {
-        this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });
+        this.matSnackBar.open("Se ha eliminado el producto", 'Aceptar', { duration: 3000 });
         this.productAjaxService.deleteProduct(product.id).subscribe({
           next: () => {
             this.getPage();
@@ -106,7 +106,7 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
+        this.matSnackBar.open("No se ha podido eliminar el producto", 'Aceptar', { duration: 3000 });
       }
     })
   }

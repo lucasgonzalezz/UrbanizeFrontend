@@ -4,92 +4,84 @@
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="has-background-light p-4 is-rounded">
 
 
-      <!-- Nombre -->
-      <div class="field" *ngIf="operation === 'EDIT'">
-        <label class="label">ID : </label>
-        <div class="control has-icons-right">
-          <input class="input" formControlName="id" placeholder="ID" readonly>
-          <span class="icon is-small is-right">
-            <i class="fas fa-lock" aria-hidden="true"></i>
-          </span>
-        </div>
-        <p class="help is-pulled-right">(This number cannot be changed )</p>
-      </div>
-      
-      
-      <!-- Nombre -->
-      <div class="field">
-        <label class="label">Nombre</label>
-        <div class="control">
-          <input class="input" type="text" formControlName="name" placeholder="Ingrese el nombre">
-        </div>
-      </div>
+    <!-- Nombre -->
+<div class="field">
+  <label class="label">Nombre</label>
+  <div class="control">
+    <input class="input" type="text" formControlName="name" placeholder="Ingrese el nombre">
+    <div class="help is-danger" *ngIf="productForm.get('name')?.touched && hasError('name', 'required')">No has introducido el nombre</div>
+  </div>
+</div>
 
-      <!-- Stock -->
-      <div class="field">
-        <label class="label">Stock</label>
-        <div class="control">
-          <input class="input" type="number" formControlName="stock" placeholder="Ingrese el stock">
-        </div>
-      </div>
+<!-- Stock -->
+<div class="field">
+  <label class="label">Stock</label>
+  <div class="control">
+    <input class="input" type="number" formControlName="stock" placeholder="Ingrese el stock">
+    <div class="help is-danger" *ngIf="productForm.get('stock')?.touched && hasError('stock', 'required')">No has introducido el stock</div>
+  </div>
+</div>
 
-      <!-- Talla -->
-      <div class="field">
-        <label class="label">Talla</label>
-        <div class="control">
-          <div class="select">
-            <select formControlName="size">
-              <option value="">Seleccione la talla</option>
-              <option value="34">34</option>
-              <option value="35">35</option>
-              <option value="36">36</option>
-              <option value="37">37</option>
-              <option value="38">38</option>
-              <option value="39">39</option>
-              <option value="40">40</option>
-              <option value="41">41</option>
-              <option value="42">42</option>
-              <option value="43">43</option>
-              <option value="44">44</option>
-              <option value="Talla Única">Talla Única</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
+<!-- Talla -->
+<div class="field">
+  <label class="label">Talla</label>
+  <div class="control">
+    <div class="select">
+      <select formControlName="size">
+        <option value="">Seleccione la talla</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="Talla Única">Talla Única</option>
+      </select>
+    </div>
+    <div class="help is-danger" *ngIf="productForm.get('size')?.touched && hasError('size', 'required')">Selecciona la talla</div>
+  </div>
+</div>
 
-      <!-- Precio -->
-      <div class="field">
-        <label class="label">Precio</label>
-        <div class="control">
-          <input class="input" type="number" formControlName="price" placeholder="Ingrese el precio">
-        </div>
-      </div>
+<!-- Precio -->
+<div class="field">
+  <label class="label">Precio</label>
+  <div class="control">
+    <input class="input" type="number" formControlName="price" placeholder="Ingrese el precio">
+    <div class="help is-danger" *ngIf="productForm.get('price')?.touched && hasError('price', 'required')">No has introducido el precio</div>
+  </div>
+</div>
 
-      <!-- Imagen -->
-      <div class="field">
-        <label class="label">Imagen</label>
-        <div class="control">
-          <input class="input" type="file" (change)="onFileSelected($event)" accept="image/*">
-        </div>
-      </div>
+<!-- Imagen -->
+<div class="field">
+  <label class="label">Imagen</label>
+  <div class="control">
+    <input class="input" type="file" (change)="onFileSelected($event)" accept="image/*">
+    <div class="help is-danger" *ngIf="productForm.get('image')?.touched && hasError('image', 'required')">Selecciona una imagen</div>
+  </div>
+</div>
 
-      <!-- Categoría -->
-      <div class="field">
-        <label class="label">Categoría</label>
-        <div class="control">
-          <button class="button is-primary" type="button" (click)="onShowCategorySelection()">Seleccionar
-            Categoría</button>
-          <span class="ml-3 text-cyan-900 font-semibold">{{ selectedCategory?.name }}</span>
-        </div>
-      </div>
+<!-- Categoría -->
+<div class="field">
+  <label class="label">Categoría</label>
+  <div class="control">
+    <button class="button is-primary" type="button" (click)="onShowCategorySelection()">Seleccionar Categoría</button>
+    <span class="ml-3 text-cyan-900 font-semibold">{{ selectedCategory?.name }}</span>
+    <div class="help is-danger" *ngIf="productForm.get('category')?.touched && hasError('category', 'required')">Selecciona la categoría</div>
+  </div>
+</div>
 
-      <!-- Botones -->
-      <div class="field">
-        <div class="control has-text-centered">
-          <button class="button is-primary" type="submit">Guardar</button>
-        </div>
-      </div>
+<!-- Botones -->
+<div class="field">
+  <div class="control has-text-centered">
+    <button class="button is-primary" type="submit">Guardar</button>
+  </div>
+</div>
+
     </form>
   </div>
 </div>

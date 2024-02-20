@@ -34,11 +34,11 @@ export class AdminProductPlistRoutedComponent implements OnInit {
     this.bLoading = true;
     this.productAjaxService.generateProducts(amount).subscribe({
       next: (response: number) => {
-        this.matSnackBar.open(`Se han generado ${response} usuarios`, 'Aceptar', { duration: 3000 });
+        this.matSnackBar.open(`Se han generado ${response} productos`, 'Aceptar', { duration: 3000 });
         this.bLoading = false;
       },
       error: (err: HttpErrorResponse) => {
-        this.matSnackBar.open(`Se ha producido un error al generar usuarios aleatorios: ${err.message}`, 'Aceptar', { duration: 3000 });
+        this.matSnackBar.open(`Se ha producido un error al generar productos aleatorios: ${err.message}`, 'Aceptar', { duration: 3000 });
         this.bLoading = false;
       }
     })
@@ -47,17 +47,17 @@ export class AdminProductPlistRoutedComponent implements OnInit {
   doEmpty($event: Event) {
     this.confirmationService.confirm({
       target: $event.target as EventTarget,
-      message: '¿Está seguro que desea eliminar todos los usuarios?',
+      message: '¿Está seguro que desea eliminar todos los productos?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.productAjaxService.deleteAllProducts().subscribe({
           next: (response: number) => {
-            this.matSnackBar.open(`Todos los usuarios han sido eliminados`, 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open(`Todos los productos han sido eliminados`, 'Aceptar', { duration: 3000 });
             this.forceReload.next(true);
             this.bLoading = false;
           },
           error: (err: HttpErrorResponse) => {
-            this.matSnackBar.open(`Se ha producido un error al eliminar todos los usuarios: ${err.message}`, 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open(`Se ha producido un error al eliminar todos los productos: ${err.message}`, 'Aceptar', { duration: 3000 });
             this.bLoading = false;
           }
         })

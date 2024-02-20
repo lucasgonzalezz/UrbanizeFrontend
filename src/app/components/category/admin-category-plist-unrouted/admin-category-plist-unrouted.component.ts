@@ -125,7 +125,7 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
+        this.matSnackBar.open("No se ha podido eliminar la categoria", 'Aceptar', { duration: 3000 });
       }
     })
   }
