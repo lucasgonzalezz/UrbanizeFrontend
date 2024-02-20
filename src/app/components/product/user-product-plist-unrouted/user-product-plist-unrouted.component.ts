@@ -62,7 +62,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     private router: Router,
     private matSnackBar: MatSnackBar,
   ) {
-    console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
 
     this.oRouter.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -74,10 +73,8 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     this.userAjaxService.getUserByUsername(this.sessionService.getUsername()).subscribe({
       next: (user: IUser) => {
         this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
       }
     });
   }
@@ -98,8 +95,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       }
     });
   }
-
-
 
   quitarFiltro(): void {
     this.value = ''; // Limpiar el valor del filtro de búsqueda
@@ -139,7 +134,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
             this.page = data;
             this.products = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;

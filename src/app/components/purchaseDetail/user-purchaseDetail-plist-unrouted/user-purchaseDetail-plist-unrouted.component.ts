@@ -2,9 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IPurchase, IPurchaseDetailPage } from 'src/app/model/model.interfaces';
+import { IProduct, IPurchase, IPurchaseDetailPage } from 'src/app/model/model.interfaces';
 import { PurchaseAjaxService } from 'src/app/service/purchase.ajax.service';
 import { PurchaseDetailAjaxService } from '../../../service/purchaseDetail.ajax.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-purchaseDetail-plist-unrouted',
@@ -23,10 +24,12 @@ export class UserPurchaseDetailPlistUnroutedComponent implements OnInit {
   orderDirection: string = 'asc';
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0};
   status: HttpErrorResponse | null = null;
+  product: IProduct = {} as IProduct;
   
   constructor(
     private purchaseDetailAjaxService: PurchaseDetailAjaxService,
-    private purchaseAjaxService: PurchaseAjaxService
+    private purchaseAjaxService: PurchaseAjaxService,
+    private oRouter: Router,
   ) { }
 
   ngOnInit() {
@@ -73,5 +76,20 @@ export class UserPurchaseDetailPlistUnroutedComponent implements OnInit {
         }
       })
     }
+
+    calculateTotal(): string {
+      let total = 0;
+      if (this.page && this.page.content) {
+        this.page.content.forEach(purchaseDetail => {
+          total += purchaseDetail.price * purchaseDetail.amount;
+        });
+      }
+      return total.toFixed(2);
+    }
+
+    doView(producto: IProduct) {
+      this.oRouter.navigate(['/user', 'product', 'view', producto.id]);
+    }
+  
 
 }

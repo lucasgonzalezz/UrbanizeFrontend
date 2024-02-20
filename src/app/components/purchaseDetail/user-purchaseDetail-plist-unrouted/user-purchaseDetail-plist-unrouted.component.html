@@ -2,19 +2,25 @@
   <table class="table is-fullwidth text-cyan-900 text-lg">
     <thead>
       <tr> 
-        <th >ID</th>
         <th>Producto</th>
         <th>Precio</th>
         <th>Cantidad</th>
+        <th>Precio Total</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let purchaseDetail of page?.content">
-        <td>{{ purchaseDetail.id }}</td>
-        <td>{{ purchaseDetail.product.name }}</td>
-        <td>{{ purchaseDetail.price }}</td>
+        <td><a [routerLink]="['/user', 'product', 'view', purchaseDetail.product.id]"> {{ purchaseDetail.product.name }}</a></td>
+        <td>{{ (purchaseDetail.price).toFixed(2) + " €" }}</td>
         <td>{{ purchaseDetail.amount }}</td>
+        <td>{{ (purchaseDetail.price * purchaseDetail.amount).toFixed(2) + " €" }}</td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="has-text-right text-cyan-900"><strong>Total de la compra:</strong></td>
+        <td>{{ calculateTotal() + " €"}}</td>
+      </tr>
+    </tfoot>
   </table>
 </div>

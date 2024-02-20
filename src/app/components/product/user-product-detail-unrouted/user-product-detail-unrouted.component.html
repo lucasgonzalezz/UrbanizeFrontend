@@ -54,26 +54,26 @@
         <div class="columns mt-2" *ngIf="username">
           <div class="column is-4">
             <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()" [disabled]="product.stock === 0">
+              <span>Añadir al carrito</span>
               <span class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </span>
-              Añadir al carrito
             </button>
           </div>
           <div class="column is-4">
             <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()" [disabled]="product.stock === 0">
+              <span>Comprar</span>
               <span class="icon">
                 <i class="fas fa-credit-card"></i>
               </span>
-              <span>Comprar</span>
             </button>
           </div>
           <div class="column is-4">
             <button type="button" class="button is-primary is-fullwidth" (click)="realizarValoracion(product)">
-              <span class="icon">
-                <i class="fas fa-credit-card"></i>
-              </span>
               <span>Valorar</span>
+              <span class="icon">
+                <i class="fas fa-star"></i>
+              </span>
             </button>
           </div>
         </div>
