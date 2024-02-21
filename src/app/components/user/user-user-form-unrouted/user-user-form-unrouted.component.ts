@@ -8,11 +8,11 @@ import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
 
 @Component({
-  selector: 'app-admin-user-form-unrouted',
-  templateUrl: './admin-user-form-unrouted.component.html',
-  styleUrls: ['./admin-user-form-unrouted.component.css']
+  selector: 'app-user-user-form-unrouted',
+  templateUrl: './user-user-form-unrouted.component.html',
+  styleUrls: ['./user-user-form-unrouted.component.css']
 })
-export class AdminUserFormUnroutedComponent implements OnInit {
+export class UserUserFormUnroutedComponent implements OnInit {
 
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW';
@@ -43,9 +43,9 @@ export class AdminUserFormUnroutedComponent implements OnInit {
         console.log(err);
       }
     });
-  }
+   }
 
-  initializeForm(user: IUser) {
+   initializeForm(user: IUser) {
     this.userForm = this.formBuilder.group({
       id: [this.user.id],
       name: [user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],

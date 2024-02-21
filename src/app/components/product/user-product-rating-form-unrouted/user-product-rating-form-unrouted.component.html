@@ -5,6 +5,9 @@
       <div class="control">
         <textarea class="input" formControlName="title"></textarea>
       </div>
+      <div class="help is-danger" *ngIf="ratingForm.get('title')?.invalid && ratingForm.get('title')?.touched">
+        Debes escribir un titulo
+      </div>
       <label class="label">Comentario</label>
       <div class="control">
         <textarea class="textarea" formControlName="description"></textarea>

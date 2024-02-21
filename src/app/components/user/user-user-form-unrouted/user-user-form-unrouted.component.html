@@ -1,0 +1,160 @@
+<div class="container">
+  <h1 class="title is-4 has-text-primary is-size-3">Editar Perfil</h1>
+  <div class="box is-shadowed box-background-color">
+    <form [formGroup]="userForm" (submit)="onSubmit()" class="has-background-light p-4 is-rounded">
+
+<!-- Nombre -->
+<div class="field">
+  <label class="label">Nombre</label>
+  <div class="control">
+    <input type="text" class="input" id="name" formControlName="name" placeholder="Ingrese el nombre">
+    <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'required')">No has introducido el nombre</div>
+    <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'minlength')">El nombre debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'maxlength')">El nombre no puede tener más de 255 caracteres</div>
+  </div>
+</div>
+
+<!-- Apellido 1 -->
+<div class="field">
+  <label class="label">Apellido 1</label>
+  <div class="control">
+    <input type="text" class="input" id="last_name1" formControlName="last_name1" placeholder="Ingrese el apellido">
+    <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'required')">No has introducido el apellido1</div>
+    <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+  </div>
+</div>
+
+<!-- Apellido 2 -->
+<div class="field">
+  <label class="label">Apellido 2</label>
+  <div class="control">
+    <input type="text" class="input" id="last_name2" formControlName="last_name2" placeholder="Ingrese el segundo apellido">
+    <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'required')">No has introducido el apellido2</div>
+    <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+  </div>
+</div>
+
+<!-- Fecha de Nacimiento -->
+<div class="field">
+  <label class="label">Fecha de Nacimiento</label>
+  <div class="control">
+    <input type="date" class="input" id="birth_date" formControlName="birth_date">
+  </div>
+</div>
+
+<!-- Teléfono -->
+<div class="field">
+  <label class="label">Teléfono</label>
+  <div class="control">
+    <input type="text" class="input" id="phone_number" formControlName="phone_number" placeholder="Ingrese el teléfono">
+    <div class="help is-danger" *ngIf="userForm.get('phone_number')?.touched && hasError('phone_number', 'required')">No has introducido el teléfono</div>
+    <div class="help is-danger" *ngIf="userForm.get('phone_number')?.touched && userForm.get('phone_number')?.hasError('pattern')">El teléfono debe contener solo números</div>
+  </div>
+</div>
+
+
+<!-- DNI -->
+<div class="field">
+  <label class="label">DNI</label>
+  <div class="control">
+    <input type="text" class="input" id="dni" formControlName="dni" placeholder="Ingrese el DNI">
+    <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'required')">No has introducido el DNI</div>
+    <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'minlength')">El DNI debe tener 9 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'maxlength')">El DNI debe tener 9 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'pattern')">El DNI debe tener 8 números seguidos de una letra</div>
+  </div>
+</div>
+
+<!-- Ciudad -->
+<div class="field">
+  <label class="label">Ciudad</label>
+  <div class="control">
+    <input type="text" class="input" id="city" formControlName="city" placeholder="Ingrese la ciudad">
+    <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'required')">No has introducido la ciudad</div>
+    <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'minlength')">La ciudad debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'maxlength')">La ciudad no puede tener más de 255 caracteres</div>
+  </div>
+</div>
+
+<!-- Código Postal -->
+<div class="field">
+  <label class="label">Código Postal</label>
+  <div class="control">
+    <input type="text" class="input" id="postal_code" formControlName="postal_code" placeholder="Ingrese el código postal">
+    <div class="help is-danger" *ngIf="userForm.get('postal_code')?.touched && hasError('postal_code', 'required')">No has introducido el código postal</div>
+    <div class="help is-danger" *ngIf="userForm.get('postal_code')?.touched && userForm.get('postal_code')?.hasError('pattern')">El código postal debe contener solo números</div>
+  </div>
+</div>
+
+<!-- Dirección -->
+<div class="field">
+  <label class="label">Dirección</label>
+  <div class="control">
+    <input type="text" class="input" id="address" formControlName="address" placeholder="Ingrese la dirección">
+    <div class="help is-danger" *ngIf="userForm.get('address')?.touched && hasError('address', 'required')">No has introducido la dirección</div>
+    <div class="help is-danger" *ngIf="userForm.get('address')?.touched && hasError('address', 'minlength')">La dirección debe tener al menos 3 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('address')?.touched && hasError('address', 'maxlength')">La dirección no puede tener más de 255 caracteres</div>
+  </div>
+</div>
+
+<!-- Email -->
+<div class="field">
+  <label class="label">Email</label>
+  <div class="control">
+    <input type="email" class="input" id="email" formControlName="email" placeholder="Ingrese el email">
+    <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'required')">No has introducido el email</div>
+    <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'email')">El email no es válido</div>
+  </div>
+</div>
+
+<!-- Username -->
+<div class="field">
+  <label class="label">Username</label>
+  <div class="control">
+    <input type="text" class="input" id="username" formControlName="username" placeholder="Ingrese el username">
+    <div class="help is-danger" *ngIf="userForm.get('username')?.touched && hasError('username', 'required')">No has introducido el username</div>
+    <div class="help is-danger" *ngIf="userForm.get('username')?.touched && hasError('username', 'minlength')">El username debe tener al menos 6 caracteres</div>
+    <div class="help is-danger" *ngIf="userForm.get('username')?.touched && hasError('username', 'maxlength')">El username no puede tener más de 15 caracteres</div>
+  </div>
+</div>
+
+<!-- Tipo -->
+<div class="field">
+  <label class="label" *ngIf="username && userSession?.role==true">Tipo</label>
+      <select id="role" formControlName="role" *ngIf="username && userSession?.role==true">
+        <option [ngValue]="false">Usuario Normal</option>
+        <option [ngValue]="true">Administrador</option>
+      </select>
+    <div class="help is-danger" *ngIf="userForm.get('role')?.touched && hasError('role', 'required')">Especifica si eres Administrador o Usuario</div>
+</div>
+
+<!-- Botón Guardar -->
+<div class="field">
+  <div class="control has-text-centered">
+    <button type="submit" class="button is-primary mt-4 mr-4">
+      <span>Guardar</span>
+      <span class="icon">
+        <i class="fas fa-save"></i>
+      </span>
+    </button>
+    
+    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==true" routerLink="/admin/user/plist">
+      <span>Volver</span>
+      <span class="icon">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+    </button>
+    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==false" [routerLink]="['/user', 'user', 'view', user.id]">
+      <span>Volver</span>
+      <span class="icon">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+    </button>
+  </div>
+</div>
+
+    </form>
+  </div>
+</div>
