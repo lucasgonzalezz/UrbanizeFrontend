@@ -146,7 +146,7 @@
         <i class="fas fa-arrow-left"></i>
       </span>
     </button>
-    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==false" routerLink="/home">
+    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==false" [routerLink]="['/user', 'user', 'view', user.id]">
       <span>Volver</span>
       <span class="icon">
         <i class="fas fa-arrow-left"></i>
