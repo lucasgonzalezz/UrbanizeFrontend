@@ -14,6 +14,7 @@ import { CategoryAjaxService } from './../../../service/category.ajax.service';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { IUser } from 'src/app/model/model.interfaces';
 import { CartAjaxService } from './../../../service/cart.ajax.service';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-product-plist-unrouted',
@@ -32,7 +33,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   products: IProduct[] = [];
   category: ICategory[] = [];
   product: IProduct = {} as IProduct;
-  oPaginatorState: PaginatorState = { first: 0, rows: 28, page: 0, pageCount: 0 };
+  oPaginatorState: PaginatorState = { first: 0, rows: 16, page: 0, pageCount: 0 };
   value: string = '';
   status: HttpErrorResponse | null = null;
   oProductToRemove: IProduct | null = null;
@@ -61,6 +62,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     private confirmService: ConfirmationService,
     private router: Router,
     private matSnackBar: MatSnackBar,
+    private el: ElementRef,
   ) {
 
     this.oRouter.events.subscribe((ev) => {
@@ -171,7 +173,15 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     this.oPaginatorState.rows = event.rows;
     this.oPaginatorState.page = event.page;
     this.getPage();
+    
+    this.scrollToTop();
   }
+  
+  private scrollToTop() {
+    const element = this.el.nativeElement;
+    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+  }
+  
 
   doOrder(fieldorder: string) {
     this.orderField = fieldorder;
