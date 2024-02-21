@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IUser, formOperation } from 'src/app/model/model.interfaces';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
+import { SessionAjaxService } from 'src/app/service/session.ajax.service';
 
 @Component({
   selector: 'app-admin-user-form-unrouted',
@@ -20,14 +21,28 @@ export class AdminUserFormUnroutedComponent implements OnInit {
   user: IUser = {} as IUser;
   status: HttpErrorResponse | null = null;
   isFieldFocused: { [key: string]: boolean } = {};
+  username: string = '';
+  userSession: IUser | null = null;
 
   constructor(
     private userAjaxService: UserAjaxService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    private sessionAjaxService: SessionAjaxService,
   ) {
     this.initializeForm(this.user);
+
+    this.username = sessionAjaxService.getUsername();
+    this.userAjaxService.getUserByUsername(this.sessionAjaxService.getUsername()).subscribe({
+      next: (user: IUser) => {
+        this.userSession = user;
+        console.log('User Session:', this.userSession); // Agrega este log
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    });
   }
 
   initializeForm(user: IUser) {
@@ -44,7 +59,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
       address: [user.address, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       email: [user.email, [Validators.required, Validators.email]],
       username: [user.username, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-      tipo: [user.role, [Validators.required]],
+      role: [user.role, [Validators.required]],
     });
   }
 

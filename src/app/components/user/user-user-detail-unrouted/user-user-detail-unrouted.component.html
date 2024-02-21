@@ -36,7 +36,7 @@
 
             <div class="columns is-centered">
               <div class="column">
-                <a class="button is-primary ml-4" [routerLink]="['/user', 'profile', 'edit']">
+                <a class="button is-primary ml-4" [routerLink]="['/admin', 'user', 'edit', user.id]">
                   <span>Editar perfil</span>
                   <span class="icon">
                     <i class="fas fa-pen"></i>
@@ -44,7 +44,7 @@
                 </a>
 
                 <a class="button is-primary ml-4" [routerLink]="['/home']">
-                  <span>Seguir comprando</span>
+                  <span>Volver</span>
                   <span class="icon">
                     <i class="fas fa-arrow-right"></i>
                   </span>

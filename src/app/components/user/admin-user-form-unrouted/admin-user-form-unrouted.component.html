@@ -122,16 +122,12 @@
 
 <!-- Tipo -->
 <div class="field">
-  <label class="label">Tipo</label>
-  <div class="control">
-    <div class="select">
-      <select id="tipo" formControlName="tipo">
+  <label class="label" *ngIf="username && userSession?.role==true">Tipo</label>
+      <select id="role" formControlName="role" *ngIf="username && userSession?.role==true">
         <option [ngValue]="false">Usuario Normal</option>
         <option [ngValue]="true">Administrador</option>
       </select>
-    </div>
-    <div class="help is-danger" *ngIf="userForm.get('tipo')?.touched && hasError('tipo', 'required')">Especifica si eres Administrador o Usuario</div>
-  </div>
+    <div class="help is-danger" *ngIf="userForm.get('role')?.touched && hasError('role', 'required')">Especifica si eres Administrador o Usuario</div>
 </div>
 
 <!-- Botón Guardar -->
@@ -144,7 +140,13 @@
       </span>
     </button>
     
-    <button type="submit" class="button is-primary mt-4" routerLink="/admin/user/plist">
+    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==true" routerLink="/admin/user/plist">
+      <span>Volver</span>
+      <span class="icon">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+    </button>
+    <button type="submit" class="button is-primary mt-4" *ngIf="username && userSession?.role==false" routerLink="/home">
       <span>Volver</span>
       <span class="icon">
         <i class="fas fa-arrow-left"></i>
