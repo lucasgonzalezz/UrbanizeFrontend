@@ -89,6 +89,20 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     });
   }
 
+  // En tu componente de Angular
+increment() {
+  if (this.cantidadSeleccionada < this.product.stock) {
+      this.cantidadSeleccionada++;
+  }
+}
+
+decrement() {
+  if (this.cantidadSeleccionada > 1) {
+      this.cantidadSeleccionada--;
+  }
+}
+
+
   getOne(): void {
     this.productService.getProductById(this.id).subscribe({
       next: (data: IProduct) => {

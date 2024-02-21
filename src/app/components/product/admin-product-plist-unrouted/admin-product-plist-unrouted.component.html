@@ -15,6 +15,7 @@
       {{page?.totalElements}}</h3>
   </div>
   <!-- Contenido de usuarios como tabla -->
+  <div class="overflow-x-auto mb-5">
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
       <tr>
@@ -64,7 +65,7 @@
               <i class="fas fa-eye"></i>
             </span>
           </button>
-          <button (click)="doRemove(product)" class="button is-danger is-small is-rounded" title="Eliminar">
+          <button (click)="doRemove(product)" *ngIf="product.ratings==0 && product.purchaseDetails==0 && product.carts==0" class="button is-danger is-small is-rounded" title="Eliminar">
             <span class="icon">
               <i class="fas fa-trash-alt"></i>
             </span>
@@ -85,6 +86,7 @@
       </tr>
     </thead>
   </table>
+  </div>
 
   <!-- Mensaje si no hay usuarios -->
   <div class="notification is-primary" *ngIf="!page?.content || page?.content?.length === 0">

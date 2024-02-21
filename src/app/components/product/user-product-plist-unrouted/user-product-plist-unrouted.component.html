@@ -21,7 +21,7 @@
       [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
       {{ cat.name }} ({{ cat.product }})
     </button>
-    <button *ngIf="filtrandoPorCategoria" type="button" (click)="quitarFiltro()" class="button is-danger">Quitar
+    <button *ngIf="filtrandoPorCategoria" type="button" (click)="quitarFiltro()" class="button is-danger is-small is-outlined ml-2">Quitar
       filtro</button>
   </div>
   <!-- Botón "Quitar filtro" con estilo de Bulma -->
@@ -40,7 +40,7 @@
               </figure>
             </div>
             <div class="card-content">
-              <p style="height: 100px" class="font-semibold text-xl text-cyan-950">{{ product.name }}</p>
+              <p style="height: 80px" class="font-semibold text-xl text-cyan-950">{{ product.name }}</p>
               <p style="position: relative" class="text-xl text-cyan-950">Precio: {{ product.price }}€</p>
               <p class="text-xl font-normal text-cyan-900" *ngIf="product.stock === 0">Sin existencias</p>
             </div>

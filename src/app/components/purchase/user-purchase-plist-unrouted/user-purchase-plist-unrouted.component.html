@@ -1,11 +1,11 @@
 <div class="container">
   <div class="columns is-multiline">
-    <div class="column is-4" *ngFor="let purchase of page?.content">
+    <div class="column is-12-mobile is-6-tablet is-4-desktop" *ngFor="let purchase of page?.content">
       <div class="card">
         <!-- Encabezado de la tarjeta -->
         <div class="card-header">
           <p class="font-semibold text-cyan-900 text-xl my-3 ml-3">Código de compra:</p>
-          <p class="font-semibold text-cyan-900 text-sm mt-4 ml-3 ">{{purchase.purchaseCode}}</p>
+          <p class="font-semibold text-cyan-900 text-sm mt-4 ml-3 mr-4">{{purchase.purchaseCode}}</p>
         </div>
 
         <!-- Contenido de la tarjeta -->

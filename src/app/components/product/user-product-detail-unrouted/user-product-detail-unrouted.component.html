@@ -43,18 +43,37 @@
           </p>
         </div>
 
-        <div class="field column is-4">
-         
-          <div class="control">
-            <span class="text-2xl text-cyan-900 font-normal">Cantidad: </span>
-            <input name="cantidad" style="max-width: 60px" class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada" (keydown)="handleKeyDown($event)">
-          </div>
-        </div>
+<div class="field column is-4">
+    <label class="label text-3xl text-cyan-900 font-normal">Cantidad</label>
+    <div class="field has-addons">
+        <p class="control">
+            <button class="button is-primary is-rounded is-small" (click)="decrement()">
+                <span class="icon is-small">
+                    <i class="fas fa-minus"></i>
+                </span>
+            </button>
+        </p>
+        <p>
+            <span class="text-cyan-900 text-2xl px-4 ">{{cantidadSeleccionada}}</span>
+        </p>
+        <p class="control">
+            <button class="button is-primary is-rounded is-small" (click)="increment()">
+                <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </button>
+        </p>
+    </div>
+</div>
+
+      
+      
 
         <!-- Botones debajo de la información del producto -->
         <div class="columns mt-2" *ngIf="username">
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()" [disabled]="product.stock === 0">
+            <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()"
+              [disabled]="product.stock === 0">
               <span>Añadir</span>
               <span class="icon">
                 <i class="fas fa-shopping-basket"></i>
@@ -62,7 +81,8 @@
             </button>
           </div>
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()" [disabled]="product.stock === 0">
+            <button type="button" class="button is-primary is-fullwidth" (click)="comprarDirectamente()"
+              [disabled]="product.stock === 0">
               <span>Comprar</span>
               <span class="icon">
                 <i class="fas fa-credit-card"></i>

@@ -19,6 +19,7 @@
       {{page?.totalElements}}</h3>
   </div>
   <!-- Contenido de valoraciones como tabla -->
+  <div class="overflow-x-auto mb-5">
   <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
     <thead class="has-background-primary">
       <tr>
@@ -68,6 +69,7 @@
       </tr>
     </thead>
   </table>
+  </div>
 
   <!-- Mensaje si no hay valoraciones -->
   <div class="notification is-primary" *ngIf="!page?.content || page?.content?.length === 0">
