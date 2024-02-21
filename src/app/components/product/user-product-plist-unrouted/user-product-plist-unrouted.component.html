@@ -4,66 +4,68 @@
       <div class="field has-addons">
         <div class="relative flex items-center">
           <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
-            class="w-96 h-10 pl-10 border rounded-full mb-5 focus:outline-none focus:border-cyan-900 text-cyan-900" />
-          <i class="fas fa-search absolute left-3 mb-5 text-cyan-900 cursor-pointer"></i>
+            class="w-96 h-10 pl-10 border rounded-full focus:outline-none focus:border-cyan-900 text-cyan-900" />
+          <i class="fas fa-search absolute left-3  text-cyan-900 cursor-pointer"></i>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="columns">
-<!-- Columna de Categorías -->
-<div class="column is-2">
-  <h1 class="title text-cyan-900">Categorías</h1>
+<div class="column mb-6">
+  <h1 class="subtitle text-cyan-900">Categorías</h1>
 
   <!-- Utilizando botones en lugar de una lista -->
   <div class="buttons">
-    <button *ngFor="let cat of category" class="button categoria-item is-primary" (click)="filtrarPorCategoria(cat.id)"
+    <button *ngFor="let cat of category" class="button is-rounded is-small is-outlined categoria-item is-primary" (click)="filtrarPorCategoria(cat.id)"
       [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
       {{ cat.name }} ({{ cat.product }})
     </button>
+    <button *ngIf="filtrandoPorCategoria" type="button" (click)="quitarFiltro()" class="button is-danger">Quitar
+      filtro</button>
   </div>
-
   <!-- Botón "Quitar filtro" con estilo de Bulma -->
-  <button *ngIf="filtrandoPorCategoria" type="button" (click)="quitarFiltro()" class="button is-primary">Quitar filtro</button>
 </div>
 
+  <!-- Columna de Categorías -->
   <!-- Columna de Productos -->
-  <div class="column is-10">
-    <div class="columns is-multiline align-right"> <!-- Add custom-align-right class -->
+  
+    <div class="columns is-multiline"> <!-- Add custom-align-right class -->
       <ng-container *ngFor="let product of products">
-        <div class="column is-3">
-          <div class="card">
+        <div class="column is-one-quarter-desktop is-one-third-tablet">
+          <div style="min-width: 230px" class="card">
             <div class="card-image">
-              <figure class="image is-4by3">
+              <figure class="image is-3by4">
                 <img [src]="product.image" alt="Imagen del producto" (click)="doView(product)">
               </figure>
             </div>
             <div class="card-content">
-              <p class="font-semibold text-2xl text-cyan-950">{{ product.name }}</p>
-              <p class="font-semibold text-xl text-cyan-950 mt-2">Precio: {{ product.price }}€</p>
+              <p style="height: 100px" class="font-semibold text-xl text-cyan-950">{{ product.name }}</p>
+              <p style="position: relative" class="text-xl text-cyan-950">Precio: {{ product.price }}€</p>
               <p class="text-xl font-normal text-cyan-900" *ngIf="product.stock === 0">Sin existencias</p>
             </div>
 
             <footer class="card-footer" *ngIf="username && product.stock != 0">
-              <button class="card-footer-item button is-primary" (click)="makeProductPurhase(product)" [disabled]="product.stock === 0">
-                Comprar<i class="fas fa-shopping-basket ml-2"></i>
+              <button class="card-footer-item button is-primary" (click)="makeProductPurhase(product)"
+                [disabled]="product.stock === 0">
+                Comprar<i class="fas fa-credit-card ml-2"></i>
               </button>
-              <button class="card-footer-item button is-primary" (click)="agregarAlCarrito(product)" [disabled]="product.stock === 0">
-                Añadir al carrito <i class="fas fa-cart-plus ml-1"></i>
+              <button class="card-footer-item button is-primary" (click)="agregarAlCarrito(product)"
+                [disabled]="product.stock === 0">
+                Añadir<i class="fas fa-shopping-basket ml-1"></i>
               </button>
             </footer>
           </div>
         </div>
       </ng-container>
+
+
     </div>
     <div class="flex-auto mx-auto">
       <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
         [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!" [totalRecords]="page?.totalElements || 0">
       </p-paginator>
     </div>
-  </div>
-</div>
 
-<p-confirmPopup></p-confirmPopup>
+
+  <p-confirmPopup></p-confirmPopup>

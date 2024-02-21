@@ -1,9 +1,9 @@
 <div class="card box">
   <div class="card-content">
-    <div class="columns">
+    <div class="columns is-vcentered">
       <!-- Columna para la imagen -->
       <div class="column is-4">
-        <figure class="image is-4by3 box">
+        <figure class="image is-3by4 box">
           <img [src]="product.image" alt="Imagen del producto" class="img-fluid"
             style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         </figure>
@@ -44,9 +44,10 @@
         </div>
 
         <div class="field column is-4">
-          <label class="label">Cantidad:</label>
+         
           <div class="control">
-            <input class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada" (keydown)="handleKeyDown($event)">
+            <span class="text-2xl text-cyan-900 font-normal">Cantidad: </span>
+            <input name="cantidad" style="max-width: 60px" class="input" type="number" min="1" max="{{product.stock}}" [(ngModel)]="cantidadSeleccionada" (keydown)="handleKeyDown($event)">
           </div>
         </div>
 
@@ -54,9 +55,9 @@
         <div class="columns mt-2" *ngIf="username">
           <div class="column is-4">
             <button type="button" class="button is-primary is-fullwidth" (click)="agregarAlCarrito()" [disabled]="product.stock === 0">
-              <span>Añadir al carrito</span>
+              <span>Añadir</span>
               <span class="icon">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-shopping-basket"></i>
               </span>
             </button>
           </div>

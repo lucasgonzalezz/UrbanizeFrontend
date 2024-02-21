@@ -32,7 +32,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   products: IProduct[] = [];
   category: ICategory[] = [];
   product: IProduct = {} as IProduct;
-  oPaginatorState: PaginatorState = { first: 0, rows: 16, page: 0, pageCount: 0 };
+  oPaginatorState: PaginatorState = { first: 0, rows: 28, page: 0, pageCount: 0 };
   value: string = '';
   status: HttpErrorResponse | null = null;
   oProductToRemove: IProduct | null = null;
