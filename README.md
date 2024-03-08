@@ -2,26 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
 
-## Development server
+# UrbanizeFrontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+¡Bienvenido a UrbanizeFrontend, el frontend del proyecto de eCommerce de ropa urbana!
 
-## Code scaffolding
+## Descripción
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+UrbanizeFrontend es la interfaz de usuario desarrollada en Angular para nuestro proyecto de eCommerce de ropa urbana. Esta aplicación utiliza tecnologías modernas como Sass, Bulma, PrimeNG y Tailwind CSS para proporcionar una experiencia visualmente atractiva y funcional.
 
-## Build
+## Características Principales
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular:** Utilizamos el framework Angular para la construcción de la interfaz de usuario, aprovechando su estructura modular y capacidad de desarrollo rápido.
 
-## Running unit tests
+- **Sass:** Los estilos están escritos en Sass para facilitar el mantenimiento y la extensibilidad del código CSS.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Bulma:** Se ha integrado Bulma como el sistema de diseño CSS para garantizar una interfaz limpia y responsiva.
 
-## Running end-to-end tests
+- **PrimeNG:** Utilizamos los componentes de PrimeNG para mejorar la usabilidad y la funcionalidad de la aplicación.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Tailwind CSS:** Tailwind CSS se utiliza para realizar ajustes y personalizaciones específicas en el diseño y estilos de la aplicación.
