@@ -169,8 +169,14 @@ decrement() {
       this.cartAjaxService.createCart(this.cart).subscribe({
         next: (data: ICart) => {
           this.cart = data;
-          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', { duration: 3000 });
-          this.oRouter.navigate(['/user', 'cart', 'plist']);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "El producto se ha añadido al carrito",
+            showConfirmButton: false,
+            timer: 1500,
+            width: 600,
+          });
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
@@ -183,17 +189,33 @@ decrement() {
   comprarDirectamente(): void {
     if (this.user) {
       const usuarioid = this.user.id;
-      this.confirmService.confirm({
-        message: `¿Quieres comprar ${this.cantidadSeleccionada} producto(s)?`,
-        accept: () => {
+      Swal.fire({
+        title: "¿Estás seguro de comprar el producto?",
+        html: `
+          <div style="text-align: center;">
+            <p>${this.product.name}</p><br>
+            <p>Cantidad: <strong>${this.cantidadSeleccionada}</strong></p><br>
+            <p>Precio: <strong>${this.product.price}€</strong></p>
+          </div>
+        `,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#164e63",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, comprar",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
           this.purchaseAjaxService.makeProductPurhase(this.product.id, usuarioid, this.cantidadSeleccionada).subscribe({
             next: () => {
               this.matSnackBar.open(`Has comprado ${this.cantidadSeleccionada} producto(s)`, 'Aceptar', { duration: 3000 });
               this.oRouter.navigate(['/user', 'purchase', 'plist', usuarioid]);
+            },
+            error: () => {
+              this.matSnackBar.open('Ha ocurrido un error al realizar la compra', 'Aceptar', { duration: 3000 });
             }
           });
-        },
-        reject: () => {
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
           this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
         }
       });
@@ -211,7 +233,6 @@ decrement() {
   
     this.ratingService.getRatingByUserAndProduct(user_id, product_id).subscribe((rating) => {
       if (rating) {
-        // Si el usuario ya ha valorado el producto, mostrar un mensaje de error
         Swal.fire({
           position: "center",
           width: 500,
@@ -221,7 +242,6 @@ decrement() {
           timer: 1500,
         });        
       } else {
-        // Si el usuario no ha valorado el producto, permitirle valorarlo
         if (this.sessionService.isSessionActive()) {
           this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
             data: {

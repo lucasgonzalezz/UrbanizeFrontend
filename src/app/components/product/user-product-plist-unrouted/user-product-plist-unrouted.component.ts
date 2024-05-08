@@ -219,15 +219,14 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       this.cart.amount = 1;
       this.cartAjaxService.createCart(this.cart).subscribe({
       next: (data: ICart) => {
-        // Mostrar el mensaje Swal de éxito
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "El producto se ha añadido al carrito",
-          showConfirmButton: false,
-          timer: 1500,
-          width: 600,
-        });
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "El producto se ha añadido al carrito",
+            showConfirmButton: false,
+            timer: 1500,
+            width: 600,
+          });
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;
@@ -251,11 +250,11 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       next: (user: IUser) => {
         if (user) {
           Swal.fire({
-            title: "¿Estás seguro de comprar el producto?",
+            title: "¿Quieres comprar este producto?",
             html: `
               <div style="text-align: center;">
-                <p>${product.name}</p>
-                <p>Precio: ${product.price}€</p>
+                <p>${product.name}</p><br>
+                <p>Precio: <strong>${product.price}€</strong></p>
               </div>
             `,
             icon: "question",
@@ -264,8 +263,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
             cancelButtonColor: "#d33",
             confirmButtonText: "Sí, comprar",
             cancelButtonText: "Cancelar"
-          })
-          .then((result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
               const cantidad = 1;
               this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({

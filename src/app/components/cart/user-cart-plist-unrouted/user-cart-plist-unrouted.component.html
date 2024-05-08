@@ -38,7 +38,7 @@
         </td>
         <td class="pt-6 font-semibold text-lg">{{ individualPricel.get(cart.id)?.toFixed(2) + " €"  }} </td>
         <td>
-          <button class="button is-primary is-rounded mr-3 mt-5" (click)="makeSingleCartPurchase(cart.id)">
+          <button class="button is-primary is-rounded mr-3 mt-5" (click)="makeSingleCartPurchase(cart.id, cart)">
             <span>Comprar</span>
           </button>
           <button class="button is-danger is-rounded mt-5" (click)="deleteCart(cart.id)">

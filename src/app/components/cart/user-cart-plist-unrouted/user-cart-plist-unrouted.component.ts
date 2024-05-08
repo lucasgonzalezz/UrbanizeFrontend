@@ -9,6 +9,7 @@ import { IProduct, ICart, ICartPage, IPurchase, IUser } from 'src/app/model/mode
 import { CartAjaxService } from './../../../service/cart.ajax.service';
 import { PurchaseAjaxService } from 'src/app/service/purchase.ajax.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-cart-plist-unrouted',
@@ -21,7 +22,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
 
   page: ICartPage | undefined;
   user: IUser | null = null;
-  product: IProduct | null = null;
+  product: IProduct = {} as IProduct;
   cart: ICart = { user: {}, product: {}, amount: 0 } as ICart;
   totalCost: number = 0;
   orderField: string = 'id';
@@ -68,7 +69,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open('Error al recuperar los carritos', 'Aceptar', { duration: 3000 })
+            this.matSnackBar.open('Error al recuperar los productos', 'Aceptar', { duration: 3000 })
           }
         });
       }
@@ -95,7 +96,6 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     } else {
       this.cartAjaxService.updateCart(cart).subscribe({
         next: (data: ICart) => {
-          this.matSnackBar.open('Cantidad actualizada', 'Aceptar', { duration: 3000 });
           this.getCostCart(data);
           this.updateTotalCost();
           this.getCarts();
@@ -107,7 +107,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
       })
     }
   } else {
-    this.matSnackBar.open('No hay suficiente stock disponible', 'Aceptar', { duration: 3000 });
+    this.matSnackBar.open('No hay mas stock disponible', 'Aceptar', { duration: 3000 });
   }
   }
 
@@ -134,13 +134,28 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     this.getCarts();
   }
 
-  makeSingleCartPurchase(cart_id: number) {
+  makeSingleCartPurchase(cart_id: number, cart: ICart) {
     this.sessionAjaxService.getSessionUser()?.subscribe({
+     
       next: (user: IUser) => {
         this.user = user;
-        this.confirmationService.confirm({
-          message: '¿Desea comprar este carrito?',
-          accept: () => {
+        Swal.fire({
+          title: "¿Quieres comprar este producto?",
+          html: `
+            <div style="text-align: center;">
+              <p>${cart.product.name}</p><br>
+              <p>Cantidad: <strong>${cart.amount}</strong></p><br>
+              <p>Precio: <strong>${ this.individualPricel.get(cart.id)?.toFixed(2) + " €"  }</strong></p>
+            </div>
+          `,
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#164e63",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí, comprar",
+          cancelButtonText: "Cancelar"
+        }).then((result) => {
+          if (result.isConfirmed) {
             this.purchaseAjaxService.makeSingleCartPurchase(user.id, cart_id).subscribe({
               next: (purchase: IPurchase) => {
                 this.matSnackBar.open('Compra realizada', 'Aceptar', { duration: 3000 });
@@ -148,15 +163,17 @@ export class UserCartPlistUnroutedComponent implements OnInit {
               },
               error: (err: HttpErrorResponse) => {
                 this.status = err;
-                this.matSnackBar.open('Error al realizar la compra', 'Aceptar', { duration: 3000 })
+                this.matSnackBar.open('Error al realizar la compra', 'Aceptar', { duration: 3000 });
               }
             });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
           }
         });
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;
-        this.matSnackBar.open('Error al recuperar el usuario', 'Aceptar', { duration: 3000 })
+        this.matSnackBar.open('Error al recuperar el usuario', 'Aceptar', { duration: 3000 });
       }
     });
   }
@@ -165,9 +182,29 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     this.sessionAjaxService.getSessionUser()?.subscribe({
       next: (user: IUser) => {
         this.user = user;
-        this.confirmationService.confirm({
-          message: '¿Desea comprar todos los carritos?',
-          accept: () => {
+        let cartDetailsHTML = '';
+        this.page?.content.forEach((cart: ICart) => {
+          cartDetailsHTML += `
+            <div style="text-align: center;"><br>
+              <p>${cart.product.name}</p><br>
+              <p>Cantidad: <strong>${cart.amount}</strong></p><br>
+              <p>Precio: <strong>${this.individualPricel.get(cart.id)?.toFixed(2) + " €"}</strong></p><br>
+              <p>--------------------------------</p>
+            </div>
+            <hr>
+          `;
+        });
+        Swal.fire({
+          title: "¿Quieres comprar todos los productos del carrito?",
+          html: cartDetailsHTML,
+          width: 800,
+          showCancelButton: true,
+          confirmButtonColor: "#164e63",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí, comprar",
+          cancelButtonText: "Cancelar"
+        }).then((result) => {
+          if (result.isConfirmed) {
             this.purchaseAjaxService.makeAllCartPurchase(user.id).subscribe({
               next: (purchase: IPurchase) => {
                 this.matSnackBar.open('Compra realizada', 'Aceptar', { duration: 3000 });
@@ -175,49 +212,61 @@ export class UserCartPlistUnroutedComponent implements OnInit {
               },
               error: (err: HttpErrorResponse) => {
                 this.status = err;
-                this.matSnackBar.open('Error al realizar la compra', 'Aceptar', { duration: 3000 })
+                this.matSnackBar.open('Error al realizar la compra', 'Aceptar', { duration: 3000 });
               }
             });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
           }
         });
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;
-        this.matSnackBar.open('Error al recuperar el usuario', 'Aceptar', { duration: 3000 })
+        this.matSnackBar.open('Error al recuperar el usuario', 'Aceptar', { duration: 3000 });
       }
     });
-
   }
+  
 
   deleteCart(cart_id: number): void {
 
         this.cartAjaxService.deleteCart(cart_id).subscribe({
           next: () => {
-            this.matSnackBar.open('Carrito eliminado', 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open('Producto eliminado de la cesta', 'Aceptar', { duration: 3000 });
             this.getCarts();
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open('Error al eliminar el carrito', 'Aceptar', { duration: 3000 })
+            this.matSnackBar.open('Error al eliminar el producto de las cesta', 'Aceptar', { duration: 3000 })
           }
         });
   }
 
   deleteAllCarts(user_id: number): void {
-    this.confirmationService.confirm({
-      message: '¿Desea eliminar todos los carritos?',
-      accept: () => {
+    Swal.fire({
+      title: "¿Desea eliminar todos los productos de la cesta?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.cartAjaxService.deleteCartByUsuario(user_id).subscribe({
           next: () => {
-            this.matSnackBar.open('Carritos eliminados', 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open('Productos eliminados de la cesta', 'Aceptar', { duration: 3000 });
             this.getCarts();
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.matSnackBar.open('Error al eliminar los carritos', 'Aceptar', { duration: 3000 })
+            this.matSnackBar.open('Error al eliminar los productos', 'Aceptar', { duration: 3000 });
           }
         });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.matSnackBar.open('Eliminación de productos cancelada', 'Aceptar', { duration: 3000 });
       }
     });
   }
+  
 }
