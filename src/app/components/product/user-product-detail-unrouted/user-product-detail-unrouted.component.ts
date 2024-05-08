@@ -16,6 +16,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { UserProductRatingFormUnroutedComponent } from '../user-product-rating-form-unrouted/user-product-rating-form-unrouted.component';
 import { Subject } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-product-detail-unrouted',
@@ -30,11 +31,12 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   cantidadSeleccionada: number = 1;
   status: HttpErrorResponse | null = null;
   product: IProduct = {} as IProduct;
-  user: IUser | null = null;
+  user: IUser = {} as IUser;
   paginatorState: PaginatorState = { first: 0, rows: 30, page: 0, pageCount: 0 };
   page: IRatingPage | null = null;
   orderField: string = 'id';
   orderDirection: string = 'asc';
+  rating: IRating | null = null;
 
   username: string = '';
   userSession: IUser | null = null;
@@ -200,28 +202,52 @@ decrement() {
     }
   }
 
-   realizarValoracion(product: IProduct): void {
-      const product_id = product.id;
-      if (this.sessionService.isSessionActive()) {
-        this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
-          data: {
-            user_id: this.user?.id,
-            product_id: product_id
-          },
-          header: 'Valorar producto',
-          width: '70%',
-          contentStyle: {"max-height": "500px", "overflow": "auto"},
-          maximizable: false
+  realizarValoracion(product: IProduct, user: IUser): void {
+    const product_id = product.id;
+    const user_id = user.id;
+  
+    console.log('Product ID:', product_id);
+    console.log('User ID:', user_id);
+  
+    this.ratingService.getRatingByUserAndProduct(user_id, product_id).subscribe((rating) => {
+      if (rating) {
+        // Si el usuario ya ha valorado el producto, mostrar un mensaje de error
+        Swal.fire({
+          position: "center",
+          width: 500,
+          icon: "error",
+          title: "Ya has valorado este producto",
+          showConfirmButton: false,
+          timer: 1500,
+        });        
+      } else {
+        // Si el usuario no ha valorado el producto, permitirle valorarlo
+        if (this.sessionService.isSessionActive()) {
+          this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
+            data: {
+              user_id: this.user?.id,
+              product_id: product_id
+            },
+            header: 'Valorar producto',
+            width: '70%',
+            contentStyle: {"max-height": "500px", "overflow": "auto"},
+            maximizable: false
           });
+          
           this.ref.onClose.subscribe({
             next: (v) => {
               if (v) {
                 this.getRatings();
               }
             }
-          })
-        };
-      } 
+          });
+        }
+      }
+    });
+  }
+  
+  
+  
 
       isUsuarioValoracion(rating: IRating): boolean {
         return this.user !== null && rating.user.id === this.user.id;

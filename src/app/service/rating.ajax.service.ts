@@ -73,8 +73,8 @@ export class RatingAjaxService {
     return this.http.get<IRatingPage>(this.url + '/user/' + user_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
   }
 
-  getRatingByUserAndProduct(usuario_id: number, camiseta_id: number): Observable<IRating> {
-    return this.http.get<IRating>(this.url + '/user/' + usuario_id + '/product/' + camiseta_id);
+  getRatingByUserAndProduct(user_id: number, product_id: number): Observable<IRating> {
+    return this.http.get<IRating>(this.url + '/byProductAndUser' + '/' + product_id + '/' + user_id);
   }
 
   getAverageRatingByProduct(product_id: number): Observable<number> {

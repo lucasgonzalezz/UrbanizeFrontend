@@ -43,31 +43,28 @@
           </p>
         </div>
 
-<div class="field column is-4" *ngIf="username">
-    <label class="label text-3xl text-cyan-900 font-normal">Cantidad</label>
-    <div class="field has-addons">
-        <p class="control">
-            <button class="button is-primary is-rounded is-small" (click)="decrement()">
+        <div class="field column is-4" *ngIf="username">
+          <label class="label text-3xl text-cyan-900 font-normal">Cantidad</label>
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-primary is-rounded is-small" (click)="decrement()">
                 <span class="icon is-small">
-                    <i class="fas fa-minus"></i>
+                  <i class="fas fa-minus"></i>
                 </span>
-            </button>
-        </p>
-        <p>
-            <span class="text-cyan-900 text-2xl px-4 ">{{cantidadSeleccionada}}</span>
-        </p>
-        <p class="control">
-            <button class="button is-primary is-rounded is-small" (click)="increment()">
+              </button>
+            </p>
+            <p>
+              <span class="text-cyan-900 text-2xl px-4 ">{{cantidadSeleccionada}}</span>
+            </p>
+            <p class="control">
+              <button class="button is-primary is-rounded is-small" (click)="increment()">
                 <span class="icon is-small">
-                    <i class="fas fa-plus"></i>
+                  <i class="fas fa-plus"></i>
                 </span>
-            </button>
-        </p>
-    </div>
-</div>
-
-      
-      
+              </button>
+            </p>
+          </div>
+        </div>
 
         <!-- Botones debajo de la información del producto -->
         <div class="columns mt-2" *ngIf="username">
@@ -90,7 +87,7 @@
             </button>
           </div>
           <div class="column is-4">
-            <button type="button" class="button is-primary is-fullwidth" (click)="realizarValoracion(product)">
+            <button type="button" *ngIf="user?.ratings !== 0" class="button is-primary is-fullwidth" (click)="realizarValoracion(product, user)">
               <span>Valorar</span>
               <span class="icon">
                 <i class="fas fa-star"></i>

@@ -11,11 +11,11 @@ $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
 $primary_theme: #164e63;
 $secondary: #94A3B8;
-$hola: rgb(176, 186, 201);
+$third: rgb(176, 186, 201);
 
 // Update Bulma's global variables
 $family-sans-serif: 'Arvo', serif;
-$table-row-hover-background-color: $hola;
+$table-row-hover-background-color: $third;
 $grey-dark: $brown;
 $grey-light: $secondary;
 $primary: $primary_theme;
@@ -43,7 +43,6 @@ $input-shadow: none;
 @import "../node_modules/bulma/sass/utilities/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/elements/_all.sass";
-//@import "../node_modules/bulma/sass/elements/button.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 @import "../node_modules/bulma/sass/components/_all.sass";
 @import "../node_modules/bulma/sass/grid/_all.sass";
@@ -51,5 +50,3 @@ $input-shadow: none;
 @import "../node_modules/bulma/sass/layout/_all.sass";
 
 @import '../node_modules/primeng/resources/themes/lara-light-indigo/theme.css';
-/*Variables primeng*/
-$paginatorTextColor: $textSecondaryColor;

@@ -15,6 +15,7 @@ import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { IUser } from 'src/app/model/model.interfaces';
 import { CartAjaxService } from './../../../service/cart.ajax.service';
 import { ElementRef } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-product-plist-unrouted',
@@ -217,18 +218,24 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       this.cart.product = { id: product.id } as IProduct;
       this.cart.amount = 1;
       this.cartAjaxService.createCart(this.cart).subscribe({
-        next: (data: ICart) => {
-          this.cart = data;
-          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', { duration: 3000 });
-          this.oRouter.navigate(['/user', 'cart', 'plist']);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-          this.matSnackBar.open('Error al añadir la producto al carrito', 'Aceptar', { duration: 3000 });
-        }
-      });
-    }
+      next: (data: ICart) => {
+        // Mostrar el mensaje Swal de éxito
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "El producto se ha añadido al carrito",
+          showConfirmButton: false,
+          timer: 1500,
+          width: 600,
+        });
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+        this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
+      }
+    });
   }
+}
 
   getTotalAPagar(): number {
     const totalAPagar = this.productosSeleccionados.reduce((total, producto) => total + producto.price, 0);
@@ -243,15 +250,27 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     this.sessionService.getSessionUser()?.subscribe({
       next: (user: IUser) => {
         if (user) {
-          this.confirmService.confirm({
-            message: '¿Quieres comprar el producto?',
-            accept: () => {
+          Swal.fire({
+            title: "¿Estás seguro de comprar el producto?",
+            html: `
+              <div style="text-align: center;">
+                <p>${product.name}</p>
+                <p>Precio: ${product.price}€</p>
+              </div>
+            `,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#164e63",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, comprar",
+            cancelButtonText: "Cancelar"
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
               const cantidad = 1;
               this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
                 next: () => {
                   this.matSnackBar.open('Producto comprado', 'Aceptar', { duration: 3000 });
-
-                  // Navegar a la lista de compras del usuario actual
                   this.router.navigate(['/user', 'purchase', 'plist', user.id]);
                 },
                 error: (err: HttpErrorResponse) => {
@@ -259,8 +278,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
                   this.matSnackBar.open('Error al comprar el producto', 'Aceptar', { duration: 3000 });
                 }
               });
-            },
-            reject: () => {
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
               this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
             }
           });
@@ -274,8 +292,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       }
     });
   }
-
-
+  
   // Método para filtrar por categoría cuando se hace clic en una categoría
   filtrarPorCategoria(idCategoria: number): void {
     this.category_id = idCategoria;
@@ -283,8 +300,4 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     this.idCategoriaFiltrada = idCategoria;
     this.filtrandoPorCategoria = true;
   }
-
-
 }
-
-
