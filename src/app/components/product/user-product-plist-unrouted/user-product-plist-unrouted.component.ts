@@ -28,7 +28,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
   @Input() category_id: number = 0;
   productosSeleccionados: IProduct[] = [];
   page: IProductPage | undefined;
-  purchase: IPurchase | null = null;
+  purchase: IPurchase = {} as IPurchase;
   orderField: string = "id";
   orderDirection: string = "asc";
   products: IProduct[] = [];
@@ -267,18 +267,15 @@ export class UserProductPlistUnroutedComponent implements OnInit {
             if (result.isConfirmed) {
               const cantidad = 1;
               this.purchaseService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
-                next: () => {
-                  this.matSnackBar.open('Producto comprado', 'Aceptar', { duration: 3000 });
-                  this.router.navigate(['/user', 'purchase', 'plist', user.id]);
+                next: (purchase: IPurchase) => {
+                  this.router.navigate(['/user', 'purchase', 'view', purchase.id]);
                 },
                 error: (err: HttpErrorResponse) => {
                   this.status = err;
                   this.matSnackBar.open('Error al comprar el producto', 'Aceptar', { duration: 3000 });
                 }
               });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              this.matSnackBar.open('Compra cancelada', 'Aceptar', { duration: 3000 });
-            }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {            }
           });
         } else {
           this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', { duration: 3000 });

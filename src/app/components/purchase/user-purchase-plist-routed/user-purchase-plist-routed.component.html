@@ -1,12 +1,12 @@
 <div class="section">
   <div class="container">
-    <h1 class="title is-3">Mis compras
-      <button type="submit" class="button is-primary ml-4" routerLink="/home">
-        <span>Volver</span>
+    <h1 class="title is-3 text-cyan-900">Mis compras
+      <a href="/home" class="text-2xl is-pulled-right mt-2">
         <span class="icon">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fas fa-chevron-left" ></i>
         </span>
-      </button>
+        <span>Atrás</span>
+      </a>
     </h1>
     <app-user-purchase-plist-unrouted [forceReload]="forceReload"></app-user-purchase-plist-unrouted>
   </div>

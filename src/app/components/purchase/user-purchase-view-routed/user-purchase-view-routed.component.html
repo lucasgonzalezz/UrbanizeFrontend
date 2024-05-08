@@ -1,14 +1,16 @@
 <div class="section bg-slate-300">
   <div class="container">
+    <h1 class="title is-3 text-cyan-900">Detalle de compra
+      <a [routerLink]="['/user', 'purchase', 'plist', userSession?.id]" class="text-2xl is-pulled-right mt-2">
+        <span class="icon">
+          <i class="fas fa-chevron-left" ></i>
+        </span>
+        <span>Atrás</span>
+      </a>
+    </h1>
     <app-user-purchase-detail-unrouted [id]="id"></app-user-purchase-detail-unrouted>
     <div class="field">
       <div class="control has-text-centered">
-        <button type="submit" class="button is-primary mt-4" routerLink="/home">
-          <span>Seguir comprando</span>
-          <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-        </button>
       </div>
     </div>
   </div>

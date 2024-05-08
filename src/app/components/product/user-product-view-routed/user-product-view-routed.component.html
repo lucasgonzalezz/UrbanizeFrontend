@@ -4,14 +4,13 @@
       <div class="col-auto">
         <div class="d-flex justify-content-center mb-3">
           <h1 class="text-3xl text-cyan-900 font-semibold mb-10"> Información del Producto
-            <button type="submit" class="button is-primary ml-4" routerLink="/home">
-              <span>Volver</span>
+            <a href="/home" class="text-2xl is-pulled-right mt-2">
               <span class="icon">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-chevron-left" ></i>
               </span>
-            </button>
+              <span>Atrás</span>
+            </a>
           </h1>
-
         </div>
       </div>
       <app-user-product-detail-unrouted [id]="id" [forceReload]="forceReload"></app-user-product-detail-unrouted>
