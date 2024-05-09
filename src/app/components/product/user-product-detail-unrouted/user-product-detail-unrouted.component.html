@@ -43,7 +43,7 @@
           </p>
         </div>
 
-        <div class="field column is-4" *ngIf="username">
+        <div class="field column is-4" *ngIf="username && product.stock !== 0">
           <label class="label text-3xl text-cyan-900 font-normal">Cantidad</label>
           <div class="field has-addons">
             <p class="control">
@@ -87,7 +87,8 @@
             </button>
           </div>
           <div class="column is-4">
-            <button type="button" *ngIf="user?.ratings !== 0" class="button is-primary is-fullwidth" (click)="realizarValoracion(product, user)">
+            <button type="button" *ngIf="user?.ratings !== 0" class="button is-primary is-fullwidth"
+              (click)="realizarValoracion(product, user)">
               <span>Valorar</span>
               <span class="icon">
                 <i class="fas fa-star"></i>
@@ -110,6 +111,12 @@
           <div class="card-header">
             <p class="card-header-title text-cyan-900 text-lg">{{rating.user.username}}</p>
             <p class="card-header-icon text-cyan-900">{{rating.date| date: 'dd-MM-yyyy'}}</p>
+            <!-- <button *ngIf="isUsuarioValoracion(rating)" class="button is-primary is-rounded is-small mt-3 mr-2"
+              (click)="editarValoracion(product, user)">
+              <span class="icon is-small">
+                <i class="fas fa-edit"></i>
+              </span>
+            </button> -->
             <button *ngIf="isUsuarioValoracion(rating)" class="button is-danger is-rounded is-small mt-3 mr-2"
               (click)="borrarValoracion(rating.id)">
               <span class="icon is-small">

@@ -42,7 +42,7 @@
             <div class="card-content">
               <p style="height: 80px" class="font-semibold text-xl text-cyan-950">{{ product.name }}</p>
               <p style="position: relative" class="text-xl text-cyan-950">Precio: {{ product.price }}€</p>
-              <p class="text-xl font-normal mt-3 text-cyan-900" *ngIf="product.stock === 0">Sin existencias</p>
+              <p class="text-xl font-normal mt-3 text-cyan-900" *ngIf="product.stock === 0 && username">Sin existencias</p>
             </div>
 
             <footer class="card-footer" *ngIf="username && product.stock != 0">

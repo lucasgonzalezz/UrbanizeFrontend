@@ -92,17 +92,17 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   }
 
   // En tu componente de Angular
-increment() {
-  if (this.cantidadSeleccionada < this.product.stock) {
+  increment() {
+    if (this.cantidadSeleccionada < this.product.stock) {
       this.cantidadSeleccionada++;
+    }
   }
-}
 
-decrement() {
-  if (this.cantidadSeleccionada > 1) {
+  decrement() {
+    if (this.cantidadSeleccionada > 1) {
       this.cantidadSeleccionada--;
+    }
   }
-}
 
 
   getOne(): void {
@@ -227,10 +227,7 @@ decrement() {
   realizarValoracion(product: IProduct, user: IUser): void {
     const product_id = product.id;
     const user_id = user.id;
-  
-    console.log('Product ID:', product_id);
-    console.log('User ID:', user_id);
-  
+
     this.ratingService.getRatingByUserAndProduct(user_id, product_id).subscribe((rating) => {
       if (rating) {
         Swal.fire({
@@ -240,7 +237,7 @@ decrement() {
           title: "Ya has valorado este producto",
           showConfirmButton: false,
           timer: 1500,
-        });        
+        });
       } else {
         if (this.sessionService.isSessionActive()) {
           this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
@@ -250,10 +247,10 @@ decrement() {
             },
             header: 'Valorar producto',
             width: '70%',
-            contentStyle: {"max-height": "500px", "overflow": "auto"},
+            contentStyle: { "max-height": "500px", "overflow": "auto" },
             maximizable: false
           });
-          
+
           this.ref.onClose.subscribe({
             next: (v) => {
               if (v) {
@@ -265,30 +262,32 @@ decrement() {
       }
     });
   }
-  
-  
-  
 
-      isUsuarioValoracion(rating: IRating): boolean {
-        return this.user !== null && rating.user.id === this.user.id;
-      }
-  
-      borrarValoracion(rating_id: number) {
-        this.confirmService.confirm({
-          message: '¿Quieres borrar la valoración?',
-          accept: () => {
-            this.ratingService.deleteRating(rating_id).subscribe({
-              next: () => {
-                this.matSnackBar.open('Valoración borrada', 'Aceptar', {duration: 3000});
-                this.getRatings();
-              },
-              error: (err: HttpErrorResponse) => {
-                this.status = err;
-                this.matSnackBar.open('Error al borrar la valoración', 'Aceptar', {duration: 3000});
-              }
-            });
-          }
-        });
-      }
+  isUsuarioValoracion(rating: IRating): boolean {
+    return this.user !== null && rating.user.id === this.user.id;
+  }
+
+  borrarValoracion(rating_id: number) {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar la valoración?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No"
+    }).then((result) => {
+      this.ratingService.deleteRating(rating_id).subscribe({
+        next: () => {
+          this.matSnackBar.open('Valoración borrada', 'Aceptar', { duration: 3000 });
+          this.getRatings();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al borrar la valoración', 'Aceptar', { duration: 3000 });
+        }
+      });
+    });
+  }
 
 }

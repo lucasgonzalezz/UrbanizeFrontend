@@ -25,6 +25,7 @@ import { CategoryAjaxService } from './service/category.ajax.service';
 import { MediaService } from './service/media.service';
 import { SessionAjaxService } from './service/session.ajax.service';
 import { CryptoService } from './service/crypto.service';
+import { PurchaseDetailPrintService } from './service/purchaseDetail.print.service';
 // Interceptor
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
@@ -181,6 +182,7 @@ import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-
     CryptoService,
     DialogService,
     ConfirmationService,
+    PurchaseDetailPrintService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

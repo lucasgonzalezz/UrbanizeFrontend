@@ -30,6 +30,7 @@
     "crypto-js": "^4.2.0",
     "feather-icons": "^4.29.1",
     "flowbite": "^2.3.0",
+    "jspdf": "^2.5.1",
     "ngx-pagination": "^6.0.3",
     "primeicons": "^6.0.1",
     "primeng": "^17.5.0",

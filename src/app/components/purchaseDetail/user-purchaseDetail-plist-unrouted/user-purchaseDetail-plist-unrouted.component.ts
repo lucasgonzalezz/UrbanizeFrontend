@@ -6,6 +6,7 @@ import { IProduct, IPurchase, IPurchaseDetailPage } from 'src/app/model/model.in
 import { PurchaseAjaxService } from 'src/app/service/purchase.ajax.service';
 import { PurchaseDetailAjaxService } from '../../../service/purchaseDetail.ajax.service';
 import { Router } from '@angular/router';
+import { PurchaseDetailPrintService } from './../../../service/purchaseDetail.print.service';
 
 @Component({
   selector: 'app-user-purchaseDetail-plist-unrouted',
@@ -17,6 +18,7 @@ export class UserPurchaseDetailPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   @Input() purchase_id: number = 0;
   @Input() product_id: number = 0;
+  @Input() id: number = 0;
 
   page: IPurchaseDetailPage | undefined;
   purchase: IPurchase | null = null;
@@ -30,6 +32,7 @@ export class UserPurchaseDetailPlistUnroutedComponent implements OnInit {
     private purchaseDetailAjaxService: PurchaseDetailAjaxService,
     private purchaseAjaxService: PurchaseAjaxService,
     private oRouter: Router,
+    private purchaseDetailPrintService: PurchaseDetailPrintService,
   ) { }
 
   ngOnInit() {
@@ -89,6 +92,10 @@ export class UserPurchaseDetailPlistUnroutedComponent implements OnInit {
 
     doView(producto: IProduct) {
       this.oRouter.navigate(['/user', 'product', 'view', producto.id]);
+    }
+
+    generatePDF(): void {
+      this.purchaseDetailPrintService.printFacturaCompra(this.purchase_id);
     }
   
 
