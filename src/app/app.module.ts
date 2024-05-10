@@ -36,6 +36,7 @@ import { HomeRoutedComponent } from './components/shared/home-routed/home-routed
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
 import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-routed.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterRoutedComponent } from './components/shared/register-routed/register-routed.component';
 // User components
 import { AdminUserFormUnroutedComponent } from './components/user/admin-user-form-unrouted/admin-user-form-unrouted.component';
 import { AdminUserPlistRoutedComponent } from './components/user/admin-user-plist-routed/admin-user-plist-routed.component';
@@ -103,6 +104,7 @@ registerLocaleData(localeEs);
     HomeRoutedComponent,
     LoginRoutedComponent,
     LogoutRoutedComponent,
+    RegisterRoutedComponent,
     // User components
     AdminUserFormUnroutedComponent,
     AdminUserPlistRoutedComponent,

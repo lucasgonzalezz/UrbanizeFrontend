@@ -1,0 +1,72 @@
+<div class="container">
+  <h1 class="title is-4 has-text-primary is-size-3">Registro de Nuevo Usuario</h1>
+  <div class="box is-shadowed box-background-color">
+    <form [formGroup]="userForm" (submit)="onSubmit()" class="has-background-light p-4 is-rounded">
+
+      <!-- Nombre -->
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input type="text" class="input" formControlName="name" placeholder="Ingrese su nombre">
+          <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'required')">Por favor, introduzca su nombre</div>
+          <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'minlength')">El nombre debe tener al menos 3 caracteres</div>
+          <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'maxlength')">El nombre no puede tener más de 255 caracteres</div>
+        </div>
+      </div>
+
+      <!-- Apellido -->
+      <div class="field">
+        <label class="label">Apellido</label>
+        <div class="control">
+          <input type="text" class="input" formControlName="last_name1" placeholder="Ingrese su apellido">
+          <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'required')">Por favor, introduzca su apellido</div>
+          <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+          <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input type="email" class="input" formControlName="email" placeholder="Ingrese su email">
+          <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'required')">Por favor, introduzca su email</div>
+          <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'email')">El email no es válido</div>
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="field">
+        <label class="label">Contraseña</label>
+        <div class="control">
+          <input type="password" class="input" formControlName="password" placeholder="Ingrese su contraseña">
+          <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'required')">Por favor, introduzca su contraseña</div>
+          <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'minlength')">La contraseña debe tener al menos 6 caracteres</div>
+        </div>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <div class="field">
+        <label class="label">Confirmar Contraseña</label>
+        <div class="control">
+          <input type="password" class="input" formControlName="confirmPassword" placeholder="Confirme su contraseña">
+          <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && hasError('confirmPassword', 'required')">Por favor, confirme su contraseña</div>
+          <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && userForm.get('password')?.value !== userForm.get('confirmPassword')?.value">Las contraseñas no coinciden</div>
+        </div>
+      </div>
+
+      <!-- Botón de Registro -->
+      <div class="field">
+        <div class="control has-text-centered">
+          <button type="submit" class="button is-primary mt-4">
+            <span>Registrarse</span>
+            <span class="icon">
+              <i class="fas fa-user-plus"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
