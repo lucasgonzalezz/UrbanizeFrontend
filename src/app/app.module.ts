@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -89,6 +89,10 @@ import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseD
 // Cart components
 import { UserCartPlistUnroutedComponent } from './components/cart/user-cart-plist-unrouted/user-cart-plist-unrouted.component';
 import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-routed/user-cart-plist-routed.component';
+
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -184,6 +188,8 @@ import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-
     ConfirmationService,
     PurchaseDetailPrintService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // Proporcionar el identificador de localización para 'es-ES'
+    { provide: LOCALE_ID, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent]
 })
