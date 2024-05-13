@@ -218,7 +218,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
       this.cart.product = { id: product.id } as IProduct;
       this.cart.amount = 1;
       this.cartAjaxService.createCart(this.cart).subscribe({
-      next: (data: ICart) => {
+        next: (data: ICart) => {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -227,14 +227,31 @@ export class UserProductPlistUnroutedComponent implements OnInit {
             timer: 1500,
             width: 600,
           });
+          this.actualizarStock(product.id, product); // Pasar el objeto product como argumento
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
+        }
+      });
+    }
+  }
+  
+  actualizarStock(productId: number, product: IProduct): void { // Asegúrate de recibir product aquí
+    const amount = -1;
+  
+    this.productService.updateStock(productId, amount).subscribe({
+      next: () => {
+        product.stock -= 1; // Usa el objeto product recibido como argumento
+        console.log('Stock actualizado correctamente.');
+        console.log('Stock actual:', product.stock); // Usa product en lugar de this.product
       },
       error: (err: HttpErrorResponse) => {
-        this.status = err;
-        this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
+        console.error('Error al actualizar el stock del producto:', err);
       }
     });
   }
-}
+  
 
   getTotalAPagar(): number {
     const totalAPagar = this.productosSeleccionados.reduce((total, producto) => total + producto.price, 0);

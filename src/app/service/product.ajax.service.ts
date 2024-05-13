@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { API_URL } from "src/environment/environment";
 import { IProduct, IProductPage } from "../model/model.interfaces";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -65,7 +66,6 @@ export class ProductAjaxService {
     return this.http.get<IProductPage>(this.url + '/category/' + category_id + '/price/' + price + '/desc?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
   }
 
-
   getProductPrice(id: number): Observable<number> {
     return this.http.get<number>(this.url + '/price/' + id);
   }
@@ -80,6 +80,11 @@ export class ProductAjaxService {
 
   updateProduct(product: IProduct): Observable<IProduct> {
     return this.http.put<IProduct>(this.url, product);
+  }
+
+  updateStock(productId: number, amount: number): Observable<IProduct> {
+    const newStock = { stock: amount };
+    return this.http.put<IProduct>(`${this.url}/${productId}/stock`, newStock);
   }
 
   deleteProduct(id: number | undefined): Observable<number> {

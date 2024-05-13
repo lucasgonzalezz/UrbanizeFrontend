@@ -38,6 +38,7 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   orderDirection: string = 'asc';
   rating: IRating | null = null;
 
+
   username: string = '';
   userSession: IUser | null = null;
 
@@ -70,7 +71,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.userAjaxService.getUserByUsername(this.sessionService.getUsername()).subscribe({
       next: (user: IUser) => {
         this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
@@ -91,7 +91,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     });
   }
 
-  // En tu componente de Angular
   increment() {
     if (this.cantidadSeleccionada < this.product.stock) {
       this.cantidadSeleccionada++;
@@ -103,7 +102,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
       this.cantidadSeleccionada--;
     }
   }
-
 
   getOne(): void {
     this.productService.getProductById(this.id).subscribe({
@@ -155,9 +153,8 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   }
 
   handleKeyDown(event: KeyboardEvent): void {
-    // Verificar si la tecla presionada no es una flecha hacia arriba o abajo
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
-      event.preventDefault(); // Prevenir la acción predeterminada (escribir el valor)
+      event.preventDefault();
     }
   }
 
@@ -168,7 +165,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
       this.cart.amount = this.cantidadSeleccionada;
       this.cartAjaxService.createCart(this.cart).subscribe({
         next: (data: ICart) => {
-          this.cart = data;
           Swal.fire({
             position: "center",
             icon: "success",
@@ -177,15 +173,32 @@ export class UserProductDetailUnroutedComponent implements OnInit {
             timer: 1500,
             width: 600,
           });
+          this.actualizarStock(this.product.id, this.cantidadSeleccionada);
+          this.cantidadSeleccionada = 1;
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
-          this.matSnackBar.open('Error al añadir la producto al carrito', 'Aceptar', { duration: 3000 });
+          this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
         }
       });
     }
   }
 
+  actualizarStock(productId: number, cantidadSeleccionada: number): void {
+    const amount = -cantidadSeleccionada;
+  
+    this.productService.updateStock(productId, amount).subscribe({
+      next: () => {
+        this.product.stock -= cantidadSeleccionada;
+        console.log('Stock actualizado correctamente.');
+        console.log('Stock actual:', this.product.stock);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error al actualizar el stock del producto:', err);
+      }
+    });
+  }
+  
   comprarDirectamente(): void {
     if (this.user) {
       const usuarioid = this.user.id;

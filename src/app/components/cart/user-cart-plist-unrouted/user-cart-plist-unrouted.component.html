@@ -23,30 +23,30 @@
         <td class="pt-6 font-semibold text-lg">{{cart.product.price.toFixed(2) + " €"}}</td>
         <td>
           <div style="display: flex; flex-direction: column; align-items: center;">
-            <button class="button is-primary is-rounded is-small mt-4" (click)="updateAmount(cart, cart.amount + 1)">
+            <button class="button is-primary is-rounded is-small mt-4" (click)="incrementAmount(cart, cart.amount + 1)">
               <span class="icon">
                 <i class="fas fa-plus"></i>
               </span>
             </button>
             {{cart.amount}}
-            <button class="button is-danger is-rounded is-small" (click)="updateAmount(cart, cart.amount - 1)">
+            <button class="button is-danger is-rounded is-small" (click)="decrementAmount(cart, cart.amount - 1)">
               <span class="icon">
                 <i class="fas fa-minus"></i>
               </span>
             </button>
           </div>
         </td>
-        <td class="pt-6 font-semibold text-lg">{{ individualPricel.get(cart.id)?.toFixed(2) + " €"  }} </td>
+        <td class="pt-6 font-semibold text-lg">{{ individualPricel.get(cart.id)?.toFixed(2) + " €" }} </td>
         <td>
           <button class="button is-primary is-rounded mr-3 mt-5" (click)="makeSingleCartPurchase(cart.id, cart)">
             <span>Comprar</span>
           </button>
-          <button class="button is-danger is-rounded mt-5" (click)="deleteCart(cart.id)">
+          <button class="button is-danger is-rounded mt-5" (click)="deleteCart(cart, cart.id)">
             <span class="icon">
               <i class="fas fa-trash-alt"></i>
             </span>
           </button>
-        </td>        
+        </td>
       </tr>
     </tbody>
   </table>
@@ -68,9 +68,6 @@
       </a>
     </div>
   </div>
-  
-  
-
 </div>
 
 <div class="notification is-primary" *ngIf="page && page.content.length === 0">
@@ -79,5 +76,3 @@
     <span>Seguir comprando</span>
   </a>
 </div>
-
-<p-confirmPopup></p-confirmPopup>

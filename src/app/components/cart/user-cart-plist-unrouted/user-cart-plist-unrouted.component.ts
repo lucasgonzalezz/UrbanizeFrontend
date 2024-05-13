@@ -10,6 +10,7 @@ import { CartAjaxService } from './../../../service/cart.ajax.service';
 import { PurchaseAjaxService } from 'src/app/service/purchase.ajax.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
 import Swal from 'sweetalert2';
+import { ProductAjaxService } from 'src/app/service/product.ajax.service';
 
 @Component({
   selector: 'app-user-cart-plist-unrouted',
@@ -30,6 +31,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   individualPricel: Map<number, number> = new Map<number, number>();
+  carts: ICart[] = []; // Change from cart to carts
 
   constructor(
     private cartAjaxService: CartAjaxService,
@@ -37,7 +39,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     private purchaseAjaxService: PurchaseAjaxService,
     private router: Router,
     private matSnackBar: MatSnackBar,
-    private confirmationService: ConfirmationService
+    private productAjaxService: ProductAjaxService
   ) { }
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class UserCartPlistUnroutedComponent implements OnInit {
           next: (page: ICartPage) => {
             this.page = page;
             this.paginatorState.pageCount = this.page.totalPages;
+            this.carts = this.page.content; // Assign fetched carts to carts property
             this.page.content.forEach((cart: ICart) => {
               this.getCostCart(cart);
             })
@@ -83,32 +86,77 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     this.individualPricel.set(cart.id, precioIndividual);
   }
 
-  updateAmount(cart: ICart, newAmount: number): void {
+  incrementAmount(cart: ICart, newAmount: number): void {
     const stockDisponible = cart.product.stock;
-
-    if (newAmount >= 0 && newAmount <= stockDisponible) {
-
-    cart.user = { id: cart.user.id } as IUser;
-    cart.product = { id: cart.product.id } as IProduct;
-    cart.amount = newAmount;
-    if (newAmount == 0) {
-      this.deleteCart(cart.id)
+  
+    if (newAmount >= 0 && stockDisponible != 0) {
+      cart.user = { id: cart.user.id } as IUser;
+      cart.product = { id: cart.product.id } as IProduct;
+      cart.amount = newAmount;
+  
+      if (newAmount === 0) {
+        this.deleteCart(cart, cart.id);
+      } else {
+        this.cartAjaxService.updateCart(cart).subscribe({
+          next: (data: ICart) => {
+            this.getCostCart(data);
+            this.updateTotalCost();
+            this.getCarts();
+            this.actualizarStock(cart.product.id, -1);
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.matSnackBar.open('Error al actualizar la cantidad', 'Aceptar', { duration: 3000 });
+          }
+        });
+      }
     } else {
-      this.cartAjaxService.updateCart(cart).subscribe({
-        next: (data: ICart) => {
-          this.getCostCart(data);
-          this.updateTotalCost();
-          this.getCarts();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-          this.matSnackBar.open('Error al actualizar la cantidad', 'Aceptar', { duration: 3000 })
-        }
-      })
+      this.matSnackBar.open('No hay más stock disponible', 'Aceptar', { duration: 3000 });
     }
-  } else {
-    this.matSnackBar.open('No hay mas stock disponible', 'Aceptar', { duration: 3000 });
   }
+  
+
+  decrementAmount(cart: ICart, newAmount: number): void {
+    if (newAmount >= 0) {
+      cart.user = { id: cart.user.id } as IUser;
+      cart.product = { id: cart.product.id } as IProduct;
+      cart.amount = newAmount;
+      
+      if (newAmount === 0) {
+        this.deleteCart(cart, cart.id);
+        this.actualizarStock(cart.product.id, 1);
+      } else {
+        this.cartAjaxService.updateCart(cart).subscribe({
+          next: (data: ICart) => {
+            this.getCostCart(data);
+            this.updateTotalCost();
+            this.getCarts();
+            this.actualizarStock(cart.product.id, 1);
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.matSnackBar.open('Error al actualizar la cantidad', 'Aceptar', { duration: 3000 });
+          }
+        });
+      }
+    } else {
+      this.matSnackBar.open('No se puede decrementar la cantidad a un valor negativo', 'Aceptar', { duration: 3000 });
+    }
+  }
+  
+  actualizarStock(productId: number, cantidadSeleccionada: number): void {
+    const amount = +cantidadSeleccionada;
+  
+    this.productAjaxService.updateStock(productId, amount).subscribe({
+      next: () => {
+        this.product.stock -= cantidadSeleccionada;
+        console.log('Stock actualizado correctamente.');
+        console.log('Stock actual:', this.product.stock);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error al actualizar el stock del producto:', err);
+      }
+    });
   }
 
   updateTotalCost(): void {
@@ -226,14 +274,16 @@ export class UserCartPlistUnroutedComponent implements OnInit {
       }
     });
   }
-  
 
-  deleteCart(cart_id: number): void {
+  deleteCart(cart: ICart, cart_id: number): void {
 
         this.cartAjaxService.deleteCart(cart_id).subscribe({
           next: () => {
             this.matSnackBar.open('Producto eliminado de la cesta', 'Aceptar', { duration: 3000 });
             this.getCarts();
+            console.log(cart.product.id, cart.amount)
+            this.actualizarStock(cart.product.id, +cart.amount);
+
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
@@ -253,9 +303,22 @@ export class UserCartPlistUnroutedComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
+        // Antes de eliminar todos los carritos, guardamos las cantidades de cada producto
+        const quantitiesToRestore: { productId: number, quantity: number }[] = [];
+  
+        for (const cart of this.carts) {
+          quantitiesToRestore.push({ productId: cart.product.id, quantity: cart.amount });
+        }
+  
         this.cartAjaxService.deleteCartByUsuario(user_id).subscribe({
           next: () => {
             this.matSnackBar.open('Productos eliminados de la cesta', 'Aceptar', { duration: 3000 });
+  
+            // Devolver el stock de cada producto
+            for (const item of quantitiesToRestore) {
+              this.actualizarStock(item.productId, item.quantity);
+            }
+  
             this.getCarts();
           },
           error: (err: HttpErrorResponse) => {
@@ -268,5 +331,6 @@ export class UserCartPlistUnroutedComponent implements OnInit {
       }
     });
   }
+  
   
 }
