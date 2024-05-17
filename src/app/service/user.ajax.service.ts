@@ -10,6 +10,7 @@ import { IUser, IUserPage } from "../model/model.interfaces";
 export class UserAjaxService {
 
   url: string = API_URL + '/user';
+  baseUrl: any;
 
   constructor(private http: HttpClient) {
   }
@@ -17,6 +18,11 @@ export class UserAjaxService {
   getUserById(id: number): Observable<IUser> {
     return this.http.get<IUser>(this.url + '/' + id);
   }
+
+    createUserWithPassword(user: IUser, password: string): Observable<number> {
+      const url = this.url + `/createWithPassword?password=${password}`; 
+      return this.http.post<number>(url, user);
+    }
 
   getUserByUsername(username: string): Observable<IUser> {
     return this.http.get<IUser>(this.url + '/username/' + username);
