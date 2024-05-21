@@ -67,15 +67,15 @@ export class RatingAjaxService {
 
   getRatingPageByProduct(product_id: number, size: number, page: number, sort: string, direction: string): Observable<IRatingPage> {
     return this.http.get<IRatingPage>(this.url + '/byProduct/' + product_id + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
-}
+  }
 
   getRatingPageByUser(user_id: number, page: number, size: number, sort: string, direction: string): Observable<IRatingPage> {
     return this.http.get<IRatingPage>(this.url + '/user/' + user_id + '?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
   }
 
-  getRatingByUserAndProduct(user_id: number, product_id: number): Observable<IRating> {
-    return this.http.get<IRating>(this.url + '/byProductAndUser' + '/' + product_id + '/' + user_id);
-  }
+  // getRatingByUserAndProduct(user_id: number, product_id: number): Observable<IRating> {
+  //   return this.http.get<IRating>(this.url + '/byProductAndUser' + '/' + product_id + '/' + user_id);
+  // }
 
   getAverageRatingByProduct(product_id: number): Observable<number> {
     return this.http.get<number>(this.url + '/product/' + product_id + '/average');
@@ -119,6 +119,9 @@ export class RatingAjaxService {
   // Get ratings sorted by newest for a user
   getRatingesByUserNewest(user_id: number, page: number, size: number, sort: string, direction: string): Observable<IRatingPage> {
     return this.http.get<IRatingPage>(this.url + '/user/' + user_id + '/newest?page=' + page + '&size=' + size + '&sort=' + sort + ',' + direction);
+  }
+  getRatingByUserAndProduct(user_id: number, product_id: number): Observable<IRating> {
+    return this.http.get<IRating>(`${this.url}/user/${user_id}/product/${product_id}`);
   }
 
 }

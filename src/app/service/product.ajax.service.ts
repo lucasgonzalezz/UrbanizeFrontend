@@ -19,7 +19,7 @@ export class ProductAjaxService {
     return this.http.get<IProduct>(this.url + '/' + id);
   }
 
-  getPageProducts(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, category_id:number, strFilter?: string): Observable<IProductPage> {
+  getPageProducts(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, category_id: number, strFilter?: string): Observable<IProductPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
@@ -68,6 +68,10 @@ export class ProductAjaxService {
 
   getProductPrice(id: number): Observable<number> {
     return this.http.get<number>(this.url + '/price/' + id);
+  }
+
+  getProductPurchased(user_id: number, size: number, page: number, sort: string, direction: string): Observable<IProductPage> {
+    return this.http.get<IProductPage>(`${this.url}/purchased?userId=${user_id}&size=${size}&page=${page}&sort=${sort},${direction}`);
   }
 
   createProduct(product: IProduct): Observable<IProduct> {

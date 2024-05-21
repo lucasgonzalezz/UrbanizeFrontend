@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { ICart, IProduct, IRating, IRatingPage } from 'src/app/model/model.interfaces';
+import { ICart, IProduct, IProductPage, IRating, IRatingPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
@@ -37,7 +37,8 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   orderField: string = 'id';
   orderDirection: string = 'asc';
   rating: IRating | null = null;
-
+  userPurchased: boolean = false;
+  userRatinged: boolean = false;
 
   username: string = '';
   userSession: IUser | null = null;
@@ -82,10 +83,14 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.getProduct();
     this.getUser();
     this.getRatings();
+    this.verifyRating();
+    console.log(this.userPurchased);
+    console.log(this.userRatinged);
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
           this.getRatings();
+          this.verifyRating();
         }
       }
     });
@@ -151,6 +156,45 @@ export class UserProductDetailUnroutedComponent implements OnInit {
       }
     })
   }
+
+  verifyRating() {
+    this.sessionService.getSessionUser()?.subscribe({
+      next: (data: IUser) => {
+        this.user = data;
+
+        if (this.user) {
+          this.userPurchased = false;
+          this.userRatinged = false;
+
+          this.productService.getProductPurchased(this.user.id, 100, 0, 'id', 'asc').subscribe({
+            next: (page: IProductPage) => {
+              const productos = page.content;
+              this.userPurchased = productos.some(product => product.id === this.product.id);
+
+              this.ratingService.getRatingByUserAndProduct(this.user.id, this.product.id).subscribe({
+                next: (rating: IRating) => {
+                  this.userRatinged = !!rating;
+                },
+                error: (err: HttpErrorResponse) => {
+                  this.status = err;
+                  console.error('Error al obtener la valoración', err);
+                }
+              });
+            },
+            error: (err: HttpErrorResponse) => {
+              this.status = err;
+              console.error('Error al obtener los productos comprados', err);
+            }
+          });
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+        console.error('Error al obtener la sesión del usuario', err);
+      }
+    });
+  }
+
 
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
@@ -240,41 +284,60 @@ export class UserProductDetailUnroutedComponent implements OnInit {
   realizarValoracion(product: IProduct, user: IUser): void {
     const product_id = product.id;
     const user_id = user.id;
-
-    this.ratingService.getRatingByUserAndProduct(user_id, product_id).subscribe((rating) => {
-      if (rating) {
-        Swal.fire({
-          position: "center",
-          width: 500,
-          icon: "error",
-          title: "Ya has valorado este producto",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } else {
-        if (this.sessionService.isSessionActive()) {
-          this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
-            data: {
-              user_id: this.user?.id,
-              product_id: product_id
-            },
-            header: 'Valorar producto',
-            width: '70%',
-            contentStyle: { "max-height": "500px", "overflow": "auto" },
-            maximizable: false
+  
+    this.ratingService.getRatingByUserAndProduct(user_id, product_id).subscribe({
+      next: (rating: IRating) => {
+        this.userRatinged = !!rating;
+  
+        if (this.userRatinged) {
+          Swal.fire({
+            position: "center",
+            width: 500,
+            icon: "error",
+            title: "Ya has valorado este producto",
+            showConfirmButton: false,
+            timer: 1500,
           });
-
-          this.ref.onClose.subscribe({
-            next: (v) => {
-              if (v) {
-                this.getRatings();
+        } else if (!this.userPurchased) {
+          Swal.fire({
+            position: "center",
+            width: 500,
+            icon: "error",
+            title: "Debes comprar el producto para valorarlo",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          if (this.sessionService.isSessionActive()) {
+            this.ref = this.dialogService.open(UserProductRatingFormUnroutedComponent, {
+              data: {
+                user_id: this.user?.id,
+                product_id: product_id
+              },
+              header: 'Valorar producto',
+              width: '70%',
+              contentStyle: { "max-height": "500px", "overflow": "auto" },
+              maximizable: false
+            });
+  
+            this.ref.onClose.subscribe({
+              next: (v) => {
+                if (v) {
+                  this.getRatings();
+                  this.verifyRating();
+                }
               }
-            }
-          });
+            });
+          }
         }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+        console.error('Error al obtener la valoración', err);
       }
     });
   }
+  
 
   isUsuarioValoracion(rating: IRating): boolean {
     return this.user !== null && rating.user.id === this.user.id;
