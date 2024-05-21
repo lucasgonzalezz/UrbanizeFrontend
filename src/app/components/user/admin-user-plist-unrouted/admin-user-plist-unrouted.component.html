@@ -54,7 +54,7 @@
             <p><a [routerLink]="['/admin', 'rating', 'plist', 'byuser', user.id]"> {{user.ratings}}</a></p>
           </td>
           <td>
-            <p>{{ user.purchases }}</p>
+            <p><a [routerLink]="['/admin', 'purchase', 'plist', user.id]"> {{ user.purchases }}</a></p>
           </td>
           <td class="user-actions has-text-centered">
             <a [routerLink]="['/admin', 'user', 'edit', user.id]" class="button is-primary is-small mr-2 is-rounded"

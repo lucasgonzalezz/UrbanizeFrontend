@@ -1,0 +1,77 @@
+<div class="container">
+
+  <div class="notification" *ngIf="user_id>0">
+    Filtrando por usuario: {{ user?.name }}
+    <button class="delete" *ngIf="user_id>0" [routerLink]="['/admin', 'user', 'plist']">Quitar filtro</button>
+  </div>
+
+  <!-- <div class="relative flex items-center">
+    <input type="text" [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+      class="w-52 h-10 pl-10 border rounded-full focus:outline-none focus:border-cyan-900 text-cyan-900" />
+    <i class="fas fa-search absolute left-3 text-cyan-900 cursor-pointer"></i>
+  </div> -->
+
+  <div class="col-lg-2 col-md-12 d-none d-md-block">
+    <h3 class="text-right mb-4 mr-2 text-xl text-cyan-900 font-semibold">Mostrando {{page?.numberOfElements}} de
+      {{page?.totalElements}}</h3>
+  </div>
+
+  <!-- Contenido de compras como tabla -->
+  <div class="overflow-x-auto mb-5">
+    <table class="table is-fullwidth is-hoverable is-rounded has-shadow">
+      <thead class="has-background-primary">
+        <tr>
+          <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+          <th (click)="doOrder('purchase_code')" class="has-text-centered is-size-5 has-text-white">Código de compra</th>
+          <th (click)="doOrder('purchase_date')" class="has-text-centered is-size-5 has-text-white">Fecha de compra</th>
+          <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchase of page?.content" class="purchase-item has-text-centered">
+          <td>
+            <p>{{ purchase.id }}</p>
+          </td>
+          <td>
+            <p>{{ purchase.purchaseCode }}</p>
+          </td>
+          <td>
+            <p>{{ purchase.purchaseDate| date: 'dd-MM-yyyy' }}</p>
+          </td>
+          <td class="purchase-actions has-text-centered">
+            <button (click)="doView(purchase)" class="button is-primary is-small mr-2 is-rounded" title="Ver Detalles">
+              <span class="icon">
+                <i class="fas fa-eye"></i>
+              </span>
+            </button>
+            <button (click)="doRemove(purchase)" class="button is-danger is-small is-rounded" title="Eliminar">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <thead class="has-background-primary">
+        <tr>
+          <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">ID</th>
+          <th (click)="doOrder('purchase_code')" class="has-text-centered is-size-5 has-text-white">Código de compra</th>
+          <th (click)="doOrder('purchase_date')" class="has-text-centered is-size-5 has-text-white">Fecha de compra</th>
+          <th class="has-text-centered is-size-5 has-text-white">Acciones</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <!-- Mensaje si no hay compras -->
+  <div class="notification is-primary" *ngIf="!page?.content || page?.content?.length === 0">
+    No hay compras para mostrar.
+  </div>
+
+  <div class="flex-auto mx-auto">
+    <p-paginator class="flex items-center justify-center rounded" (onPageChange)="onPageChange($event)"
+      [first]="paginatorState.first!" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0"
+      [rowsPerPageOptions]="[10, 20, 30]">
+    </p-paginator>
+  </div>
+</div>

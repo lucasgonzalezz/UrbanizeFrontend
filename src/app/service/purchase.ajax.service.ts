@@ -22,13 +22,15 @@ export class PurchaseAjaxService {
     return this.http.get<IPurchasePage>(this.url + '/byUser/' + user_id + "?size=" + size + "&page=" + page + '&sort=' + sort + ',' + direction);
   }
 
-  getPagePurchases(size: number, page: number, sort: string, direction: string, user_id: number): Observable<IPurchasePage> {
-    let user = '';
+  getPagePurchases(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, user_id: number): Observable<IPurchasePage> {
+    let userParam = "";
     if (user_id > 0) {
-      user = '&user=' + user_id;
+        userParam = '&user=' + user_id;
     }
-    return this.http.get<IPurchasePage>(this.url + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction + user);
+    const url = `${this.url}?size=${size}&page=${page}&sort=${orderField},${orderDirection}${userParam}`;
+    return this.http.get<IPurchasePage>(url);
 }
+
 
   getPurchaseRandom(): Observable<IPurchase> {
     return this.http.get<IPurchase>(this.url + '/random');

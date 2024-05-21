@@ -30,6 +30,7 @@ import { UserCartPlistRoutedComponent } from './components/cart/user-cart-plist-
 import { UserUserViewRoutedComponent } from './components/user/user-user-view-routed/user-user-view-routed.component';
 import { UserUserEditRoutedComponent } from './components/user/user-user-edit-routed/user-user-edit-routed.component';
 import { RegisterRoutedComponent } from './components/shared/register-routed/register-routed.component';
+import { AdminPurchasePlistRoutedComponent } from './components/purchase/admin-purchase-plist-routed/admin-purchase-plist-routed.component';
 
 const routes: Routes = [
   // Shared routes
@@ -45,7 +46,6 @@ const routes: Routes = [
   { path: 'admin/user/view/:id', component: AdminUserViewRoutedComponent },
   { path: 'user/user/view/:id', component: UserUserViewRoutedComponent },
   { path: 'user/user/edit/:id', component: UserUserEditRoutedComponent },
-
   // Product routes
   { path: 'admin/product/plist', component: AdminProductPlistRoutedComponent },
   { path: 'admin/product/edit/:id', component: AdminProductEditRoutedComponent },
@@ -67,6 +67,7 @@ const routes: Routes = [
   // Purchase routes
   { path: 'user/purchase/plist/:id', component: UserPurchasePlistRoutedComponent },
   { path: 'user/purchase/view/:id', component: UserPurchaseViewRoutedComponent },
+  { path: 'admin/purchase/plist/:user_id', component: AdminPurchasePlistRoutedComponent },
   // Cart routes
   { path: 'user/cart/plist', component: UserCartPlistRoutedComponent },
 ];

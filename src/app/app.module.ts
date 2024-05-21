@@ -85,6 +85,9 @@ import { UserPurchasePlistUnroutedComponent } from './components/purchase/user-p
 import { UserPurchasePlistRoutedComponent } from './components/purchase/user-purchase-plist-routed/user-purchase-plist-routed.component';
 import { UserPurchaseDetailUnroutedComponent } from './components/purchase/user-purchase-detail-unrouted/user-purchase-detail-unrouted.component';
 import { UserPurchaseViewRoutedComponent } from './components/purchase/user-purchase-view-routed/user-purchase-view-routed.component';
+import { AdminPurchasePlistUnroutedComponent } from './components/purchase/admin-purchase-plist-unrouted/admin-purchase-plist-unrouted.component';
+import { AdminPurchasePlistRoutedComponent } from './components/purchase/admin-purchase-plist-routed/admin-purchase-plist-routed.component';
+import { AdminPurchaseDetailUnroutedComponent } from './components/purchase/admin-purchase-detail-unrouted/admin-purchase-detail-unrouted.component';
 // PurchaseDetail components
 import { UserPurchaseDetailPlistUnroutedComponent } from './components/purchaseDetail/user-purchaseDetail-plist-unrouted/user-purchaseDetail-plist-unrouted.component';
 // Cart components
@@ -132,6 +135,7 @@ registerLocaleData(localeEs);
     UserProductDetailUnroutedComponent,
     UserProductViewRoutedComponent,
     UserProductRatingFormUnroutedComponent,
+    AdminPurchasePlistUnroutedComponent,
     // Category components
     AdminCategoryPlistUnroutedComponent,
     AdminCategoryPlistRoutedComponent,
@@ -154,6 +158,8 @@ registerLocaleData(localeEs);
     UserPurchasePlistRoutedComponent,
     UserPurchaseDetailUnroutedComponent,
     UserPurchaseViewRoutedComponent,
+    AdminPurchasePlistRoutedComponent,
+    AdminPurchaseDetailUnroutedComponent,
     // PurchaseDetail components
     UserPurchaseDetailPlistUnroutedComponent,
     // Cart components
