@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { IUser, IUserPage } from 'src/app/model/model.interfaces';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { AdminUserDetailUnroutedComponent } from '../admin-user-detail-unrouted/admin-user-detail-unrouted.component';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [DialogService, ConfirmationService],
@@ -54,11 +55,6 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
         this.page = data;
         this.paginatorState.pageCount = data.totalPages;
         this.usuarios = data.content;
-        console.log("pageCount: " + this.paginatorState.pageCount);
-        console.log(data);
-        console.log(this.paginatorState.page);
-        console.log(this.usuarios)
-
       },
       error: (response: HttpErrorResponse) => {
         this.status = response;
@@ -89,8 +85,22 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
 
   doRemove(user: IUser) {
     this.usuarioABorrar = user;
-    this.confirmationService.confirm({
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar el usuario?",
+      html: `
+        <div style="text-align: center;">
+          <br><p>Nombre: <strong>${user.username}</strong></p><br>
+          <p>DNI: <strong>${user.dni}</strong></p><br>
+        </div>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.matSnackBar.open("Se ha eliminado el usuario", 'Aceptar', { duration: 3000 });
         this.userAjaxService.deleteUser(user.id).subscribe({
           next: () => {
@@ -100,7 +110,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
             this.status = err;
           }
         });
-      },
+      }
       reject: (type: ConfirmEventType) => {
         this.matSnackBar.open("No se ha podido eliminar el usuario", 'Aceptar', { duration: 3000 });
       }

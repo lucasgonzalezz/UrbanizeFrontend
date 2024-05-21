@@ -9,6 +9,7 @@ import { ICategory, IProduct, IProductPage } from 'src/app/model/model.interface
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
 import { AdminProductDetailUnroutedComponent } from '../admin-product-detail-unrouted/admin-product-detail-unrouted.component';
 import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [DialogService, ConfirmationService],
@@ -93,23 +94,33 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
 
   doRemove(product: IProduct) {
     this.productToDelete = product;
-    this.confirmationService.confirm({
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar el producto?",
+      html: `
+        <div style="text-align: center;">
+          <p>Nombre: <strong>${product.name}</strong></p><br>
+        </div>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.matSnackBar.open("Se ha eliminado el producto", 'Aceptar', { duration: 3000 });
         this.productAjaxService.deleteProduct(product.id).subscribe({
           next: () => {
             this.getPage();
           },
           error: (err: HttpErrorResponse) => {
-            this.status = err;
+            this.matSnackBar.open("No se ha podido eliminar el producto", 'Aceptar', { duration: 3000 });
           }
         });
-      },
-      reject: (type: ConfirmEventType) => {
-        this.matSnackBar.open("No se ha podido eliminar el producto", 'Aceptar', { duration: 3000 });
       }
-    })
-  }
+    });
+  }  
 
   onInputChange(query: string): void {
     if (query.length > 2) {

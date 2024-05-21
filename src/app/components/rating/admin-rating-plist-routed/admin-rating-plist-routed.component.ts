@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RatingAjaxService } from '../../../service/rating.ajax.service';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [ConfirmationService],
@@ -49,11 +50,16 @@ export class AdminRatingPlistRoutedComponent implements OnInit {
   }
 
   doEmpty(event: Event) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: '¿Está seguro que desea eliminar todas las valoraciones?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar todas las valoraciones?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.ratingAjaxService.deleteAllRatinges().subscribe({
           next: (response: number) => {
             this.matSnackBar.open(`Todas las valoraciones han sido eliminadas, ahora hay ${response} valoraciones`, 'Aceptar', { duration: 3000 });
@@ -65,13 +71,8 @@ export class AdminRatingPlistRoutedComponent implements OnInit {
             this.bLoading = false;
           }
         });
-      },
-      reject: () => {
-        this.matSnackBar.open("Se ha cancelado la eliminación de las valoraciones", "Aceptar", { duration: 3000 });
-        this.bLoading = false;
       }
     });
   }
-  
 
 }

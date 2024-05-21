@@ -4,18 +4,18 @@ import { API_URL } from "src/environment/environment";
 import { UserAjaxService } from "./user.ajax.service";
 import { IPrelogin, IToken, IUser, SessionEvent } from "../model/model.interfaces";
 import { Observable, Subject } from "rxjs";
+import { tap } from 'rxjs/operators';
 
-@Injectable()
-
+@Injectable({
+  providedIn: 'root'
+})
 export class SessionAjaxService {
 
   private url = API_URL + '/session';
-
   subjectSession = new Subject<SessionEvent>();
+  private userSession: IUser | null = null;
 
-  constructor(private http: HttpClient, private userAjaxService: UserAjaxService) {
-
-  }
+  constructor(private http: HttpClient, private userAjaxService: UserAjaxService) { }
 
   private parseJwt(token: string): IToken {
     var base64url = token.split('.')[1];
@@ -26,7 +26,7 @@ export class SessionAjaxService {
 
     return JSON.parse(jsonPayload);
   }
-
+  
   prelogin(): Observable<IPrelogin> {
     return this.http.get<IPrelogin>(this.url + '/prelogin');
   }
@@ -41,6 +41,7 @@ export class SessionAjaxService {
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
+    this.loadUserSession();
   }
 
   getToken(): string | null {
@@ -49,6 +50,7 @@ export class SessionAjaxService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.userSession = null;
   }
 
   isSessionActive(): boolean {
@@ -86,12 +88,21 @@ export class SessionAjaxService {
     this.subjectSession.next(event);
   }
 
-  getSessionUser(): Observable<IUser> | null {
+  getSessionUser(): Observable<IUser> {
+    return this.userAjaxService.getUserByUsername(this.getUsername()).pipe(
+      tap(user => this.userSession = user)
+    );
+  }
+
+  private loadUserSession(): void {
     if (this.isSessionActive()) {
-      return this.userAjaxService.getUserByUsername(this.getUsername());
-    } else {
-      return null;
+      this.getSessionUser().subscribe(user => {
+        this.userSession = user;
+      });
     }
   }
 
+  getUserSession(): IUser | null {
+    return this.userSession;
+  }
 }

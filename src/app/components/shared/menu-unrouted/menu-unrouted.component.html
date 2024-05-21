@@ -16,30 +16,28 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul
         class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-tradewind-500 rounded-lg bg-tradewind-500 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-tradewind-500 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a class="block py-2 px-3 md:p-0 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url=='/home' || url=='/' ? 'bg-slate-300' : '' }}"
-            aria-current="page" routerLink="/home">Home</a>
-        </li>
+        <ng-container *ngIf="!username || (username && userSession?.role==false)">
+          <li>
+            <a class="block py-2 px-3 md:p-0 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url=='/home' || url=='/' ? 'bg-slate-300' : '' }}"
+              aria-current="page" routerLink="/home">Home</a>
+          </li>
+        </ng-container>
         <ng-container *ngIf="username && userSession?.role==true">
           <li>
             <a class="block py-2 px-3 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url.startsWith('/admin/user') ? 'bg-slate-300' : '' }}"
-              aria-current="page" routerLink="/admin/user/plist"
-              *ngIf="username && userSession?.role==true">Usuarios</a>
+              aria-current="page" routerLink="/admin/user/plist">Usuarios</a>
           </li>
           <li>
             <a class="block py-2 px-3 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url.startsWith('/admin/product') ? 'bg-slate-300' : '' }}"
-              aria-current="page" routerLink="/admin/product/plist"
-              *ngIf="username && userSession?.role==true">Productos</a>
+              aria-current="page" routerLink="/admin/product/plist">Productos</a>
           </li>
           <li>
             <a class="block py-2 px-3 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url.startsWith('/admin/category') ? 'bg-slate-300' : '' }}"
-              aria-current="page" routerLink="/admin/category/plist"
-              *ngIf="username && userSession?.role==true">Categorías</a>
+              aria-current="page" routerLink="/admin/category/plist">Categorías</a>
           </li>
           <li>
             <a class="block py-2 px-3 text-cyan-900 md:border-0 font-bold text-xl nav-link nav-item rounded {{ url.startsWith('/admin/rating') ? 'bg-slate-300' : '' }}"
-              aria-current="page" routerLink="/admin/rating/plist"
-              *ngIf="username && userSession?.role==true">Valoraciones</a>
+              aria-current="page" routerLink="/admin/rating/plist">Valoraciones</a>
           </li>
         </ng-container>
         <ng-container *ngIf="username && userSession?.role==false">

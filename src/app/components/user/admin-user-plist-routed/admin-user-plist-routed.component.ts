@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [ConfirmationService],
@@ -40,11 +41,16 @@ export class AdminUserPlistRoutedComponent implements OnInit {
   }
 
   doEmpty($event: Event) {
-    this.confirmationService.confirm({
-      target: $event.target as EventTarget,
-      message: '¿Está seguro que desea eliminar todos los usuarios?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar todos los usuarios?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.userAjaxService.deleteAllUsers().subscribe({
           next: (response: number) => {
             this.matSnackBar.open(`Todos los usuarios han sido eliminados`, 'Aceptar', { duration: 3000 });
@@ -55,9 +61,9 @@ export class AdminUserPlistRoutedComponent implements OnInit {
             this.matSnackBar.open(`Se ha producido un error al eliminar todos los usuarios: ${err.message}`, 'Aceptar', { duration: 3000 });
             this.bLoading = false;
           }
-        })
+        });
       }
-    })
-  }
+    });
+  }  
 
 }

@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { ProductAjaxService } from 'src/app/service/product.ajax.service';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [ConfirmationService],
@@ -21,7 +22,6 @@ export class AdminProductPlistRoutedComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productAjaxService: ProductAjaxService,
-    private confirmationService: ConfirmationService,
     private matSnackBar: MatSnackBar,
   ) { 
     this.category_id = parseInt(this.activatedRoute.snapshot.paramMap.get('category_id') ?? "0");
@@ -45,11 +45,16 @@ export class AdminProductPlistRoutedComponent implements OnInit {
   }
 
   doEmpty($event: Event) {
-    this.confirmationService.confirm({
-      target: $event.target as EventTarget,
-      message: '¿Está seguro que desea eliminar todos los productos?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar todos los productos?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.productAjaxService.deleteAllProducts().subscribe({
           next: (response: number) => {
             this.matSnackBar.open(`Todos los productos han sido eliminados`, 'Aceptar', { duration: 3000 });
@@ -60,9 +65,9 @@ export class AdminProductPlistRoutedComponent implements OnInit {
             this.matSnackBar.open(`Se ha producido un error al eliminar todos los productos: ${err.message}`, 'Aceptar', { duration: 3000 });
             this.bLoading = false;
           }
-        })
+        });
       }
-    })
+    });
   }
 
 }

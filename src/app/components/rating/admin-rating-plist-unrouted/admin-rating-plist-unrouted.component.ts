@@ -10,6 +10,7 @@ import { ProductAjaxService } from '../../../service/product.ajax.service';
 import { UserAjaxService } from '../../../service/user.ajax.service';
 import { RatingAjaxService } from '../../../service/rating.ajax.service';
 import { AdminRatingDetailUnroutedComponent } from '../admin-rating-detail-unrouted/admin-rating-detail-unrouted.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-rating-plist-unrouted',
@@ -119,24 +120,35 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
 
   doRemove(valoracion: IRating) {
     this.ratingToDelete = valoracion;
-    this.confirmationService.confirm({
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar la valoración?",
+      html: `
+        <div style="text-align: center;">
+          <br><p>Titulo: <strong>${this.ratingToDelete.title}</strong></p><br>
+          <p>Comentario: <strong>${this.ratingToDelete.description}</strong></p><br>
+        </div>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.ratingAjaxService.deleteRating(valoracion.id).subscribe({
           next: () => {
-            this.matSnackBar.open("Valoracion borrada", "Aceptar", { duration: 3000 });
+            this.matSnackBar.open("Valoración eliminada", "Aceptar", { duration: 3000 });
             this.getPage();
           },
           error: (err: HttpErrorResponse) => {
-            this.status = err;
-            this.matSnackBar.open("Error al borrar la valoracion", "Aceptar", { duration: 3000 });
+            this.matSnackBar.open(`Error al eliminar la valoración: ${err.message}`, "Aceptar", { duration: 3000 });
           }
         });
-      },
-      reject: () => {
-        this.matSnackBar.open("No se ha borrado la valoracion", "Aceptar", { duration: 3000 });
       }
     });
   }
+  
 
   getUser(): void {
     this.userAjaxService.getUserById(this.user_id).subscribe({

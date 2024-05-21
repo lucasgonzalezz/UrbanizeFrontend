@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { ICategory, ICategoryPage } from 'src/app/model/model.interfaces';
 import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
 import { AdminCategoryDetailUnroutedComponent } from '../admin-category-detail-unrouted/admin-category-detail-unrouted.component';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [DialogService, ConfirmationService],
@@ -112,22 +113,34 @@ export class AdminCategoryPlistUnroutedComponent implements OnInit {
 
   doRemove(category: ICategory) {
     this.categoryToDelete = category;
-    this.confirmationService.confirm({
-      accept: () => {
-        this.matSnackBar.open("Se ha eliminado la categoria", 'Aceptar', { duration: 3000 });
+    Swal.fire({
+      title: "¿Estás seguro de eliminar la categoría?",
+      html: `
+        <div style="text-align: center;">
+          <p>Nombre de la categoría: <strong>${this.categoryToDelete.name}</strong></p>
+        </div>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.categoryAjaxService.deleteCategory(category.id).subscribe({
           next: () => {
+            this.matSnackBar.open("Se ha eliminado la categoría", 'Aceptar', { duration: 3000 });
             this.getPage();
           },
           error: (err: HttpErrorResponse) => {
-            this.status = err;
+            this.matSnackBar.open(`No se ha podido eliminar la categoría: ${err.message}`, 'Aceptar', { duration: 3000 });
           }
         });
-      },
-      reject: (type: ConfirmEventType) => {
-        this.matSnackBar.open("No se ha podido eliminar la categoria", 'Aceptar', { duration: 3000 });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.matSnackBar.open("Operación cancelada", 'Aceptar', { duration: 3000 });
       }
-    })
-  }
+    });
+  }  
 
 }

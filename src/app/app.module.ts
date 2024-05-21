@@ -158,7 +158,7 @@ registerLocaleData(localeEs);
     UserPurchaseDetailPlistUnroutedComponent,
     // Cart components
     UserCartPlistUnroutedComponent,
-    UserCartPlistRoutedComponent
+    UserCartPlistRoutedComponent,
   ],
   imports: [
     BrowserModule,

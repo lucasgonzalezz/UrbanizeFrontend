@@ -59,8 +59,22 @@ export class LoginRoutedComponent implements OnInit {
         next: (data: string) => {
           this.sessionService.setToken(data);
           this.sessionService.emit({ type: 'login' });
-          this.router.navigate(['/home']);
-        }, error: (error: HttpErrorResponse) => {
+          this.sessionService.getSessionUser().subscribe({
+            next: (user) => {
+              if (user.role) {
+                this.router.navigate(['/admin/user/plist']);
+              } else {
+                this.router.navigate(['/home']);
+              }
+            },
+            error: (error: HttpErrorResponse) => {
+              this.status = error;
+              this.showNotificationWithMessage('Error al obtener la sesión del usuario');
+              this.router.navigate(['/home']);
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
           this.status = error;
           this.showNotificationWithMessage('Error al iniciar sesión');
           this.getPreloginData();
@@ -89,6 +103,6 @@ export class LoginRoutedComponent implements OnInit {
     setTimeout(() => {
       this.notificationMessage = null;
       this.showNotification = false;
-    }, 2000); // Oculta la notificación después de 2 segundos
+    }, 2000);
   }
 }

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { CategoryAjaxService } from 'src/app/service/category.ajax.service';
+import Swal from 'sweetalert2';
 
 @Component({
   providers: [ConfirmationService],
@@ -40,24 +41,30 @@ export class AdminCategoryPlistRoutedComponent implements OnInit {
   }
 
   doEmpty($event: Event) {
-    this.confirmationService.confirm({
-      target: $event.target as EventTarget,
-      message: '¿Está seguro que desea eliminar todos los categorias?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar todas las categorías?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#164e63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.categoryAjaxService.deleteAllCategoryes().subscribe({
           next: (response: number) => {
-            this.matSnackBar.open(`Todos los categorias han sido eliminados`, 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open(`Todas las categorías han sido eliminadas`, 'Aceptar', { duration: 3000 });
             this.forceReload.next(true);
             this.bLoading = false;
           },
           error: (err: HttpErrorResponse) => {
-            this.matSnackBar.open(`Se ha producido un error al eliminar todos los categorias: ${err.message}`, 'Aceptar', { duration: 3000 });
+            this.matSnackBar.open(`Se ha producido un error al eliminar todas las categorías: ${err.message}`, 'Aceptar', { duration: 3000 });
             this.bLoading = false;
           }
-        })
+        });
       }
-    })
+    });
   }
+  
 
 }
