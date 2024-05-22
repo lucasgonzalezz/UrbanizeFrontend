@@ -5,10 +5,17 @@
         <div class="card-content">
           <div class="content">
             <h5 class="title is-4 has-text-primary">Detalles de Compra</h5>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Producto:</b> {{ purchaseDetail.product.name }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Precio:</b> {{ purchaseDetail.product.price }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Cantidad:</b> {{ purchaseDetail.amount }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Precio total:</b> {{ purchaseDetail.product.price * purchaseDetail.amount }}</p>
+            <ng-container *ngIf="purchaseDetails.length > 0; else noDetails">
+              <div *ngFor="let purchaseDetail of purchaseDetails">
+                <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Producto:</b> {{ purchaseDetail.product.name }}</p>
+                <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Precio:</b> {{ purchaseDetail.product.price }}</p>
+                <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Cantidad:</b> {{ purchaseDetail.amount }}</p>
+                <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Precio total:</b> {{ purchaseDetail.product.price * purchaseDetail.amount }}</p><br>
+              </div>
+            </ng-container>
+            <ng-template #noDetails>
+              <p class="has-text-danger">No se encontraron detalles de compra.</p>
+            </ng-template>
           </div>
         </div>
       </div>
