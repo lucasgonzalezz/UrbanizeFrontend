@@ -1,95 +1,90 @@
-<div class="flex items-center justify-center min-h-screen bg-slate-300">
-  <div class="container ml-72">
-    <div class="relative flex flex-col ml-72 space-y-6 bg-slate-400 shadow-2xl rounded-md md:flex-row md:space-y-0 md:w-4/5 lg:w-3/5 xl:w-1/2 mt-8 mb-8">
-      <div class="flex flex-col justify-center p-6 md:p-8 w-full">
-        <a href="/login" class="text-xl absolute top-5 right-5 text-cyan-900 font-semibold">
-          <span class="icon">
-            <i class="fas fa-chevron-left" ></i>
-          </span>
-          <span>Volver al Login</span>
-        </a>
-        <span class="mb-4 font-bold text-5xl text-cyan-900">Registro</span>
-        <span class="text-cyan-900 mb-5 font-medium">
-          ¡Bienvenid&#64;! Complete el formulario para registrarse
-        </span>
-        <form [formGroup]="userForm" (submit)="onSubmit()" class="py-4 w-full space-y-6">
-               <!-- Nombre -->
-               <div class="mb-5 w-full">
-                <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Nombre <span class="text-red-500">*</span></span>
-                <input type="text"
-                  class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-                  formControlName="name" placeholder="Ingrese su nombre">
-                <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'required')">Por favor, introduzca su nombre</div>
-                <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'minlength')">El nombre debe tener al menos 3 caracteres</div>
-                <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'maxlength')">El nombre no puede tener más de 255 caracteres</div>
-              </div>
-          <!-- Apellido -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Apellido</span>
-            <input type="text"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="last_name1" placeholder="Ingrese su apellido">
-            <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
-            <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
-          </div>
-          <!-- Username -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Username <span class="text-red-500">*</span></span>
-            <input type="text"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="username" placeholder="Nombre de usuario">
-            <div class="help is-danger" *ngIf="userForm.get('username')?.touched && hasError('username', 'required')">Por favor, introduzca un nombre de usuario</div>
-          </div>
-          <!-- Email -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Email <span class="text-red-500">*</span></span>
-            <input type="email"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="email" placeholder="Ingrese su email">
-            <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'required')">Por favor, introduzca su email</div>
-            <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'email')">El email no es válido</div>
-          </div>
-          <!-- Contraseña -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Contraseña <span class="text-red-500">*</span></span>
-            <input type="password"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="password" placeholder="Ingrese su contraseña">
-            <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'required')">Por favor, introduzca su contraseña</div>
-            <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'minlength')">La contraseña debe tener al menos 6 caracteres</div>
-          </div>
-          <!-- Confirmar Contraseña -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Confirmar Contraseña <span class="text-red-500">*</span></span>
-            <input type="password"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="confirmPassword" placeholder="Confirme su contraseña">
-            <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && hasError('confirmPassword', 'required')">Por favor, confirme su contraseña</div>
-            <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && userForm.get('password')?.value !== userForm.get('confirmPassword')?.value">Las contraseñas no coinciden</div>
-          </div>
-          <!-- Fecha de Nacimiento -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Fecha de Nacimiento <span class="text-red-500">*</span></span>
-            <input type="date"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="birthdate" placeholder="Fecha de Nacimiento">
-            <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && hasError('birthdate', 'required')">Por favor, introduzca su fecha de nacimiento</div>
-            <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && !isAdult()">Debe ser mayor de edad</div>
-          </div>
-          <!-- Teléfono -->
-          <div class="mb-5 w-full">
-            <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Teléfono</span>
-            <input type="tel"
-              class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-              formControlName="phone" placeholder="Ingrese su teléfono">
-          </div>
-          <!-- Botón de Registro -->
-          <button type="submit"
-            class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-md hover:bg-gray-200 hover:text-black hover:border-gray-300">
-            Registrarse
-          </button>
-        </form>
-      </div>
-    </div>
+
+
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">¡Bienvenid&#64;! Complete el formulario para registrarse
+    </h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form [formGroup]="userForm" (submit)="onSubmit()" class="py-4 w-full space-y-6">
+      <!-- Nombre -->
+      <div class="mb-5 w-full">
+       <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Nombre <span class="text-red-500">*</span></span>
+       <input type="text"
+         class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+         formControlName="name" placeholder="Ingrese su nombre">
+       <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'required')">Por favor, introduzca su nombre</div>
+       <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'minlength')">El nombre debe tener al menos 3 caracteres</div>
+       <div class="help is-danger" *ngIf="userForm.get('name')?.touched && hasError('name', 'maxlength')">El nombre no puede tener más de 255 caracteres</div>
+     </div>
+ <!-- Apellido -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Apellido</span>
+   <input type="text"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="last_name1" placeholder="Ingrese su apellido">
+   <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+   <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+ </div>
+ <!-- Username -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Username <span class="text-red-500">*</span></span>
+   <input type="text"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="username" placeholder="Nombre de usuario">
+   <div class="help is-danger" *ngIf="userForm.get('username')?.touched && hasError('username', 'required')">Por favor, introduzca un nombre de usuario</div>
+ </div>
+ <!-- Email -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Email <span class="text-red-500">*</span></span>
+   <input type="email"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="email" placeholder="Ingrese su email">
+   <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'required')">Por favor, introduzca su email</div>
+   <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'email')">El email no es válido</div>
+ </div>
+ <!-- Contraseña -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Contraseña <span class="text-red-500">*</span></span>
+   <input type="password"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="password" placeholder="Ingrese su contraseña">
+   <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'required')">Por favor, introduzca su contraseña</div>
+   <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'minlength')">La contraseña debe tener al menos 6 caracteres</div>
+ </div>
+ <!-- Confirmar Contraseña -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Confirmar Contraseña <span class="text-red-500">*</span></span>
+   <input type="password"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="confirmPassword" placeholder="Confirme su contraseña">
+   <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && hasError('confirmPassword', 'required')">Por favor, confirme su contraseña</div>
+   <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && userForm.get('password')?.value !== userForm.get('confirmPassword')?.value">Las contraseñas no coinciden</div>
+ </div>
+ <!-- Fecha de Nacimiento -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Fecha de Nacimiento <span class="text-red-500">*</span></span>
+   <input type="date"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="birthdate" placeholder="Fecha de Nacimiento">
+   <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && hasError('birthdate', 'required')">Por favor, introduzca su fecha de nacimiento</div>
+   <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && !isAdult()">Debe ser mayor de edad</div>
+ </div>
+ <!-- Teléfono -->
+ <div class="mb-5 w-full">
+   <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Teléfono</span>
+   <input type="tel"
+     class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
+     formControlName="phone" placeholder="Ingrese su teléfono">
+ </div>
+ <!-- Botón de Registro -->
+ <button type="submit"
+   class="w-full bg-cyan-900 font-bold text-gray-200 p-2 rounded-md hover:bg-gray-200 hover:text-black hover:border-gray-300">
+   Registrarse
+ </button>
+</form>
+
   </div>
 </div>
