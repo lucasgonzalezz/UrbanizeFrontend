@@ -66,10 +66,10 @@
             <div *ngIf="mostrarDropdown"
               class="absolute left-0 md:left-auto md:right-0 mt-2 w-48 rounded-md shadow-lg bg-slate-400 ring-1 ring-black ring-opacity-5">
               <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" [routerLink]="['/user', 'user', 'view', userSession?.id]">
+                <a href="#" class="block px-4 py-2 text-lg text-cyan-900 font-semibold hover:bg-gray-100 hover:text-cyan-900" role="menuitem" [routerLink]="['/user', 'user', 'view', userSession?.id]">
                   <i class="fas fa-user mr-2"></i> Perfil
                 </a>
-                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" routerLink="/logout">
+                <a class="block px-4 py-2 text-lg text-red-900 hover:bg-gray-100 hover:text-red-900 font-semibold" role="menuitem" routerLink="/logout">
                   <i class="fas fa-sign-out-alt mr-2"></i> Salir
                 </a>
               </div>

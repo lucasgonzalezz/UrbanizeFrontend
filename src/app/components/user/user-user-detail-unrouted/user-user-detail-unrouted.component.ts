@@ -6,7 +6,6 @@ import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-user-user-detail-unrouted',
   templateUrl: './user-user-detail-unrouted.component.html',

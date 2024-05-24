@@ -1,60 +1,43 @@
 <div class="container">
   <div class="columns is-centered">
     <div class="column is-half">
-      <div class="card has-shadow">
+      <div class="card">
         <div class="card-content">
           <div class="content">
-            <h5 class="title is-4 has-text-primary">Perfil</h5>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Nombre de
-                Usuario:</b> {{ user.username }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Primer apellido:</b>
-              {{ user.last_name1 }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Segundo
-                apellido:</b> {{ user.last_name2 }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Email:</b> {{
-              user.email }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Dirección:</b> {{
-              user.address }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Teléfono:</b> {{
-              user.phone_number }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> DNI:</b> {{ user.dni
-              }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Fecha de
-                Nacimiento:</b> {{ user.birth_date | date }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Ciudad:</b> {{
-              user.city }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Código Postal:</b>
-              {{ user.postal_code }}</p>
-            <p><a class="has-text-primary ml-4" [routerLink]="['/user', 'cart', 'plist']"><i
-                  class="fas fa-arrow-right has-text-primary"></i><b> Número de Productos
-                  en el carrito:</b> {{ user.carts }}</a></p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Número de
-                Valoraciones:</b> {{ user.ratings }}</p>
-            <p><a class="has-text-primary ml-4" [routerLink]="['/user', 'purchase', 'plist', userSession?.id]"><i
-                  class="fas fa-arrow-right has-text-primary"></i><b> Número de
-                  Compras:</b> {{ user.purchases }}</a></p>
-
-            <div class="columns is-centered">
-              <div class="column">
-                <a class="button is-primary ml-4" [routerLink]="['/user', 'user', 'edit', user.id]">
-                  <span>Editar perfil</span>
-                  <span class="icon">
-                    <i class="fas fa-pen"></i>
-                  </span>
-                </a>
-
-                <a class="button is-primary ml-4" [routerLink]="['/home']">
-                  <span>Volver</span>
-                  <span class="icon">
-                    <i class="fas fa-arrow-left"></i>
-                  </span>
-                </a>
+            <h1 class="title is-3 text-cyan-900">Perfil
+              <a class="is-primary ml-3 text-cyan-900" [routerLink]="['/user', 'user', 'edit', id]">
+                <span class="icon">
+                  <i class="fas fa-pen"></i>
+                </span>
+              </a>
+              <a [routerLink]="['/home']" class="text-2xl is-pulled-right text-cyan-900">
+                <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                </span>
+                <span>Atrás</span>
+              </a>
+            </h1>
+            <div class="columns">
+              <div class="column is-half">
+                <p class="has-text-primary"><b>Nombre de Usuario:</b> {{ user.username || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Primer apellido:</b> {{ user.last_name1 || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Segundo apellido:</b> {{ user.last_name2 || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Email:</b> {{ user.email || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Dirección:</b> {{ user.address || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Teléfono:</b> {{ user.phone_number || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>DNI:</b> {{ user.dni || 'Sin datos' }}</p>
+              </div>
+              <div class="column is-half">
+                <p class="has-text-primary"><b>Fecha de Nacimiento:</b> {{ user.birth_date | date }}</p>
+                <p class="has-text-primary"><b>Ciudad:</b> {{ user.city || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Código Postal:</b> {{ user.postal_code || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Número de Productos en el carrito:</b> {{ user.carts }}</p>
+                <p class="has-text-primary"><b>Número de Valoraciones:</b> {{ user.ratings }}</p>
+                <p class="has-text-primary"><b>Número de Compras:</b> {{ user.purchases }}</p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
