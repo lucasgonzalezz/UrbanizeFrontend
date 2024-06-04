@@ -65,9 +65,9 @@
    <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Fecha de Nacimiento <span class="text-red-500">*</span></span>
    <input type="date"
      class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-     formControlName="birthdate" placeholder="Fecha de Nacimiento">
-   <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && hasError('birthdate', 'required')">Por favor, introduzca su fecha de nacimiento</div>
-   <div class="help is-danger" *ngIf="userForm.get('birthdate')?.touched && !isAdult()">Debe ser mayor de edad</div>
+     formControlName="birth_date" placeholder="Fecha de Nacimiento">
+   <div class="help is-danger" *ngIf="userForm.get('birth_date')?.touched && hasError('birth_date', 'required')">Por favor, introduzca su fecha de nacimiento</div>
+   <div class="help is-danger" *ngIf="userForm.get('birth_date')?.touched && !isAdult()">Debe ser mayor de edad</div>
  </div>
  <!-- Teléfono -->
  <div class="mb-5 w-full pl-8 pr-8">

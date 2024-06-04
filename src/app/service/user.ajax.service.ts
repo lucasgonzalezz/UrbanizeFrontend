@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_URL } from "src/environment/environment";
@@ -19,11 +19,11 @@ export class UserAjaxService {
     return this.http.get<IUser>(this.url + '/' + id);
   }
 
-    createUserWithPassword(user: IUser, password: string): Observable<number> {
-      const url = this.url + `/createWithPassword?password=${password}`; 
-      return this.http.post<number>(url, user);
-    }
-
+  createUserWithPassword(user: IUser, password: string): Observable<number> {
+    const params = new HttpParams().set('password', password);
+    const url = `${this.url}/createWithPassword`;
+    return this.http.post<number>(url, user, { params });
+  }
   getUserByUsername(username: string): Observable<IUser> {
     return this.http.get<IUser>(this.url + '/username/' + username);
   }

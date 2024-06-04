@@ -6,10 +6,6 @@ import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { CryptoService } from 'src/app/service/crypto.service';
 import { IUser } from 'src/app/model/model.interfaces';
 
-interface IRegistrationData extends IUser {
-  password: string;
-}
-
 @Component({
   selector: 'app-register-routed',
   templateUrl: './register-routed.component.html',
@@ -40,23 +36,22 @@ export class RegisterRoutedComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
-      birthdate: ['', [Validators.required]],
+      birth_date: ['', [Validators.required]],
       phone: ['']
     });
-  }  
-  
+  }
 
   hasError(controlName: string, errorName: string): boolean {
     return this.userForm.controls[controlName].hasError(errorName);
   }
 
   isAdult(): boolean {
-    if (this.userForm.get('birthdate')?.value) {
-      const birthdate = new Date(this.userForm.get('birthdate')?.value);
+    if (this.userForm.get('birth_date')?.value) {
+      const birth_date = new Date(this.userForm.get('birth_date')?.value);
       const today = new Date();
-      const age = today.getFullYear() - birthdate.getFullYear();
-      const monthDiff = today.getMonth() - birthdate.getMonth();
-      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+      const age = today.getFullYear() - birth_date.getFullYear();
+      const monthDiff = today.getMonth() - birth_date.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth_date.getDate())) {
         return age - 1 >= 18;
       }
       return age >= 18;
@@ -67,13 +62,11 @@ export class RegisterRoutedComponent implements OnInit {
   onSubmit(): void {
     if (this.userForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      const userData: IRegistrationData = this.userForm.value;
-      const password = this.cryptoService.getSHA256(userData.password);
-       
-      
-      console.log(userData.password)
+      const userData = { ...this.userForm.value } as IUser;
+      const password = this.cryptoService.getSHA256(this.userForm.value.password);
+
       this.userService.createUserWithPassword(userData, password).subscribe(
-        (userId: number) => { 
+        (userId: number) => {
           this.snackBar.open('Usuario registrado correctamente', 'Aceptar', { duration: 3000 });
           this.router.navigate(['/login']);
         },
