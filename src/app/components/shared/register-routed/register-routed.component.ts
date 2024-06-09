@@ -37,10 +37,12 @@ export class RegisterRoutedComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
       birth_date: ['', [Validators.required]],
-      phone: ['']
+      // phone: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]{8}[A-Za-z]$/)]],
+      address: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]]
     });
   }
-
+  
   hasError(controlName: string, errorName: string): boolean {
     return this.userForm.controls[controlName].hasError(errorName);
   }

@@ -7,14 +7,14 @@
             <h5 class="title is-4 has-text-primary">Detalle de Usuario</h5>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Nombre de Usuario:</b> {{ user.username }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Primer apellido:</b> {{ user.last_name1 }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Segundo apellido:</b> {{ user.last_name2 }}</p>
+            <!-- <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Segundo apellido:</b> {{ user.last_name2 }}</p> -->
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Email:</b> {{ user.email }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Dirección:</b> {{ user.address }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Teléfono:</b> {{ user.phone_number }}</p>
+            <!-- <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Teléfono:</b> {{ user.phone_number }}</p> -->
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> DNI:</b> {{ user.dni }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Fecha de Nacimiento:</b> {{ user.birth_date | date }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Ciudad:</b> {{ user.city }}</p>
-            <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Código Postal:</b> {{ user.postal_code }}</p>
+            <!-- <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Ciudad:</b> {{ user.city }}</p> -->
+            <!-- <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Código Postal:</b> {{ user.postal_code }}</p> -->
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Tipo de Usuario:</b> {{ user.role ? 'Administrador' : 'Usuario' }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Número de Carritos:</b> {{ user.carts }}</p>
             <p class="has-text-primary ml-4"><i class="fas fa-arrow-right has-text-primary"></i><b> Número de Valoraciones:</b> {{ user.ratings }}</p>

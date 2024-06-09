@@ -21,16 +21,16 @@
               <div class="column is-half">
                 <p class="has-text-primary"><b>Nombre de Usuario:</b> {{ user.username || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Primer apellido:</b> {{ user.last_name1 || 'Sin datos' }}</p>
-                <p class="has-text-primary"><b>Segundo apellido:</b> {{ user.last_name2 || 'Sin datos' }}</p>
+                <!-- <p class="has-text-primary"><b>Segundo apellido:</b> {{ user.last_name2 || 'Sin datos' }}</p> -->
                 <p class="has-text-primary"><b>Email:</b> {{ user.email || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Dirección:</b> {{ user.address || 'Sin datos' }}</p>
-                <p class="has-text-primary"><b>Teléfono:</b> {{ user.phone_number || 'Sin datos' }}</p>
+                <!-- <p class="has-text-primary"><b>Teléfono:</b> {{ user.phone_number || 'Sin datos' }}</p> -->
                 <p class="has-text-primary"><b>DNI:</b> {{ user.dni || 'Sin datos' }}</p>
               </div>
               <div class="column is-half">
                 <p class="has-text-primary"><b>Fecha de Nacimiento:</b> {{ user.birth_date | date }}</p>
-                <p class="has-text-primary"><b>Ciudad:</b> {{ user.city || 'Sin datos' }}</p>
-                <p class="has-text-primary"><b>Código Postal:</b> {{ user.postal_code || 'Sin datos' }}</p>
+                <!-- <p class="has-text-primary"><b>Ciudad:</b> {{ user.city || 'Sin datos' }}</p> -->
+                <!-- <p class="has-text-primary"><b>Código Postal:</b> {{ user.postal_code || 'Sin datos' }}</p> -->
                 <p class="has-text-primary"><b>Número de Productos en el carrito:</b> {{ user.carts }}</p>
                 <p class="has-text-primary"><b>Número de Valoraciones:</b> {{ user.ratings }}</p>
                 <p class="has-text-primary"><b>Número de Compras:</b> {{ user.purchases }}</p>
