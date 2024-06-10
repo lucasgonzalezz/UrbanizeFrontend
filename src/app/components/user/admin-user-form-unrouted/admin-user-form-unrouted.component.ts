@@ -48,7 +48,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       id: [this.user.id],
       name: [user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      last_name1: [user.last_name1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      surname: [user.surname, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       // last_name2: [user.last_name2, [Validators.minLength(3), Validators.maxLength(255)]],
       birth_date: [user.birth_date, [Validators.required]],
       // phone_number: [user.phone_number, [Validators.required, Validators.pattern(/^[0-9]+$/)]],

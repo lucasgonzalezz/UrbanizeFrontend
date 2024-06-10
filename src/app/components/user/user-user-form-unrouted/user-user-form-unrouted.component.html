@@ -29,10 +29,10 @@
           <div class="field">
             <label class="label">Apellido 1</label>
             <div class="control">
-              <input type="text" class="input" id="last_name1" formControlName="last_name1" placeholder="Ingrese el apellido">
-              <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'required')">No has introducido el apellido</div>
-              <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
-              <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+              <input type="text" class="input" id="surname" formControlName="surname" placeholder="Ingrese el apellido">
+              <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'required')">No has introducido el apellido</div>
+              <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+              <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
             </div>
           </div>
         </div>

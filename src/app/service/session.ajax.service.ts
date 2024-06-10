@@ -53,6 +53,10 @@ export class SessionAjaxService {
     this.userSession = null;
   }
 
+  register(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>(this.url + '/register', user);
+}
+
   isSessionActive(): boolean {
     let token: string | null = localStorage.getItem('token');
     if (token) {

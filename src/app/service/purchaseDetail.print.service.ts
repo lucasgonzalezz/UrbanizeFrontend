@@ -114,7 +114,7 @@ export class PurchaseDetailPrintService {
         doc.setFontSize(15);
         doc.setTextColor(22, 78, 99); // Color azul oscuro
         doc.setFont('normal'); // Texto normal
-        const cliente = compra2Print?.user?.name + ' ' + compra2Print?.user.last_name1;
+        const cliente = compra2Print?.user?.name + ' ' + compra2Print?.user.surname;
         doc.text(cliente, clienteX, clienteY + 9);
 
         doc.setTextColor(22, 78, 99); // Color azul oscuro

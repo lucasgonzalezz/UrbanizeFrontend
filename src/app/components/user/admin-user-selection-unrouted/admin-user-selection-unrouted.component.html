@@ -4,7 +4,7 @@
       <tr>
         <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">Id</th>
         <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th (click)="doOrder('last_name1')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
+        <th (click)="doOrder('surname')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
         <th (click)="doOrder('username')" class="has-text-centered is-size-5 has-text-white">Username</th>
         <th (click)="doOrder('role')" class="has-text-centered is-size-5 has-text-white">Tipo</th>
         <th class="has-text-centered is-size-5 has-text-white">Compras</th>
@@ -15,7 +15,7 @@
       <tr *ngFor="let user of page?.content" class="user-item has-text-centered">
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
-        <td>{{ user.last_name1 }}</td>
+        <td>{{ user.surname }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.role }}</td>
         <td>{{ user.purchases }}</td>
@@ -28,7 +28,7 @@
       <tr>
         <th (click)="doOrder('id')" class="has-text-centered is-size-5 has-text-white">Id</th>
         <th (click)="doOrder('name')" class="has-text-centered is-size-5 has-text-white">Nombre</th>
-        <th (click)="doOrder('last_name1')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
+        <th (click)="doOrder('surname')" class="has-text-centered is-size-5 has-text-white">Apellido</th>
         <th (click)="doOrder('username')" class="has-text-centered is-size-5 has-text-white">Username</th>
         <th (click)="doOrder('role')" class="has-text-centered is-size-5 has-text-white">Tipo</th>
         <th class="has-text-centered is-size-5 has-text-white">Compras</th>

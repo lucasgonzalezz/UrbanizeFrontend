@@ -42,7 +42,7 @@ export interface IEntity {
 
 export interface IUser extends IEntity {
     name: string,
-    last_name1: string,
+    surname: string,
     // last_name2: string,
     birth_date: Date,
     // phone_number: number,

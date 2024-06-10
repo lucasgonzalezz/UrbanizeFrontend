@@ -5,7 +5,7 @@
       <p class="text-cyan-900 mt-4 ml-3 mr-4">{{purchase.purchaseCode}}</p>
     </div>
     <div class="content">
-      <p class="ml-4 mt-3 text-cyan-900"><strong class="text-cyan-900 text-lg">Cliente: </strong>{{purchase.user.name}} {{purchase.user.last_name1}}</p>
+      <p class="ml-4 mt-3 text-cyan-900"><strong class="text-cyan-900 text-lg">Cliente: </strong>{{purchase.user.name}} {{purchase.user.surname}}</p>
       <p class="ml-4 mt-3 text-cyan-900"><strong class="text-cyan-900 text-lg">Dirección de entrega: </strong>{{purchase.user.address}}</p>
       <p class="ml-4 mt-3 text-cyan-900 pb-4"><strong class="text-cyan-900 text-lg">Fecha de compra: </strong>{{purchase.purchaseDate | date: 'dd-MM-yyyy'}}</p>
       <ng-container *ngIf="purchase.num_bill">

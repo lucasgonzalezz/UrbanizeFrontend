@@ -21,9 +21,9 @@
         <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Apellido</span>
         <input type="text"
           class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-          formControlName="last_name1" placeholder="Ingrese su apellido">
-        <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
-        <div class="help is-danger" *ngIf="userForm.get('last_name1')?.touched && hasError('last_name1', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
+          formControlName="surname" placeholder="Ingrese su apellido">
+        <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
+        <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
       </div>
       <!-- Username -->
       <div class="mb-5 w-full pl-8 pr-8">
@@ -43,23 +43,23 @@
         <div class="help is-danger" *ngIf="userForm.get('email')?.touched && hasError('email', 'email')">El email no es válido</div>
       </div>
       <!-- Contraseña -->
-      <div class="mb-5 w-full pl-8 pr-8">
-        <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Contraseña <span class="text-red-500">*</span></span>
+      <div class="mb-4 w-full pl-8 pr-8">
+        <label class="block text-cyan-900 ml-1 text-lg">Contraseña <span class="text-red-500">*</span></label>
         <input type="password"
           class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
           formControlName="password" placeholder="Ingrese su contraseña">
         <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'required')">Por favor, introduzca su contraseña</div>
-        <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'minlength')">La contraseña debe tener al menos 6 caracteres</div>
+        <div class="help is-danger" *ngIf="userForm.get('password')?.touched && hasError('password', 'minlength')">La contraseña debe contener al menos 6 caracteres</div>
       </div>
-      <!-- Confirmar Contraseña -->
-      <div class="mb-5 w-full pl-8 pr-8">
-        <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Confirmar Contraseña <span class="text-red-500">*</span></span>
+      <div class="mb-4 w-full pl-8 pr-8">
+        <label class="block text-cyan-900 ml-1 text-lg">Confirmar Contraseña <span class="text-red-500">*</span></label>
         <input type="password"
           class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
           formControlName="confirmPassword" placeholder="Confirme su contraseña">
         <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && hasError('confirmPassword', 'required')">Por favor, confirme su contraseña</div>
-        <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && userForm.get('password')?.value !== userForm.get('confirmPassword')?.value">Las contraseñas no coinciden</div>
+        <div class="help is-danger" *ngIf="userForm.get('confirmPassword')?.touched && hasError('confirmPassword', 'mustMatch')">Las contraseñas deben coincidir</div>
       </div>
+      
       <!-- Fecha de Nacimiento -->
       <div class="mb-5 w-full pl-8 pr-8">
         <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Fecha de Nacimiento <span class="text-red-500">*</span></span>
@@ -103,6 +103,7 @@
           Registrarse
         </button>
       </div>
+      
 
       <div class="mt-5 text-center font-semibold w-full text-cyan-900">
         ¿Ya tienes cuenta?
