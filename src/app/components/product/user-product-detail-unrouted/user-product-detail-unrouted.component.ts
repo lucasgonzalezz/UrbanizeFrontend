@@ -74,7 +74,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
         this.userSession = user;
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
       }
     });
   }
@@ -84,8 +83,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.getUser();
     this.getRatings();
     this.verifyRating();
-    console.log(this.userPurchased);
-    console.log(this.userRatinged);
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -112,8 +109,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.productService.getProductById(this.id).subscribe({
       next: (data: IProduct) => {
         this.product = data;
-        console.log(this.product);
-        console.log(data.name);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
@@ -234,8 +229,6 @@ export class UserProductDetailUnroutedComponent implements OnInit {
     this.productService.updateStock(productId, amount).subscribe({
       next: () => {
         this.product.stock -= cantidadSeleccionada;
-        console.log('Stock actualizado correctamente.');
-        console.log('Stock actual:', this.product.stock);
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error al actualizar el stock del producto:', err);
@@ -277,7 +270,7 @@ export class UserProductDetailUnroutedComponent implements OnInit {
         }
       });
     } else {
-      this.matSnackBar.open('Debes estar logueado para comprar camisetas', 'Aceptar', { duration: 3000 });
+      this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', { duration: 3000 });
     }
   }
 
@@ -353,17 +346,19 @@ export class UserProductDetailUnroutedComponent implements OnInit {
       confirmButtonText: "Sí",
       cancelButtonText: "No"
     }).then((result) => {
-      this.ratingService.deleteRating(rating_id).subscribe({
-        next: () => {
-          this.matSnackBar.open('Valoración borrada', 'Aceptar', { duration: 3000 });
-          this.getRatings();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-          this.matSnackBar.open('Error al borrar la valoración', 'Aceptar', { duration: 3000 });
-        }
-      });
+      if (result.isConfirmed) {
+        this.ratingService.deleteRating(rating_id).subscribe({
+          next: () => {
+            this.matSnackBar.open('Valoración borrada', 'Aceptar', { duration: 3000 });
+            this.getRatings();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.matSnackBar.open('Error al borrar la valoración', 'Aceptar', { duration: 3000 });
+          }
+        });
+      }
     });
   }
-
+  
 }

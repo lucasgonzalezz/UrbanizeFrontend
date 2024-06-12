@@ -2,10 +2,7 @@
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">¡Bienvenid&#64; introduce tus datos!</h1>
   </div>
-
   <div class="mt-10 mx-auto w-full max-w-xl bg-slate-400 shadow-2xl rounded-md">
-
-
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="py-4 w-full space-y-6">
       <div class="mb-5 w-full pl-8 pr-8 mt-5">
         <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Username</span>
@@ -16,7 +13,7 @@
         <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Contraseña</span>
         <input type="password"
           class="w-full p-2 border shadow-md rounded-md placeholder-light placeholder-opacity-50 mt-1"
-          name="contrasenya" id="contrasenya" formControlName="contrasenya" placeholder="Contraseña">
+          name="password" id="password" formControlName="password" placeholder="Contraseña">
       </div>
       <div class="mb-5 w-full pl-8 pr-8">
         <span class="py-1 font-semibold text-cyan-900 ml-1 text-lg">Captcha</span>
@@ -30,25 +27,10 @@
       <button
         class="w-80 bg-cyan-900 font-bold text-gray-200 p-2 rounded-md hover:bg-gray-200 hover:text-black hover:border-gray-300">Login</button>
       </div>
-      <!-- <div class="flex justify-center items-center">
-       <button type="button"
-        class="w-80 bg-cyan-900 font-bold text-gray-200 p-2 rounded-md hover:bg-gray-200 hover:text-black hover:border-gray-300"
-        (click)="loginAdmin()">Soy Admin</button>
-      </div>
-
-      <div class="flex justify-center items-center">
-      <button type="button"
-        class="w-80 bg-cyan-900 font-bold text-gray-200 p-2 rounded-md mb-5 hover:bg-gray-200 hover:text-black hover:border-gray-300"
-        (click)="loginUser()">Soy Usuario</button>
-      </div> -->
     </form>
     <div class="text-center font-semibold w-full text-cyan-900 mt-3 mb-10">
       ¿No tienes cuenta?
       <a class="font-bold text-black hover:text-gray-200 cursor-pointer" routerLink="/register">Regístrate</a>
     </div>
-    <!-- <div class="text-center font-semibold w-full mt-4 mb-10">
-      <span class="font-bold text-black hover:text-gray-200 cursor-pointer">¿Te has olvidado de la contraseña?</span>
-    </div> -->
-
   </div>
 </div>

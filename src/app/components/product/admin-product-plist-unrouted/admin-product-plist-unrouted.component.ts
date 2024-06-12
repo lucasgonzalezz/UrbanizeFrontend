@@ -132,7 +132,6 @@ export class AdminProductPlistUnroutedComponent implements OnInit {
             this.page = data;
             this.products = data.content;
             this.paginatorState.pageCount = data.totalPages;
-            console.log(this.paginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;

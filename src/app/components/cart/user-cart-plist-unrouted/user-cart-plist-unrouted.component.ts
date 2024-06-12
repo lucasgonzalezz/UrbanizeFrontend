@@ -80,9 +80,9 @@ export class UserCartPlistUnroutedComponent implements OnInit {
   }
 
   getCostCart(cart: ICart): void {
-    const precioCamiseta = cart.product.price;
+    const precioProducto = cart.product.price;
     const cantidad = cart.amount;
-    const precioIndividual = precioCamiseta * cantidad;
+    const precioIndividual = precioProducto * cantidad;
     this.individualPricel.set(cart.id, precioIndividual);
   }
 
@@ -150,8 +150,6 @@ export class UserCartPlistUnroutedComponent implements OnInit {
     this.productAjaxService.updateStock(productId, amount).subscribe({
       next: () => {
         this.product.stock -= cantidadSeleccionada;
-        console.log('Stock actualizado correctamente.');
-        console.log('Stock actual:', this.product.stock);
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error al actualizar el stock del producto:', err);
@@ -281,7 +279,6 @@ export class UserCartPlistUnroutedComponent implements OnInit {
           next: () => {
             this.matSnackBar.open('Producto eliminado de la cesta', 'Aceptar', { duration: 3000 });
             this.getCarts();
-            console.log(cart.product.id, cart.amount)
             this.actualizarStock(cart.product.id, +cart.amount);
 
           },

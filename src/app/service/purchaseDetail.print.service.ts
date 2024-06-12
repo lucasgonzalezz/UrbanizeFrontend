@@ -53,7 +53,7 @@ export class PurchaseDetailPrintService {
                                 totalFactura += (purchaseDetail.amount * purchaseDetail.price);
                             });
                             this.endFactura(doc, linea, totalFactura, compra);
-                            doc.save('Factura.pdf');
+                            doc.save(`Factura_${compra.purchaseCode}.pdf`);
                         }).catch(error => {
                             console.error('Error al cargar el logo:', error);
                         });
@@ -146,14 +146,6 @@ export class PurchaseDetailPrintService {
         doc.setFontSize(11);
         doc.text(formatDate(compra2Print.purchaseDate, 'dd/MM/yyyy', 'es-ES'), datosX + 40, datosY + 7);
 
-        // // Texto "Número de factura:"
-        // doc.setTextColor(22, 78, 99); // Color azul oscuro
-        // doc.setFont('normal'); // Texto normal
-        // doc.text('Número de factura:', datosX, datosY + 30); // Añadir separación entre líneas
-        // doc.setTextColor(0); // Restaurar color de texto a negro
-        // doc.setFont('bold'); // Texto en negrita
-        // doc.text(`${compra2Print.num_bill}`, datosX + 40, datosY + 30);
-
         // Cambiar el color del texto y las líneas
         doc.setTextColor(22, 78, 99); // Color azul oscuro
         doc.setDrawColor(22, 78, 99); // Color azul oscuro
@@ -222,7 +214,7 @@ export class PurchaseDetailPrintService {
         const imgWidth2 = 210; // Ajustar el ancho de la imagen según sea necesario
         const imgHeight2 = 80; // Ajustar la altura de la imagen según sea necesario
         const imgX2 = 0; // Posición x de la imagen
-        const imgY2 = linea + 41; // Posición y de la imagen
+        const imgY2 = linea + 60; // Posición y de la imagen
 
         doc.addImage(imgData2, 'PNG', imgX2, imgY2, imgWidth2, imgHeight2);
     }

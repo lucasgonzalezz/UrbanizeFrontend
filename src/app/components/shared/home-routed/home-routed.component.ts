@@ -22,8 +22,6 @@ export class HomeRoutedComponent implements OnInit {
     private sessionService: SessionAjaxService,
     private userAjaxService: UserAjaxService,
   ) {
-    console.log('MenuUnroutedComponent created'); // Agrega este log al constructor
-
     this.oRouter.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.url = ev.url;
@@ -34,11 +32,7 @@ export class HomeRoutedComponent implements OnInit {
     this.userAjaxService.getUserByUsername(this.sessionService.getUsername()).subscribe({
       next: (user: IUser) => {
         this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
     });
    }
 

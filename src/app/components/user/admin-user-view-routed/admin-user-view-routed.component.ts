@@ -28,11 +28,7 @@ export class AdminUserViewRoutedComponent implements OnInit {
     this.userAjaxService.getUserByUsername(this.sessionAjaxService.getUsername()).subscribe({
       next: (user: IUser) => {
         this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
     });
   }
 

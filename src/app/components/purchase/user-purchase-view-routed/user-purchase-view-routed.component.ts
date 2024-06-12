@@ -28,9 +28,6 @@ export class UserPurchaseViewRoutedComponent implements OnInit {
       next: (user: IUser) => {
         this.userSession = user;
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
     });
   }
 

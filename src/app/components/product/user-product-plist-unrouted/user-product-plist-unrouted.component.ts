@@ -101,7 +101,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
 
   quitarFiltro(): void {
     this.value = ''; // Limpiar el valor del filtro de búsqueda
-    console.log(this.value);
 
     this.productService.getPageProducts(
       this.oPaginatorState.rows,
@@ -114,7 +113,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
         this.page = data;
         this.oPaginatorState.pageCount = data.totalPages;
         this.products = data.content;
-        console.log(this.products);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
@@ -122,10 +120,8 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     });
 
     this.category_id = 0; // Restablecer el valor de id_categoria a 0
-    console.log(this.category_id);
 
     this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
-    console.log(this.filtrandoPorCategoria);
   }
 
   onInputChange(query: string): void {
@@ -161,8 +157,6 @@ export class UserProductPlistUnroutedComponent implements OnInit {
           this.page = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.products = data.content;
-
-          console.log(this.products);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -227,7 +221,7 @@ export class UserProductPlistUnroutedComponent implements OnInit {
             timer: 1500,
             width: 600,
           });
-          this.actualizarStock(product.id, product); // Pasar el objeto product como argumento
+          this.actualizarStock(product.id, product);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
@@ -237,14 +231,12 @@ export class UserProductPlistUnroutedComponent implements OnInit {
     }
   }
   
-  actualizarStock(productId: number, product: IProduct): void { // Asegúrate de recibir product aquí
+  actualizarStock(productId: number, product: IProduct): void {
     const amount = -1;
   
     this.productService.updateStock(productId, amount).subscribe({
       next: () => {
-        product.stock -= 1; // Usa el objeto product recibido como argumento
-        console.log('Stock actualizado correctamente.');
-        console.log('Stock actual:', product.stock); // Usa product en lugar de this.product
+        product.stock -= 1;
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error al actualizar el stock del producto:', err);

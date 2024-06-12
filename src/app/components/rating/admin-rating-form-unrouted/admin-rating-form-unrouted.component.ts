@@ -118,7 +118,7 @@ export class AdminRatingFormUnroutedComponent implements OnInit {
     });
   }
 
-  onShowCamisetasSelection() {
+  onShowProductsSelection() {
     this.dynamicDialogRef = this.dialogService.open(AdminProductSelectionUnroutedComponent, {
       header: 'Selecciona un producto',
       width: '70%',

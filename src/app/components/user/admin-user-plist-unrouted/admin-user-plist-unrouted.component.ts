@@ -126,7 +126,6 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
             this.page = data;
             this.usuarios = data.content;
             this.paginatorState.pageCount = data.totalPages;
-            console.log(this.paginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;

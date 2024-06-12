@@ -60,7 +60,7 @@ export class AdminProductSelectionUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  selectCamiseta(product: IProduct) {
+  selectProduct(product: IProduct) {
     this.dynamicDialogRef.close(product);
   }
 

@@ -97,7 +97,6 @@ export class AdminProductFormUnroutedComponent implements OnInit {
       if (this.operation == 'NEW') {
         this.productAjaxService.createProduct(this.productForm.value).subscribe({
           next: (data: IProduct) => {
-            console.log(data);
             this.product = { "image": '', "category": {} } as IProduct;
             this.product.id = data.id;
             this.initializeForm(this.product);

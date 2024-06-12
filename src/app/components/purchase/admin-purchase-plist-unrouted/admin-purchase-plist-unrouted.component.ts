@@ -56,7 +56,6 @@ export class AdminPurchasePlistUnroutedComponent implements OnInit {
   getPage(): void {
     const rows = this.paginatorState.rows ?? 0;
     const page = this.paginatorState.page ?? 0;
-    console.log("User ID:", this.user_id);
     this.purchaseAjaxService.getPagePurchases(rows, page, this.orderField, this.orderDirection, this.user_id).subscribe({
         next: (page: IPurchasePage) => {
             this.page = page;

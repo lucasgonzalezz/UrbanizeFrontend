@@ -27,25 +27,12 @@
         <!-- Apellido 1 -->
         <div class="column is-half">
           <div class="field">
-            <label class="label">Apellido 1</label>
+            <label class="label">Apellido</label>
             <div class="control">
               <input type="text" class="input" id="surname" formControlName="surname" placeholder="Ingrese el apellido">
               <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'required')">No has introducido el apellido</div>
               <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
               <div class="help is-danger" *ngIf="userForm.get('surname')?.touched && hasError('surname', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Apellido 2 -->
-        <div class="column is-half">
-          <div class="field">
-            <label class="label">Apellido 2</label>
-            <div class="control">
-              <input type="text" class="input" id="last_name2" formControlName="last_name2" placeholder="Ingrese el segundo apellido">
-              <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'required')">No has introducido el apellido</div>
-              <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'minlength')">El apellido debe tener al menos 3 caracteres</div>
-              <div class="help is-danger" *ngIf="userForm.get('last_name2')?.touched && hasError('last_name2', 'maxlength')">El apellido no puede tener más de 255 caracteres</div>
             </div>
           </div>
         </div>
@@ -60,18 +47,6 @@
           </div>
         </div>
 
-        <!-- Teléfono -->
-        <div class="column is-half">
-          <div class="field">
-            <label class="label">Teléfono</label>
-            <div class="control">
-              <input type="text" class="input" id="phone_number" formControlName="phone_number" placeholder="Ingrese el teléfono">
-              <div class="help is-danger" *ngIf="userForm.get('phone_number')?.touched && hasError('phone_number', 'required')">No has introducido el teléfono</div>
-              <div class="help is-danger" *ngIf="userForm.get('phone_number')?.touched && userForm.get('phone_number')?.hasError('pattern')">El teléfono debe contener solo números</div>
-            </div>
-          </div>
-        </div>
-
         <!-- DNI -->
         <div class="column is-half">
           <div class="field">
@@ -82,31 +57,6 @@
               <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'minlength')">El DNI debe tener 9 caracteres</div>
               <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'maxlength')">El DNI debe tener 9 caracteres</div>
               <div class="help is-danger" *ngIf="userForm.get('dni')?.touched && hasError('dni', 'pattern')">El DNI debe tener 8 números seguidos de una letra</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ciudad -->
-        <div class="column is-half">
-          <div class="field">
-            <label class="label">Ciudad</label>
-            <div class="control">
-              <input type="text" class="input" id="city" formControlName="city" placeholder="Ingrese la ciudad">
-              <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'required')">No has introducido la ciudad</div>
-              <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'minlength')">La ciudad debe tener al menos 3 caracteres</div>
-              <div class="help is-danger" *ngIf="userForm.get('city')?.touched && hasError('city', 'maxlength')">La ciudad no puede tener más de 255 caracteres</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Código Postal -->
-        <div class="column is-half">
-          <div class="field">
-            <label class="label">Código Postal</label>
-            <div class="control">
-              <input type="text" class="input" id="postal_code" formControlName="postal_code" placeholder="Ingrese el código postal">
-              <div class="help is-danger" *ngIf="userForm.get('postal_code')?.touched && hasError('postal_code', 'required')">No has introducido el código postal</div>
-              <div class="help is-danger" *ngIf="userForm.get('postal_code')?.touched && userForm.get('postal_code')?.hasError('pattern')">El código postal debe contener solo números</div>
             </div>
           </div>
         </div>

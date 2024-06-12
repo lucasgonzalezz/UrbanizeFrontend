@@ -38,9 +38,6 @@ export class AdminUserFormUnroutedComponent implements OnInit {
       next: (user: IUser) => {
         this.userSession = user;
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
     });
   }
 
@@ -49,12 +46,8 @@ export class AdminUserFormUnroutedComponent implements OnInit {
       id: [this.user.id],
       name: [user.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       surname: [user.surname, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      // last_name2: [user.last_name2, [Validators.minLength(3), Validators.maxLength(255)]],
       birth_date: [user.birth_date, [Validators.required]],
-      // phone_number: [user.phone_number, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       dni: [user.dni, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('\\d{8}[a-zA-Z]')]],
-      // city: [user.city, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      // postal_code: [user.postal_code, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       address: [user.address, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       email: [user.email, [Validators.required, Validators.email]],
       username: [user.username, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],

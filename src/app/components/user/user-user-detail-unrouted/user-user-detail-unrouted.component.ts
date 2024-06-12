@@ -1,5 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Optional } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IUser } from 'src/app/model/model.interfaces';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
@@ -19,7 +19,6 @@ export class UserUserDetailUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   userSession: IUser | null = null;
 
-
   constructor(
     private sessionAjaxService: SessionAjaxService,
     private userAjaxService: UserAjaxService,
@@ -35,11 +34,7 @@ export class UserUserDetailUnroutedComponent implements OnInit {
     this.userAjaxService.getUserByUsername(this.sessionAjaxService.getUsername()).subscribe({
       next: (user: IUser) => {
         this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
       },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
     });
   }
 
@@ -56,6 +51,9 @@ export class UserUserDetailUnroutedComponent implements OnInit {
         this.status = err;
       }
     });
-    }
+  }
 
+  goBack(): void {
+    history.back();
+  }
 }

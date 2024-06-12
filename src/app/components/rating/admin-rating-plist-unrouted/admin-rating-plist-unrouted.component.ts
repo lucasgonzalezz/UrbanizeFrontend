@@ -72,7 +72,6 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
             this.page = data;
             this.ratings = data.content;
             this.paginatorState.pageCount = data.totalPages;
-            console.log(this.paginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -167,8 +166,6 @@ export class AdminRatingPlistUnroutedComponent implements OnInit {
       next: (data: IProduct) => {
         this.product = data;
         this.getPage();
-        console.log(this.product_id);
-
       },
       error: (err: HttpErrorResponse) => {
         this.status = err;

@@ -24,9 +24,6 @@ export class LogoutRoutedComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/home']);
+    history.back();
   }
-
-
-
 }

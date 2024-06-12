@@ -28,8 +28,6 @@ export class AdminRatingPlistRoutedComponent implements OnInit {
   ) {
     this.user_id = parseInt(this.activatedRoute.snapshot.paramMap.get('user_id') ?? "0");
     this.product_id = parseInt(this.activatedRoute.snapshot.paramMap.get('product_id') ?? "0");
-    console.log(this.user_id);
-    console.log(this.product_id);
    }
 
   ngOnInit() {
