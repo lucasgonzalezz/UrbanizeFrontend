@@ -4,7 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IUser } from 'src/app/model/model.interfaces';
 import { UserAjaxService } from 'src/app/service/user.ajax.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-user-detail-unrouted',
@@ -22,6 +22,7 @@ export class UserUserDetailUnroutedComponent implements OnInit {
   constructor(
     private sessionAjaxService: SessionAjaxService,
     private userAjaxService: UserAjaxService,
+    private router: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -54,6 +55,10 @@ export class UserUserDetailUnroutedComponent implements OnInit {
   }
 
   goBack(): void {
-    history.back();
+    if (this.user.role) {
+      this.router.navigate(['/admin/user/plist']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

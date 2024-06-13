@@ -43,12 +43,8 @@ export interface IEntity {
 export interface IUser extends IEntity {
     name: string,
     surname: string,
-    // last_name2: string,
     birth_date: Date,
-    // phone_number: number,
     dni: string,
-    // city: string,
-    // postal_code: number,
     address: string,
     email: string,
     username: string,

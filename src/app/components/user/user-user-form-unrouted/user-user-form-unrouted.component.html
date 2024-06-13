@@ -99,21 +99,6 @@
           </div>
         </div>
 
-        <!-- Tipo -->
-        <div class="column is-half" *ngIf="username && userSession?.role == true">
-          <div class="field">
-            <label class="label">Tipo</label>
-            <div class="control">
-              <div class="select is-fullwidth">
-                <select id="role" formControlName="role">
-                  <option [ngValue]="false">Usuario Normal</option>
-                  <option [ngValue]="true">Administrador</option>
-                </select>
-              </div>
-            </div>
-            <div class="help is-danger" *ngIf="userForm.get('role')?.touched && hasError('role', 'required')">Especifica si eres Administrador o Usuario</div>
-          </div>
-        </div>
       </div>
       <!-- Botón Guardar -->
       <div class="field">

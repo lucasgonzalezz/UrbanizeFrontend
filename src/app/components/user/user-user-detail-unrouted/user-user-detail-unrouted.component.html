@@ -20,17 +20,18 @@
             </h1>
             <div class="columns">
               <div class="column is-half">
-                <p class="has-text-primary"><b>Nombre de Usuario:</b> {{ user.username || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Username:</b> {{ user.username || 'Sin datos' }}</p>
+                <p class="has-text-primary"><b>Nombre de Usuario:</b> {{ user.name || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Primer apellido:</b> {{ user.surname || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Email:</b> {{ user.email || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Dirección:</b> {{ user.address || 'Sin datos' }}</p>
-                <p class="has-text-primary"><b>DNI:</b> {{ user.dni || 'Sin datos' }}</p>
               </div>
               <div class="column is-half">
+                <p class="has-text-primary"><b>DNI:</b> {{ user.dni || 'Sin datos' }}</p>
                 <p class="has-text-primary"><b>Fecha de Nacimiento:</b> {{ user.birth_date | date }}</p>
-                <p class="has-text-primary"><b>Número de Productos en el carrito:</b> {{ user.carts }}</p>
-                <p class="has-text-primary"><b>Número de Valoraciones:</b> {{ user.ratings }}</p>
-                <p class="has-text-primary"><b>Número de Compras:</b> {{ user.purchases }}</p>
+                <p *ngIf="user.role===false" class="has-text-primary"><b>Número de Productos en el carrito:</b> {{ user.carts }}</p>
+                <p *ngIf="user.role===false" class="has-text-primary"><b>Número de Valoraciones:</b> {{ user.ratings }}</p>
+                <p *ngIf="user.role===false" class="has-text-primary"><b>Número de Compras:</b> {{ user.purchases }}</p>
               </div>
             </div>
           </div>
